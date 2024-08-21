@@ -1,0 +1,155 @@
+﻿/*  
+---------------------------------------------------
+Listings - Filter Form - Large
+---------------------------------------------------  
+*/
+
+/* Above filter form on sidebar pages */
+.listing_filter-form.listing_filter-form_above { 
+	display: none;
+}
+
+/* Sidebar filter form on sidebar pages */
+.listing_filter-form.listing_filter-form_sidebar {
+	display: block;
+	margin-bottom: var(--base-spacing);
+}
+
+/* Expand button */
+.listing_filter-form .expand-filters {
+	display: none;
+}
+
+
+/* Sidebar column */
+/* REMOVED FOR NOW. MAY INCLUDE STICKY SIDEBAR OPTION IN FUTURE.
+.left-col .listing_filter-form,
+.right-col .listing_filter-form {
+	position: sticky; top: var(--base-half-spacing);
+}
+*/
+.show_header-on-scroll-lg .left-col .listing_filter-form,
+.show_header-on-scroll-lg .right-col .listing_filter-form {
+	top: calc(var(--large-header) - var(--base-border-width));
+}
+
+
+/* Items */
+.listing_filter-form .filter-form_configurable .item:last-of-type,
+.listing_filter-form .filter-form_configurable .item:last-of-type {
+	border-width: var(--base-border-width) 0;
+	border-style: solid;
+	border-color: rgba(var(--base-borders), 1);
+}
+
+
+/* Text field with a button */
+.listing_filter-form .item.item_filter-group.item_filter-groups_text-field > .inner .filters .form-group .form-control {
+	padding-right: 65px;
+}
+
+.listing_filter-form .item.item_filter-group.item_filter-groups_text-field > .inner .filters .btn {
+	width: 50px; height: 50px;
+}
+
+
+
+/* Filter layout on full width */
+.listing_filter-form.listing_filter-form_full-width {
+	position: sticky; top: 0; z-index: 551;
+	padding: var(--base-half-spacing) 0;
+	background: rgba(var(--base-bg-color1), 1);
+}
+
+body.show_header-on-scroll-lg:not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .listing_filter-form.listing_filter-form_full-width {
+	top: var(--large-header);
+}
+
+html.nav-down body:not(.show_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .listing_filter-form.listing_filter-form_full-width {
+	top: var(--large-header);
+}
+
+/* Half size header */
+html.nav-up body.header-04-lg.show_header-on-scroll-lg .listing_filter-form.listing_filter-form_full-width,
+html.nav-up body.header-05-lg.show_header-on-scroll-lg .listing_filter-form.listing_filter-form_full-width,
+html.nav-up body.header-09-lg.show_header-on-scroll-lg .listing_filter-form.listing_filter-form_full-width,
+html.nav-up body.header-10-lg.show_header-on-scroll-lg .listing_filter-form.listing_filter-form_full-width,
+html.nav-up body.header-13-lg.show_header-on-scroll-lg .listing_filter-form.listing_filter-form_full-width,
+html.nav-up body.header-14-lg.show_header-on-scroll-lg .listing_filter-form.listing_filter-form_full-width,
+html.nav-up body.header-18-lg.show_header-on-scroll-lg .listing_filter-form.listing_filter-form_full-width {
+	top: calc(var(--large-header) / 2)!important;
+}
+
+
+.listing_filter-form.listing_filter-form_full-width .item { 
+	border: 0 none!important;
+	padding-top: 0;
+}
+
+.listing_filter-form.listing_filter-form_full-width .item.item_filter-group > .inner .tab {
+	padding-bottom: 0;
+}
+
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_sort-search {
+	display: flex;
+	order: 2;
+	margin-left: auto;
+}
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_sort-search .item {
+	padding-left: calc(var(--base-half-spacing) / 2);
+}
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_sort-search .item .tab {
+	display: none;
+}
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_sort-search .item_filter-sort {
+	order: 2;
+}
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_sort-search .item_filter-search {
+	order: 1;
+}
+
+
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_configurable {
+	display: flex;
+	flex-wrap: wrap;
+	order: 1;
+}
+
+
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_configurable .item {
+	padding-right: calc(var(--base-half-spacing) / 2);
+}
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_configurable .item .inner { 
+	position: relative;
+}
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_configurable .item .filters {
+	position: absolute; top: calc(var(--p-heading_small-typography_font-size_lg) * 2); z-index: 0;
+	background: rgba(var(--base-bg-color1), 1); 
+	border: var(--base-border-width) solid rgba(var(--base-borders), 1); 
+	min-width: 260px; max-height: 280px;
+	overflow-y: auto;
+	padding: 0 var(--base-half-spacing) var(--base-half-spacing);
+	opacity: 1;
+	box-shadow: var(--base-box-shadow_h) var(--base-box-shadow_v) var(--base-box-shadow_b) rgba(var(--true-black), var(--base-box-shadow_o));
+	border-radius: var(--base-border-radius);
+}
+
+
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_sort-search .item .form-group {
+	margin: 0;
+}
+
+/* Sticky filter reset and count */
+.listing_filter-form.listing_filter-form_full-width .filter-form_inner > .filter-form_configurable .filter-summary {
+	position: sticky; top: 0; z-index: 20;
+	background: rgba(var(--base-bg-color1),1);
+	padding: var(--base-half-spacing) 0 0;
+}

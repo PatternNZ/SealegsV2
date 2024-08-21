@@ -1,0 +1,37 @@
+﻿/*  
+---------------------------------------------------
+Listings
+---------------------------------------------------  
+*/
+
+.usn_cmp_listing {
+
+}
+
+
+.listing-component {
+}
+
+/* Labels */
+.listing .item .labels {
+    padding-top: var(--base-half-spacing);
+}
+.listing .item .image ~ .labels {
+    position: absolute;
+    z-index: 21;
+    padding-top: 0;
+}
+.item:not(.item_text-left):not(.no-image) .image ~ .labels {
+    left: 5px;
+}
+.item:not(.item_text-above):not(.no-image) .image ~ .labels {
+    top: 5px;
+}
+.item.item_text-above:not(.no-image) .image ~ .labels {
+    bottom: 5px;
+}
+
+.item .labels > .label {
+    margin-right: -2px;
+    padding: 1px 4px;
+}

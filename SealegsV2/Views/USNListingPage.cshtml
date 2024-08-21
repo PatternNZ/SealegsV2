@@ -1,0 +1,202 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@{
+    Layout = "USNMaster.cshtml";
+    Usnstyle websiteStyle = (Usnstyle)Model.WebsiteStyle;
+    int mainListingPageID = (Model.IsDocumentType(UsnlistingPage.ModelTypeAlias) || Model.IsDocumentType(UsnshopPage.ModelTypeAlias)) ? Model.Id : Model.Parent.Parent.Parent.Id;
+}
+
+@section BodyTag
+{
+    @await Html.PartialAsync(Model.ThemeFolder +"/MiscPageElements/BodyTag", Model, new ViewDataDictionary(ViewData) { { "pageLayout", Model.PageLayoutSettings.PageLayout } })
+}
+
+<script>
+    const usnRelevanceText = "@Umbraco.GetDictionaryValue("USN List Sort Relevance Asc")";
+</script>
+
+@await Html.PartialAsync(Model.ThemeFolder + "/BlockContainers/BlockComponents", Model, new ViewDataDictionary(ViewData) { { "blockFieldAlias", "aboveListing" }, { "pageLayout", "pageLayoutFull" } })
+
+@if (Model.PageLayoutSettings.PageLayout != "pageLayoutFull")
+{
+    @:<section class="content component usn_cmp_listing @websiteStyle.StyleColors.contentBackgroundClass"><div class="container">@await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/PageTitle", Model)
+
+     <!-- Listing - Filter form - Above -->
+    <div class="listing_filter-form listing_filter-form_above">
+        <button class="expand-filters" type="button" aria-expanded="false" aria-label="@Umbraco.GetDictionaryValue("USN Aria Expand Filters")">
+            @Umbraco.GetDictionaryValue("USN Aria Expand Filters")
+            <i aria-hidden="true" class="icon usn_ion-ios-optusn_ions after"></i>
+        </button>
+        @await Component.InvokeAsync("ListingFilter", new
+        {
+            MainListingPageId = mainListingPageID,
+            CurrentPageId = Model.Id,
+            ThemeFolder = Model.ThemeFolder,
+            WebsiteStyleId = websiteStyle.Id,
+            GlobalSettingsId = Model.GlobalSettings.Id,
+            Position = "above",
+            PageLayout = Model.PageLayoutSettings.PageLayout
+        })
+    </div>
+    <!--// Listing - Filter form - Above -->
+
+    @:<div class="row justify-content-between">
+
+    <!-- Content column -->
+    <div class="@Model.PageLayoutSettings.FirstDivColumnClass">
+        <section class="content component listing-component shop-listing-component p-0 ajax-wrap">
+            <div id="ListContainer_@Model.Id">
+                @await Component.InvokeAsync("Listing", new
+                {
+                    MainListingPageId = mainListingPageID,
+                    WebsiteStyleId = Model.WebsiteStyle.Id,
+                    CurrentPageId = Model.Id,
+                    GlobalSettingsId = Model.GlobalSettings.Id,
+                    ThemeFolder = Model.ThemeFolder,
+                    PageLayout = Model.PageLayoutSettings.PageLayout
+                })
+            </div>
+            <div class="ajax-loading" id="ListingLoading_@Model.Id" style="display:none">
+                <div class="loading">
+                    <span class="message">@Umbraco.GetDictionaryValue("USN Listing Loading")</span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--// Content column -->
+}
+
+@if (Model.PageLayoutSettings.PageLayout == "pageLayoutLeft" || Model.PageLayoutSettings.PageLayout == "pageLayoutRight" || Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavLeft" || Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavRight")
+{
+    <!-- Second column -->
+    <div class="@Model.PageLayoutSettings.SecondDivColumnClass">
+        @if (Model.PageLayoutSettings.PageLayout == "pageLayoutLeft" || Model.PageLayoutSettings.PageLayout == "pageLayoutRight" || Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavLeft")
+        {
+            <!-- Listing - Filter form - Sidebar -->
+            <div class="listing_filter-form listing_filter-form_sidebar">
+                @await Component.InvokeAsync("ListingFilter", new
+                {
+                    MainListingPageId = mainListingPageID,
+                    CurrentPageId = Model.Id,
+                    ThemeFolder = Model.ThemeFolder,
+                    WebsiteStyleId = websiteStyle.Id,
+                    GlobalSettingsId = Model.GlobalSettings.Id,
+                    Position = "side",
+                    PageLayout = Model.PageLayoutSettings.PageLayout
+                })
+            </div>
+            <!--// Listing - Filter form - Sidebar -->
+        }
+        @if (Model.PageLayoutSettings.PageLayout == "pageLayoutLeft" || Model.PageLayoutSettings.PageLayout == "pageLayoutRight" || Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavLeft")
+        {
+            @await Html.PartialAsync(Model.ThemeFolder + "/Navigation/SubNavigation", Model, new ViewDataDictionary(ViewData) { { "inThisSection", false } })
+        
+            @await Html.PartialAsync(Model.ThemeFolder + "/BlockContainers/SitewidePods", Model)
+        }
+    </div>
+    <!--// Second column -->
+}
+
+@if (Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavLeft" || Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavRight")
+{
+    <!-- Third column -->
+    <div class="@Model.PageLayoutSettings.ThirdDivColumnClass">
+        @if (Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavRight")
+        {
+            <!-- Listing - Filter form - Sidebar -->
+            <div class="listing_filter-form listing_filter-form_sidebar">
+                @await Component.InvokeAsync("ListingFilter", new
+                {
+                    MainListingPageId = mainListingPageID,
+                    CurrentPageId = Model.Id,
+                    ThemeFolder = Model.ThemeFolder,
+                    WebsiteStyleId = websiteStyle.Id,
+                    GlobalSettingsId = Model.GlobalSettings.Id,
+                    Position = "side",
+                    PageLayout = Model.PageLayoutSettings.PageLayout
+                })
+            </div>
+            <!--// Listing - Filter form - Sidebar -->
+        
+             @await Html.PartialAsync(Model.ThemeFolder + "/Navigation/SubNavigation", Model, new ViewDataDictionary(ViewData) { { "inThisSection", false } })
+        }
+        @if (Model.PageLayoutSettings.PageLayout == "pageLayoutCenterNavLeft")
+        {
+            @await Html.PartialAsync(Model.ThemeFolder + "/BlockContainers/SitewidePods", Model)
+        }
+    </div>
+    <!--// Third column -->
+}
+
+@if (Model.PageLayoutSettings.PageLayout != "pageLayoutFull")
+{
+    @:</div></div></section>
+}
+
+@if (Model.PageLayoutSettings.PageLayout == "pageLayoutFull")
+{
+    <section class="content component @websiteStyle.StyleColors.contentBackgroundClass">
+        <div class="container">
+
+            @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/PageTitle", Model)
+
+            <!-- Filter form -->
+            <section class="listing_filter-form listing_filter-form_full-width">
+                <button class="expand-filters" type="button" aria-expanded="false" aria-label="@Umbraco.GetDictionaryValue("USN Aria Expand Filters")">
+                    @Umbraco.GetDictionaryValue("USN Aria Filters")
+                    <i aria-hidden="true" class="icon usn_ion-ios-optusn_ions after"></i>
+                </button>
+                @await Component.InvokeAsync("ListingFilter", new
+                {
+                    MainListingPageId = mainListingPageID,
+                    CurrentPageId = Model.Id,
+                    ThemeFolder = Model.ThemeFolder,
+                    WebsiteStyleId = websiteStyle.Id,
+                    GlobalSettingsId = Model.GlobalSettings.Id,
+                    Position = "full",
+                    PageLayout = Model.PageLayoutSettings.PageLayout
+                })
+            </section>
+            <!--// Filter form -->
+
+           
+            <!-- Row -->
+            <div class="row justify-content-between">
+
+                <!-- Content column -->
+                <div class="content-col col">
+                    <section class="content component listing-component shop-listing-component p-0 ajax-wrap">
+                        <div id="ListContainer_@Model.Id">
+                            @await Component.InvokeAsync("Listing", new
+                            {
+                                MainListingPageId = mainListingPageID,
+                                WebsiteStyleId = Model.WebsiteStyle.Id,
+                                CurrentPageId = Model.Id,
+                                GlobalSettingsId = Model.GlobalSettings.Id,
+                                ThemeFolder = Model.ThemeFolder,
+                                PageLayout = Model.PageLayoutSettings.PageLayout
+                            })
+                        </div>
+                        <div class="ajax-loading" id="ListingLoading_@Model.Id" style="display:none">
+                            <div class="loading">
+                                <span class="message">@Umbraco.GetDictionaryValue("USN Listing Loading")</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!--// Content column -->
+
+            </div>
+            <!--// Row -->
+
+        </div>
+    </section>
+}
+
+@await Html.PartialAsync(Model.ThemeFolder + "/BlockContainers/BlockComponents", Model, new ViewDataDictionary(ViewData) { { "blockFieldAlias", "belowListing" }, { "pageLayout", "pageLayoutFull" } })
+
+@if (Model.PageLayoutSettings.PageLayout == "pageLayoutFull")
+{
+    @await Html.PartialAsync(Model.ThemeFolder + "/BlockContainers/SitewidePods", Model)
+}
+

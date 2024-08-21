@@ -1,0 +1,102 @@
+﻿/*  
+---------------------------------------------------
+Listings - Filter Form - Small
+---------------------------------------------------  
+*/
+
+
+.listing_filter-form {
+	position: sticky; top: 0; z-index: 551;
+	margin-bottom: calc(var(--base-half-spacing) / 2);
+	background: rgba(var(--base-bg-color1), 1);
+}
+
+html.nav-up body:not(.show_header-on-scroll-sm) .listing_filter-form {
+	top: 0;
+}
+
+html.nav-down body:not(.show_header-on-scroll-sm) .listing_filter-form {
+	top: var(--small-header);
+}
+
+body.show_header-on-scroll-sm .listing_filter-form {
+	top: var(--small-header);
+}
+
+
+/* Above filter form on sidebar pages */
+.listing_filter-form.listing_filter-form_above {
+	display: block;
+}
+
+/* Sidebar filter form on sidebar pages */
+.listing_filter-form.listing_filter-form_sidebar {
+	display: none;
+}
+
+/* Expand button */
+.listing_filter-form .expand-filters {
+	display: block;
+}
+
+
+/* Form inner */
+.listing_filter-form .filter-form_inner {
+	padding: calc(var(--base-half-spacing) / 2) var(--base-half-spacing);
+	border: var(--base-border-width) solid rgba(var(--base-borders), 1);
+	border-top: 0 none;
+}
+
+
+/* Items */
+.listing_filter-form .filter-form_sort-search .item:first-of-type,
+.listing_filter-form .filter-form_sort-search .item:first-of-type {
+	border-top: 0 none;
+}
+
+
+/*  
+---------------------------------------------------
+Expandable filters
+---------------------------------------------------  
+*/
+
+.listing_filter-form {
+	border-radius: var(--base-border-radius);
+}
+
+.listing_filter-form .expand-filters {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	width: 100%;
+	padding: var(--base-half-spacing);
+	margin: 0;
+	color: rgba(var(--base-heading), 1);
+	font-weight: var(--p-heading-typography_font-weight);
+	text-align: left;
+	border: 0 none;
+	background: rgba(var(--base-bg-color1), 1);
+	border: var(--base-border-width) solid rgba(var(--base-borders), 1);
+	border-radius: var(--base-border-radius);
+}
+.listing_filter-form .expand-filters.active {
+	border-radius: var(--base-border-radius) var(--base-border-radius) 0 0;
+}
+
+.listing_filter-form .expand-filters > i {
+	position: relative;
+	top: 2px;
+	float: right;
+	color: rgba(var(--base-highlight), 1);
+	transition: all 0.25s ease-in-out 0s;
+}
+
+.listing_filter-form .filter-form_inner {
+	margin: 0;
+	border-radius: 0 0 var(--base-border-radius) var(--base-border-radius);
+}
+
+.listing_filter-form .filter-form_inner:not(.open) {
+	display: none;
+}

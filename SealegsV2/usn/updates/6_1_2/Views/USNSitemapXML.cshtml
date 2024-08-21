@@ -1,0 +1,246 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@using System.Globalization
+@using Umbraco.Cms.Core.Services 
+@inject IPublicAccessService _publicAccessService
+@{
+    Layout = null;
+    Context.Response.ContentType = "text/xml";
+
+    const string DATE_TIME_FORMAT = "yyyy-MM-dd";
+
+    IPublishedContent rootNode;
+
+    if(Model.HasProperty("sitemapStartpage") && Model.HasValue("sitemapStartpage"))
+    {
+        rootNode = Model.Value<IPublishedContent>("sitemapStartpage");
+    }
+    else
+    {
+        rootNode = Model.Root();
+    }
+
+    //Ensure decimal contains dot, not comma.
+    CultureInfo culture = new CultureInfo("en-US");
+
+}
+<?xml version="1.0" encoding="UTF-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>@rootNode.Url(mode: UrlMode.Absolute)</loc>
+        <lastmod>@rootNode.UpdateDate.ToString(DATE_TIME_FORMAT)</lastmod>
+        @if (rootNode.HasValue("sitemapXMLPriority") && rootNode.Value<decimal>("sitemapXMLPriority") != 0)
+        {
+            <priority>@(rootNode.Value<decimal>("sitemapXMLPriority").ToString("0.0", culture))</priority>
+        }
+        @if (rootNode.HasValue("sitemapXMLChangeFrequency"))
+        {
+            <changefreq>@(rootNode.Value<string>("sitemapXMLChangeFrequency").Remove(0, 8).ToLower())</changefreq>
+        }
+    </url>
+    @{
+        await Traverse(rootNode, DATE_TIME_FORMAT, culture);
+    }
+</urlset>
+
+@functions{
+    private async Task Traverse(IPublishedContent node, string DATE_TIME_FORMAT, CultureInfo culture)
+    {
+        //Exclude certain nodes from sitemap.
+        var items = node.Children.Where(x => !x.IsDocumentType(UsnsitemapXml.ModelTypeAlias) && !x.IsDocumentType(UsnrobotsTxt.ModelTypeAlias) &&
+        !x.IsDocumentType(UsnblogPostsFolder.ModelTypeAlias) && !x.IsDocumentType(UsnblogCategories.ModelTypeAlias) &&
+        !x.IsDocumentType(UsnblogAuthors.ModelTypeAlias) && !x.IsDocumentType(UsnblogAuthor.ModelTypeAlias) &&
+        !x.IsDocumentType(UsnlistingFilters.ModelTypeAlias) && !x.IsDocumentType(UsnlistingFilterGroup.ModelTypeAlias) && 
+        !x.IsDocumentType(UsnlistingPagesFolder.ModelTypeAlias) && !x.IsDocumentType(UsnproductPagesFolder.ModelTypeAlias) &&
+        !_publicAccessService.IsProtected(x.Path));
+
+        if (items.Any())
+        {
+            foreach (var item in items)
+            {
+                if (!item.Value<bool>("hideFromSearchEngines"))
+                {
+                    <url>
+                        <loc>@item.Url(mode: UrlMode.Absolute)</loc>
+                        <lastmod>@item.UpdateDate.ToString(DATE_TIME_FORMAT)</lastmod>
+                        @if (item.HasValue("updateFrequency"))
+                        {
+                            <changefreq>@item.Value("updateFrequency")</changefreq>
+                        }
+                        @if (item.HasValue("sitemapXmlpriority") && item.Value<decimal>("sitemapXmlpriority") != 0)
+                        {
+                            <priority>@(item.Value<decimal>("sitemapXmlpriority").ToString("0.0", culture))</priority>
+                        }
+                        @if (item.HasValue("sitemapXmlchangeFrequency"))
+                        {
+                            <changefreq>@(item.Value<string>("sitemapXmlchangeFrequency").Remove(0, 8).ToLower())</changefreq>
+                        }
+                    </url>
+                }
+                await Traverse(item, DATE_TIME_FORMAT, culture);
+            }
+        }
+
+        if (node.IsDocumentType(UsnblogLandingPage.ModelTypeAlias))
+        {
+
+            var catFolder = node.Children.FirstOrDefault(x => x.IsDocumentType(UsnblogCategories.ModelTypeAlias) && !_publicAccessService.IsProtected(x.Path));
+
+            if (catFolder != null)
+            {
+                await TraverseCategories(catFolder, DATE_TIME_FORMAT, culture);
+            }
+
+            ListBlogPosts(node, DATE_TIME_FORMAT, culture);
+        }
+
+        
+        if (node.IsDocumentType(UsnlistingPage.ModelTypeAlias) || node.IsDocumentType(UsnshopPage.ModelTypeAlias))
+        {
+
+            var filterFolder = node.Children.FirstOrDefault(x => x.IsDocumentType(UsnlistingFilters.ModelTypeAlias) && !_publicAccessService.IsProtected(x.Path));
+
+            if (filterFolder != null)
+            {
+                TraverseFilters(filterFolder, DATE_TIME_FORMAT, culture);
+            }
+
+            ListPages(node, DATE_TIME_FORMAT, culture);
+        }
+    }
+
+    private async Task TraverseCategories(IPublishedContent catFolder, string DATE_TIME_FORMAT, CultureInfo culture)
+    {
+        var items = catFolder.Children.Where(x => x.IsDocumentType(UsnblogCategoryPage.ModelTypeAlias));
+
+        if (items != null && items.Any())
+        {
+            foreach (var item in items)
+            {
+                if (!item.Value<bool>
+                    ("hideFromSearchEngines"))
+                {
+                    <url>
+                        <loc>@item.Url(mode: UrlMode.Absolute)</loc>
+                        <lastmod>@item.UpdateDate.ToString(DATE_TIME_FORMAT)</lastmod>
+                        @if (item.HasValue("updateFrequency"))
+                        {
+                            <changefreq>@item.Value("updateFrequency")</changefreq>
+                        }
+                        @if (item.HasValue("sitemapXmlpriority") && item.Value<decimal>("sitemapXmlpriority") != 0)
+                        {
+                            <priority>@(item.Value<decimal>("sitemapXmlpriority").ToString("0.0", culture))</priority>
+                        }
+                        @if (item.HasValue("sitemapXmlchangeFrequency"))
+                        {
+                            <changefreq>@(item.Value<string>("sitemapXmlchangeFrequency").Remove(0, 8).ToLower())</changefreq>
+                        }
+                    </url>
+                }
+                await TraverseCategories(item, DATE_TIME_FORMAT, culture);
+            }
+        }
+    }
+
+    private void ListBlogPosts(IPublishedContent blogLandingPage, string DATE_TIME_FORMAT, CultureInfo culture)
+    {
+        var blogPages = blogLandingPage.Children.First(x => x.IsDocumentType(UsnblogPostsFolder.ModelTypeAlias)).Children.OrderByDescending(y => y.Value<DateTime>
+            ("postDate"));
+
+        if (blogPages.Any())
+        {
+            foreach (var item in blogPages)
+            {
+                if (!item.Value<bool>
+                    ("hideFromSearchEngines"))
+                {
+                    <url>
+                        <loc>@item.Url(mode: UrlMode.Absolute)</loc>
+                        <lastmod>@item.UpdateDate.ToString(DATE_TIME_FORMAT)</lastmod>
+                        @if (item.HasValue("updateFrequency"))
+                        {
+                            <changefreq>@item.Value("updateFrequency")</changefreq>
+                        }
+                        @if (item.HasValue("sitemapXmlpriority") && item.Value<decimal>("sitemapXmlpriority") != 0)
+                        {
+                            <priority>@(item.Value<decimal>("sitemapXmlpriority").ToString("0.0", culture))</priority>
+                        }
+                        @if (item.HasValue("sitemapXmlchangeFrequency"))
+                        {
+                            <changefreq>@(item.Value<string>("sitemapXmlchangeFrequency").Remove(0, 8).ToLower())</changefreq>
+                        }
+                    </url>
+                }
+            }
+        }
+    }
+
+    private void TraverseFilters(IPublishedContent filterFolder, string DATE_TIME_FORMAT, CultureInfo culture)
+    {
+        var filterGroups = filterFolder.Children.Where(x => x.IsDocumentType(UsnlistingFilterGroup.ModelTypeAlias));
+
+        if (filterGroups != null && filterGroups.Any())
+        {
+            foreach (var group in filterGroups)
+            {
+                var filters = group.Children.Where(x => (x.IsDocumentType(UsnlistingFilterPage.ModelTypeAlias)) && x.IsVisible());
+                
+                foreach (var filter in filters)
+                {
+                    if (!filter.Value<bool>("hideFromSearchEngines"))
+                    {
+                        <url>
+                            <loc>@filter.Url(mode: UrlMode.Absolute)</loc>
+                            <lastmod>@filter.UpdateDate.ToString(DATE_TIME_FORMAT)</lastmod>
+                            @if (filter.HasValue("updateFrequency"))
+                            {
+                                    <changefreq>@filter.Value("updateFrequency")</changefreq>
+                            }
+                            @if (filter.HasValue("sitemapXmlpriority") && filter.Value<decimal>("sitemapXmlpriority") != 0)
+                            {
+                                <priority>@(filter.Value<decimal>("sitemapXmlpriority").ToString("0.0", culture))</priority>
+                            }
+                            @if (filter.HasValue("sitemapXmlchangeFrequency"))
+                            {
+                                <changefreq>@(filter.Value<string>("sitemapXmlchangeFrequency").Remove(0, 8).ToLower())</changefreq>
+                            }
+                        </url>
+                    }
+                }
+            }
+        }
+    }
+
+    private void ListPages(IPublishedContent listLandingPage, string DATE_TIME_FORMAT, CultureInfo culture)
+    {
+        var pages = listLandingPage.Children.First(x => x.IsDocumentType(UsnproductPagesFolder.ModelTypeAlias) || x.IsDocumentType(UsnlistingPagesFolder.ModelTypeAlias)).Children;
+
+        if (pages.Any())
+        {
+            foreach (var item in pages)
+            {
+                if (!item.Value<bool>
+                    ("hideFromSearchEngines"))
+                {
+                    <url>
+                        <loc>@item.Url(mode: UrlMode.Absolute)</loc>
+                        <lastmod>@item.UpdateDate.ToString(DATE_TIME_FORMAT)</lastmod>
+                        @if (item.HasValue("updateFrequency"))
+                        {
+                            <changefreq>@item.Value("updateFrequency")</changefreq>
+                        }
+                        @if (item.HasValue("sitemapXmlpriority") && item.Value<decimal>("sitemapXmlpriority") != 0)
+                        {
+                            <priority>@(item.Value<decimal>("sitemapXmlpriority").ToString("0.0", culture))</priority>
+                        }
+                        @if (item.HasValue("sitemapXmlchangeFrequency"))
+                        {
+                            <changefreq>@(item.Value<string>("sitemapXmlchangeFrequency").Remove(0, 8).ToLower())</changefreq>
+                        }
+                    </url>
+                }
+            }
+        }
+    }
+}

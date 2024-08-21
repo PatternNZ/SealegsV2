@@ -1,0 +1,244 @@
+/*  
+---------------------------------------------------
+Header - Large Breakpoint
+---------------------------------------------------  
+*/
+
+header#site-header {
+    overflow: visible;
+    height: var(--large-header);
+}
+
+html:not(.reveal-out) body.transparent-header-lg header#site-header { 
+    position: fixed;
+    width: calc(100% - var(--site-spacing_lg) - var(--site-spacing_lg));
+}
+
+html:not(.reveal-out) body.max-width.transparent-header-lg header#site-header { 
+    max-width: calc(var(--site-max-width) - var(--site-spacing_lg) - var(--site-spacing_lg));
+}
+
+header#site-header #logo {
+    padding: var(--logo_lg-padding_top) var(--logo_lg-padding_right) var(--logo_lg-padding_bottom) var(--logo_lg-padding_left);
+    height: var(--large-header);
+}
+
+header#site-header #logo picture,
+header#site-header #logo img { 
+    height: calc(var(--large-header) - var(--logo_lg-padding_top) - var(--logo_lg-padding_bottom));
+    max-height: calc(var(--large-header) - var(--logo_lg-padding_top) - var(--logo_lg-padding_bottom));
+}
+
+header#site-header #logo.no-image span { 
+    height: calc(var(--large-header) - var(--logo_lg-padding_top) - var(--logo_lg-padding_bottom));
+}
+
+header#site-header #logo,
+header#site-header nav.main,
+header#site-header nav.cta-links,
+header#site-header .site-search,
+header#site-header nav.secondary,
+header#site-header nav.shopping-cart { 
+    -ms-flex:0 0 auto;
+    flex:0 0 auto;
+}
+
+header#site-header nav.cta-links .btn { 
+    margin:0;
+}
+
+/*  
+---------------------------------------------------
+Header
+
+- Burger Navigation Open
+---------------------------------------------------  
+*/
+
+/* This removes the vertical scrollbar when buger navigation is open */
+html.reveal-out { 
+    overflow: hidden;
+} 
+/* END */
+
+html.reveal-out body.header-03-lg header#site-header,
+html.reveal-out body.header-11-lg header#site-header,
+html.reveal-out body.header-12-lg header#site-header,
+html.reveal-out body.header-17-lg header#site-header,
+html.reveal-out body.header-19-lg header#site-header,
+html.reveal-out body.header-20-lg header#site-header {
+    position: fixed; top: 0; right: 0; left: 0;
+    width: calc(100% - var(--site-spacing_lg) - var(--site-spacing_lg));
+    height: 100%; max-height: 100%;
+    overflow: auto;
+    padding-bottom: var(--large-header);
+} 
+
+html.reveal-out body.max-width.header-03-lg header#site-header,
+html.reveal-out body.max-width.header-17-lg header#site-header,
+html.reveal-out body.max-width.header-19-lg header#site-header,
+html.reveal-out body.max-width.header-20-lg header#site-header { 
+    max-width: calc(var(--site-max-width) - var(--site-spacing_lg) - var(--site-spacing_lg));
+}
+
+header#site-header .container { 
+    max-width:var(--header-max-width)!important;
+}
+
+html.reveal-out body.header-03-lg #site,
+html.reveal-out body.header-11-lg #site,
+html.reveal-out body.header-12-lg #site,
+html.reveal-out body.header-17-lg #site,
+html.reveal-out body.header-19-lg #site,
+html.reveal-out body.header-20-lg #site {
+    max-height: 100%;
+}
+
+/* iOS 13 issues with html, body overflow */
+html.reveal-out body.header-03-lg,
+html.reveal-out body.header-11-lg,
+html.reveal-out body.header-12-lg,
+html.reveal-out body.header-17-lg,
+html.reveal-out body.header-19-lg,
+html.reveal-out body.header-20-lg { 
+    overflow-y: hidden; height:100%; max-height:100%;
+}
+html.reveal-out body.header-03-lg header#site-header,
+html.reveal-out body.header-11-lg header#site-header,
+html.reveal-out body.header-12-lg header#site-header,
+html.reveal-out body.header-17-lg header#site-header,
+html.reveal-out body.header-19-lg header#site-header,
+html.reveal-out body.header-20-lg header#site-header { 
+    bottom:0;
+    overflow-x: hidden;
+}
+html.reveal-out body.header-03-lg header#site-header,
+html.reveal-out body.header-11-lg header#site-header,
+html.reveal-out body.header-12-lg header#site-header,
+html.reveal-out body.header-17-lg header#site-header,
+html.reveal-out body.header-19-lg header#site-header,
+html.reveal-out body.header-20-lg header#site-header {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+}
+/* iOS 13 issues with html, body overflow --- END */
+
+/* Display none of internal header items before expanded */
+html:not(.reveal-out) body.header-03-lg header#site-header nav.main,
+html:not(.reveal-out) body.header-03-lg header#site-header .site-search,
+html:not(.reveal-out) body.header-03-lg header#site-header nav.secondary { 
+    display:none;
+}
+html:not(.reveal-out) body.header-11-lg header#site-header nav.main,
+html:not(.reveal-out) body.header-11-lg header#site-header .site-search,
+html:not(.reveal-out) body.header-11-lg header#site-header nav.secondary,
+html:not(.reveal-out) body.header-11-lg header#site-header nav.cta-links { 
+    display:none;
+}
+html:not(.reveal-out) body.header-12-lg header#site-header nav.main,
+html:not(.reveal-out) body.header-12-lg header#site-header .site-search,
+html:not(.reveal-out) body.header-12-lg header#site-header nav.secondary,
+html:not(.reveal-out) body.header-12-lg header#site-header nav.cta-links { 
+    display:none;
+}
+html:not(.reveal-out) body.header-17-lg header#site-header nav.main,
+html:not(.reveal-out) body.header-17-lg header#site-header .site-search,
+html:not(.reveal-out) body.header-17-lg header#site-header nav.secondary { 
+    display:none;
+}
+html:not(.reveal-out) body.header-19-lg header#site-header nav.main,
+html:not(.reveal-out) body.header-19-lg header#site-header .site-search,
+html:not(.reveal-out) body.header-19-lg header#site-header nav.secondary { 
+    display:none;
+}
+html:not(.reveal-out) body.header-20-lg header#site-header nav.main,
+html:not(.reveal-out) body.header-20-lg header#site-header .site-search,
+html:not(.reveal-out) body.header-20-lg header#site-header nav.secondary { 
+    display:none;
+}
+
+/* Expand subpages clickable on burger navigations */
+body.header-03-lg nav.main ul li.has-child > .expand-subpages,
+body.header-11-lg nav.main ul li.has-child > .expand-subpages,
+body.header-12-lg nav.main ul li.has-child > .expand-subpages,
+body.header-17-lg nav.main ul li.has-child > .expand-subpages,
+body.header-19-lg nav.main ul li.has-child > .expand-subpages
+body.header-20-lg nav.main ul li.has-child > .expand-subpages {
+    z-index: 100;
+}
+
+
+/*  
+---------------------------------------------------
+Header
+
+- Transparent header
+---------------------------------------------------  
+*/
+
+body.transparent-header-lg header#site-header {
+    background: transparent;
+}
+html.reached-top body.transparent-header-lg header#site-header nav.main>ul>li,
+html:not(.nav-down):not(.nav-up) body.transparent-header-lg header#site-header nav.main>ul>li { 
+    border-color: transparent;
+}
+html.reached-top body.transparent-header-lg header#site-header #logo,
+html:not(.nav-down):not(.nav-up) body.transparent-header-lg header#site-header #logo,
+html.reached-top body.transparent-header-lg header#site-header #logo::after,
+html:not(.nav-down):not(.nav-up) body.transparent-header-lg header#site-header #logo::after,
+html.reached-top body.transparent-header-lg header#site-header .row::after,
+html:not(.nav-down):not(.nav-up) body.transparent-header-lg header#site-header .row::after,
+html.reached-top body.transparent-header-lg header#site-header .site-search::after,
+html:not(.nav-down):not(.nav-up) body.transparent-header-lg header#site-header .site-search::after,
+html.reached-top body.transparent-header-lg header#site-header nav.shopping-cart::after,
+html:not(.nav-down):not(.nav-up) body.transparent-header-lg header#site-header nav.shopping-cart::after { 
+    background: transparent!important;
+}
+
+html.nav-down:not(.reached-top) body.transparent-header-lg header#site-header,
+html.nav-up:not(.reached-top) body.transparent-header-lg header#site-header,
+html.nav-down:not(.reached-top) body.transparent-header-lg header#site-header.header-bg-solid,
+html.nav-up:not(.reached-top) body.transparent-header-lg header#site-header.header-bg-solid { 
+    background: rgba(var(--header-bg-color1), 1); 
+}
+html.nav-down:not(.reached-top) body.transparent-header-lg header#site-header.header-bg-linear,
+html.nav-up:not(.reached-top) body.transparent-header-lg header#site-header.header-bg-linear { 
+    background: linear-gradient(var(--header-bg-angle), rgba(var(--header-bg-color1), 1) 0%, rgba(var(--header-bg-color2), 1) 100%); 
+}
+html.nav-down:not(.reached-top) body.transparent-header-lg header#site-header.header-bg-radial,
+html.nav-up:not(.reached-top) body.transparent-header-lg header#site-header.header-bg-radial { 
+    background: radial-gradient(farthest-side at var(--header-bg-start-perc) var(--header-bg-stop-perc), rgba(var(--header-bg-color1), 1) 0%, rgba(var(--header-bg-color2), 1) 100%); 
+}
+
+body.transparent-header-lg header#site-header::after { 
+    opacity:0;
+
+    -webkit-transition: opacity 0.4s ease-in-out 0s;
+    transition: opacity 0.4s ease-in-out 0s;
+}
+
+html.nav-down:not(.reached-top) body.transparent-header-lg header#site-header::after, 
+html.nav-up:not(.reached-top) body.transparent-header-lg header#site-header::after {
+    opacity:1;
+}
+
+
+/*  
+---------------------------------------------------
+Header
+
+- On scroll
+---------------------------------------------------  
+*/
+
+html.nav-down:not(.reached-top) body.transparent-header-lg header#site-header::after, 
+html.nav-up:not(.reached-top) body.transparent-header-lg header#site-header::after {
+    opacity:1;
+}
+
+/* Header */
+html.nav-up body:not(.show_header-on-scroll-lg) header#site-header { 
+    top: calc((var(--large-header) + 5px) * -1);
+}

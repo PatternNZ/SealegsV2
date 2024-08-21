@@ -1,0 +1,19 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@{
+    Layout = null;
+    Context.Response.ContentType = "text/plain";
+}
+@Html.Raw(Model.Value<string>("crawlInstructions"))
+
+@if (Model.HasValue("sitemapXmllocation"))
+{
+    @* try catch added to avoid errors with sites that originally used content picker rather than multi url picker *@
+    try{
+        foreach (var item in Model.Value<IEnumerable<IPublishedContent>>("sitemapXmllocation"))
+        {
+            @("Sitemap: " + item.Url(mode:UrlMode.Absolute))
+        }
+    }
+    catch{}
+}

@@ -1,0 +1,261 @@
+﻿@inherits UmbracoViewPage<ListingFilterViewModel>
+@using USNSiteBuilder.Core
+@using USNSiteBuilder.Core.Models
+@{
+    Usnstyle websiteStyle = (Usnstyle)Model.WebsiteStyle;
+    string buttonBackgroundClass = websiteStyle.StyleColors.buttonBackgroundClass;
+    string buttonBackgroundHoverClass = websiteStyle.StyleColors.buttonBackgroundHoverClass;
+
+    <script>
+        //Prevent default form submission
+        document.addEventListener("DOMContentLoaded", function() {
+            var form = document.getElementById("ListSearchForm_@(Model.Position)_@(Model.CurrentListingPage.Id)");
+            form.addEventListener("keydown", function (event) {
+                if (event.keyCode == 13) {
+                    if (event.target === document.getElementById("filter_text_@Model.Position") || event.target === document.getElementById("filter_text_button_@Model.Position"))
+                    {
+                        event.preventDefault();
+                        usnSubmitListingForm('@Model.Position', @Model.CurrentListingPage.Id);
+                    }
+                }
+            });
+        });
+        
+    </script>
+    <form asp-action="UpdateListing" asp-controller="ListingSurface"
+        data-ajax="true" data-ajax-method="POST"
+        data-ajax-loading="#ListingLoading_@Model.CurrentListingPage.Id" data-ajax-mode="replace" data-ajax-update="#ListContainer_@Model.CurrentListingPage.Id" id="ListSearchForm_@(Model.Position)_@(Model.CurrentListingPage.Id)">
+
+        @Html.HiddenFor(m => Model.ThemeFolder)
+        @Html.HiddenFor(m => Model.CurrentListingPage.Id)
+        @Html.HiddenFor(m => Model.MainListingPage.Id)
+        @Html.HiddenFor(m => Model.WebsiteStyle.Id)
+        @Html.HiddenFor(m => Model.GlobalSettings.Id)
+        @Html.HiddenFor(m => Model.CurrentCulture)
+        @Html.HiddenFor(m => Model.Path)
+        @Html.HiddenFor(m => Model.PageLayout)
+
+        <!-- Filter form - Inner -->
+        <div class="filter-form_inner" aria-label="@Umbraco.GetDictionaryValue("USN Aria Filters")">
+
+            <!-- Filter form - sort + search -->
+            <div class="filter-form_sort-search">
+
+                @if (Model.ListSettings.Value<string[]>("sortOptions") != null && Model.ListSettings.Value<string[]>("sortOptions").Any())
+                {
+                    if (!String.IsNullOrEmpty(Model.SearchText) || (String.IsNullOrEmpty(Model.SearchText) && Model.ListSettings.Value<string[]>("sortOptions").Count() > 1))
+                    {
+                    <!-- Item — Fiter group — Dropdowns -->
+                    <div class="item item_filter-group item_filter-groups_dropdown item_filter-sort">
+                        <div class="inner">
+                            <p class="tab">@Umbraco.GetDictionaryValue("USN List Sort Heading")</p>
+                            <div class="filters">
+                                <div class="form-group dropdown no-label">
+                                    <label class="control-label d-none" for="filter_sort_order_@Model.Position">@Umbraco.GetDictionaryValue("USN List Sort Heading")</label>
+                                    <select class="form-control" id="filter_sort_order_@Model.Position" name="filter_sort_order" onchange="usnSyncListingSort(this.selectedIndex, '@(Model.Position)', '@(Model.CurrentListingPage.Id)');usnSubmitListingForm('@Model.Position', @Model.CurrentListingPage.Id)">
+                                        @if (!String.IsNullOrEmpty(Model.SearchText))
+                                        {
+                                            <!option value="@USNConstants.ListSortRelevanceAscValue" @(Model.SortOrder == USNConstants.ListSortRelevanceAscValue ? "selected" : "")>@Umbraco.GetDictionaryValue("USN List Sort Relevance Asc")</!option>
+                                        }
+                                        @if (Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortNodeAscValue.Contains) || Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortNodeDefaultAscValue.Contains))
+                                        {
+                                            <!option value="@USNConstants.ListSortNodeAscValue"  @(Model.SortOrder == USNConstants.ListSortNodeAscValue ? "selected" : "")>@Umbraco.GetDictionaryValue("USN List Sort Order Asc")</!option>
+                                        }
+                                        @if (Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortNodeDescValue.Contains) || Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortNodeDefaultDescValue.Contains))
+                                        {
+                                            <!option value="@USNConstants.ListSortNodeDescValue"  @(Model.SortOrder == USNConstants.ListSortNodeDescValue ? "selected" : "")>@Umbraco.GetDictionaryValue("USN List Sort Order Desc")</!option>
+                                        }
+                                        @if (Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortPriceAscValue.Contains) || Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortPriceDefaultAscValue.Contains))
+                                        {
+                                            <!option value="@USNConstants.ListSortPriceAscValue" @(Model.SortOrder == USNConstants.ListSortPriceAscValue ? "selected" : "")>@Umbraco.GetDictionaryValue("USN List Sort Price Asc")</!option>
+                                        }
+                                        @if (Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortPriceDescValue.Contains) || Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortPriceDefaultDescValue.Contains))
+                                        {
+                                            <!option value="@USNConstants.ListSortPriceDescValue"  @(Model.SortOrder == USNConstants.ListSortPriceDescValue ? "selected" : "")>@Umbraco.GetDictionaryValue("USN List Sort Price Desc")</!option>
+                                        }
+                                        @if (Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortAlphaAscValue.Contains) || Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortAlphaDefaultAscValue.Contains))
+                                        {
+                                            <!option value="@USNConstants.ListSortAlphaAscValue" @(Model.SortOrder == USNConstants.ListSortAlphaAscValue ? "selected" : "")>@Umbraco.GetDictionaryValue("USN List Sort Alpha Asc")</!option>
+                                        }
+                                        @if (Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortAlphaDescValue.Contains) || Model.ListSettings.Value<string[]>("sortOptions").Any(USNConstants.ListSortAlphaDefaultDescValue.Contains))
+                                        {
+                                            <!option value="@USNConstants.ListSortAlphaDescValue" @(Model.SortOrder == USNConstants.ListSortAlphaDescValue ? "selected" : "")>@Umbraco.GetDictionaryValue("USN List Sort Alpha Desc")</!option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    }
+                }
+
+                <!--// Item — Fiter group — Dropdowns -->
+                @if (Model.ListSettings.Value<bool>("displayFreeTextSearch"))
+                {
+                    <!-- Item — Fiter group — Text field -->
+                    <div class="item item_filter-group item_filter-groups_text-field item_filter-search">
+                        <div class="inner">
+                            <p class="tab">@Umbraco.GetDictionaryValue("USN List Text Search")</p>
+                            <div class="filters">
+                                <div class="form-group no-label">
+                                    <label class="control-label d-none" for="filter_text_@Model.Position">@Umbraco.GetDictionaryValue("USN List Text Search")</label>
+                                    <input id="filter_text_@Model.Position" type="text" class="form-control" name="filter_text" aria-label="@Umbraco.GetDictionaryValue("USN Aria Search")" placeholder="@Umbraco.GetDictionaryValue("USN List Text Search")" value="@Model.SearchText" oninput="usnSyncListingSearchText(this.value, '@(Model.Position)', '@(Model.CurrentListingPage.Id)')">
+                                </div>
+                                <button id="filter_text_button_@Model.Position" type="button" role="button" aria-label="@Umbraco.GetDictionaryValue("USN Aria Search Button")" class="btn @buttonBackgroundClass @buttonBackgroundHoverClass base-btn-text base-btn-borders btn-search" onclick="usnSubmitListingForm('@Model.Position', @Model.CurrentListingPage.Id)">
+                                    <span></span>
+                                    <i aria-hidden="true" class="icon usn_ion-ios-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// Item — Fiter group — Text field -->
+                }
+
+            </div>   
+            <!--// Filter form - sort + search -->
+
+            @if (!Model.CurrentListingPage.IsDocumentType(USNConstants.ListingFilterPageNodeAlias) && Model.ListingFiltersFolder != null && Model.ListingFiltersFolder.Children.Any())
+            {
+
+                <!-- Filter form - configurable -->
+                <div class="filter-form_configurable">
+
+                    @foreach (UsnlistingFilterGroup group in Model.ListingFiltersFolder.Children)
+                    {
+
+                        int selectedCount = 0;
+
+                        foreach (UsnlistingFilterPage filterPage in group.Children)
+                        {
+                            selectedCount = Model.SelectedFilters.Contains(filterPage.Id) ? selectedCount+=1 : selectedCount;
+                        }
+
+                        if (group.FilterType == "radio" && group.Children.Any())
+                        {
+                            <!-- Item — Fiter group — Radio buttons -->
+                            <div class="item item_filter-group item_filter-groups_radiobutton radio_filter">
+                                <div class="inner">
+                                    <p class="tab">
+                                        <button type="button" class="nav-link nav-button-link collapsed" data-bs-toggle="collapse" data-bs-target=".collapse_filter_radio_@(group.Id)" aria-expanded="false" aria-controls="collapse_filter_radio_@(group.Id)" role="button">
+                                            @group.Name
+                                        </button>
+                                    </p>
+                                    <div class="filters collapse collapse_filter_radio_@(group.Id)">
+                                        <div class="filter-summary">
+                                            <div class="filter-selected">
+                                                <span class="selected-count">@selectedCount</span> @Umbraco.GetDictionaryValue("USN List Filter Selected")
+                                            </div>
+                                            <div class="filter-reset">
+                                                <button type="button" class="btn btn-sm" onclick="usnResetFilterByNameGroup('@(Model.Position)','filter_radio_@(Model.Position)_@group.Id', @Model.CurrentListingPage.Id)">
+                                                    @Umbraco.GetDictionaryValue("USN List Filter Reset")
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @foreach (UsnlistingFilterPage filterPage in group.Children)
+                                        {
+
+                                            <div class="form-group radio">
+                                                <label for="filter_radio_@(Model.Position)_@(filterPage.Id)">
+                                                    <input class="form-control" type="radio" name="filter_radio_@(Model.Position)_@(group.Id)" id="filter_radio_@(Model.Position)_@(filterPage.Id)" value="@filterPage.Id" onchange="usnSubmitListingForm('@Model.Position', @Model.CurrentListingPage.Id)" @(Model.SelectedFilters.Contains(filterPage.Id) ? "checked" : "")>
+                                                    @filterPage.Name
+                                                    <span></span>
+                                                </label>
+                                            </div>
+
+                                        }
+                            
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--// Item — Fiter group — Radio buttons -->
+                        }
+                        else if (group.FilterType == "dropdown" && group.Children.Any())
+                        {
+                            <!-- Item — Fiter group — Dropdowns -->
+                            <div class="item item_filter-group item_filter-groups_dropdown dropdown_filter">
+                                <div class="inner">
+                                    <p class="tab">
+                                        <button type="button" class="nav-link nav-button-link collapsed" data-bs-toggle="collapse" data-bs-target=".collapse_filter_dropdown_@(group.Id)" aria-expanded="false" aria-controls="collapse_filter_dropdown_@(group.Id)" role="button">
+                                            @group.Name
+                                        </button>
+                                    </p>
+                                    <div class="filters collapse collapse_filter_dropdown_@(group.Id)">
+                                        <div class="filter-summary">
+                                            <div class="filter-selected">
+                                                <span class="selected-count">@selectedCount</span> @Umbraco.GetDictionaryValue("USN List Filter Selected")
+                                            </div>
+                                            <div class="filter-reset">
+                                                <button type="button" class="btn btn-sm" onclick="usnResetFilterDropdown('@(Model.Position)',@group.Id, @Model.CurrentListingPage.Id)">
+                                                    @Umbraco.GetDictionaryValue("USN List Filter Reset")
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group dropdown no-label">
+                                            <label class="control-label d-none" for="filter_dropdown_@(Model.Position)_@group.Id">@group.Name</label>
+                                            <select id="filter_dropdown_@(Model.Position)_@group.Id" name="filter_dropdown_@group.Id" class="form-control" onchange="usnSyncListingSearchDropdown(this.selectedIndex, '@(Model.Position)', @group.Id, @Model.CurrentListingPage.Id);usnSubmitListingForm('@Model.Position', @Model.CurrentListingPage.Id)">
+                                                <option value="">@Umbraco.GetDictionaryValue("USN List Dropdown Option All")</option>
+                                                @foreach (UsnlistingFilterPage filterPage in group.Children)
+                                                {
+                                                    <!option value="@filterPage.Id" @(Model.SelectedFilters.Contains(filterPage.Id) ? "selected" : "")>@filterPage.Name</!option>
+                                                }
+                                    
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--// Item — Fiter group — Dropdowns -->
+                        }
+                        else if (group.Children.Any())
+                        {
+                            <!-- Item — Fiter group — Checkbox -->
+                            <div class="item item_filter-group item_filter-groups_checkbox checkbox_filter">
+                                <div class="inner">
+                                    <p class="tab">
+                                        <button type="button" class="nav-link nav-button-link collapsed" data-bs-toggle="collapse" data-bs-target=".collapse_filter_check_@(group.Id)" aria-expanded="false" aria-controls="collapse_filter_check_@(group.Id)" role="button">
+                                            @group.Name
+                                        </button>
+                                    </p>
+                                    <div class="filters collapse collapse_filter_check_@(group.Id)">
+                                        <div class="filter-summary">
+                                            <div class="filter-selected">
+                                                <span class="selected-count">@selectedCount</span> @Umbraco.GetDictionaryValue("USN List Filter Selected")
+                                            </div>
+                                            <div class="filter-reset">
+                                                <button type="button" class="btn btn-sm" onclick="usnResetFilterByNameGroup('@(Model.Position)','filter_check_@(Model.Position)_@(group.Id)', @Model.CurrentListingPage.Id)">
+                                                    @Umbraco.GetDictionaryValue("USN List Filter Reset")
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @foreach (UsnlistingFilterPage filterPage in group.Children)
+                                        {
+                                            <div class="form-group checkbox">
+                                                <label for="filter_check_@(Model.Position)_@(filterPage.Id)">
+                                                    <input class="form-control" type="checkbox" value="@filterPage.Id" name="filter_check_@(Model.Position)_@(group.Id)" id="filter_check_@(Model.Position)_@(filterPage.Id)" @(Model.SelectedFilters.Contains(filterPage.Id) ? "checked" : "") onchange="usnSubmitListingForm('@Model.Position', @Model.CurrentListingPage.Id)">
+                                                    @filterPage.Name
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--// Item — Fiter group — Checkbox -->
+                        }
+
+                    }
+
+                </div>
+                <!--// Filter form - configurable -->
+
+            }
+
+        </div>
+        <!--// Filter form - Inner -->
+
+    </form>
+}

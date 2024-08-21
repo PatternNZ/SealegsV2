@@ -1,0 +1,339 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBlock>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@using USNSiteBuilder.Core.Interfaces
+@inject ISiteBuilderService _siteBuilderService
+@{
+    // Available as Pod Block type only
+
+    var content = (Usn_Pb_PodSubpageListing)Model.BlockContent;
+
+    //Settings taken from compositions common to all pod block types
+    var uniqueSettings = (IUsn_Cmp_SubpageListing_Pod_Settings)Model.BlockSettings;
+    var animateSettings = (IUsn_Cmp_AnimateSettings)Model.BlockSettings;
+
+    string backgroundColorLabel = ViewData["backgroundColorLabel"].ToString();
+    bool disableModalLinks = Convert.ToBoolean(ViewData["disableModalLinks"]);
+
+    //Clear view data before calling next partial
+    ViewData.Clear();
+
+    Usnstyle websiteStyle = (Usnstyle)Model.BaseModel.WebsiteStyle;
+
+    AnimationSettings animation = _siteBuilderService.GetAnimationSettings(animateSettings.Animate, animateSettings.AnimationDelay, animateSettings.AnimationDuration, animateSettings.AnimationStyle);
+    string itemTextAlignment = uniqueSettings.TextAlignment.HasValue() ? uniqueSettings.TextAlignment : "text-left";
+    string itemHeadingSizeClass = uniqueSettings.ItemHeadingSize;
+    string itemSecondaryHeadingSizeClass = uniqueSettings.ItemSecondaryHeadingSize;
+    string tabStyle = uniqueSettings.TabStyle.HasValue() ? uniqueSettings.TabStyle : "tab-basic";
+    string uniqueID = Guid.NewGuid().ToString();
+    int listPage = 0;
+
+    //Get all main pages to display
+    List<IPublishedContent> mainPages = new List<IPublishedContent>();
+    List<string> tabHeadings = new List<string>();
+    List<string> tabIcons = new List<string>();
+    List<SiteBuilderMultiUrlPicker> links = new List<SiteBuilderMultiUrlPicker>();
+
+    @await Html.PartialAsync(Model.BaseModel.ThemeFolder + "/MiscPageElements/Headings", new ViewDataDictionary(ViewData) { { "headingOrder", ((Usnstyle)Model.BaseModel.WebsiteStyle).StyleLayout.headingOrder }, { "animation", animation }, { "heading", content.Heading }, { "secondaryHeading", content.SecondaryHeading }, { "backgroundColorLabel", backgroundColorLabel } })
+
+    if (content.LinkToListing != null && content.LinkToListing.Any())
+    {
+        foreach (var pageLink in content.LinkToListing)
+        {
+            if (pageLink.link.LinkType == SiteBuilderLink.UrlPickerTypes.Content && _siteBuilderService.DisplayLink(pageLink, disableModalLinks))
+            {
+                var page = Umbraco.Content(pageLink.link.LinkUdi);
+
+                if (page != null && (page.IsDocumentType(Usnhomepage.ModelTypeAlias) || page.IsDocumentType(Usnpage.ModelTypeAlias) || page.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || page.IsDocumentType(UsnblogCategoryPage.ModelTypeAlias) || page.IsDocumentType(UsnshopPage.ModelTypeAlias) || page.IsDocumentType(UsnlistingPage.ModelTypeAlias) || page.IsDocumentType(UsnlistingFilterPage.ModelTypeAlias)))
+                {
+                    mainPages.Add(page);
+                    tabHeadings.Add(pageLink.link.LinkText);
+                    tabIcons.Add(pageLink.icon);
+                    links.Add(pageLink);
+                }
+            }
+        }
+    }
+
+    if (mainPages.Any() && mainPages.Count() > 1)
+    {
+        <div class="repeatable tabbed @tabStyle @animation.AnimationClass" data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
+
+            <nav class="tabs">
+                <ul class="nav @itemTextAlignment" role="tablist">
+                    @foreach (var item in mainPages)
+                    {
+                        <li class="tab" role="presentation">
+                            <a class="nav-item nav-button-link nav-link @(listPage == 0 ? "active" : "")" id="nav_tab_@(uniqueID)_@listPage" data-bs-toggle="tab" href="#nav_@(uniqueID)_@listPage" role="tab" aria-controls="nav_@(uniqueID)_@listPage" aria-selected="@(listPage == 0 ? "true" : "false")">
+                                @Html.Raw(tabIcons[listPage])@tabHeadings[listPage]
+                            </a>
+                        </li>
+                        listPage += 1;
+                    }
+                </ul>
+            </nav>
+
+        </div>
+    }
+
+    if (mainPages.Any())
+    {
+        listPage = 0;
+        int pagesToDisplay = uniqueSettings.PagesToDisplay.HasValue() && uniqueSettings.PagesToDisplay != 0 ? uniqueSettings.PagesToDisplay : 10;
+
+        <div class="repeatable-content tab-content @animation.AnimationClass" data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
+            @foreach (var landingPage in mainPages)
+            {
+                <div id="nav_@(uniqueID)_@listPage" role="tabpanel" class="tab-pane @(listPage == 0 ? "show active" : String.Empty)" aria-labelledby="nav_tab_@(uniqueID)_@listPage">
+                    <div class="component-main row listing listing_basic-grid listing_short">
+
+                        @if (landingPage.IsDocumentType(Usnhomepage.ModelTypeAlias) || landingPage.IsDocumentType(Usnpage.ModelTypeAlias))
+                        {
+                            bool hideCurrentPage = uniqueSettings.HideCurrentPageFromList.HasValue() ? uniqueSettings.HideCurrentPageFromList : false;
+                            IEnumerable<IPublishedContent> pages;
+
+                            if (hideCurrentPage)
+                            {
+                                pages = landingPage.Children.Where(x => (x.IsDocumentType(Usnpage.ModelTypeAlias) || x.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || x.IsDocumentType(UsnshopPage.ModelTypeAlias) || x.IsDocumentType(UsnlistingPage.ModelTypeAlias) || x.IsDocumentType(UsnsearchResultsPage.ModelTypeAlias)) && x.IsVisible() && x.Id != Model.BaseModel.Id);
+                            }
+                            else
+                            {
+                                pages = landingPage.Children.Where(x => (x.IsDocumentType(Usnpage.ModelTypeAlias) || x.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || x.IsDocumentType(UsnshopPage.ModelTypeAlias) || x.IsDocumentType(UsnlistingPage.ModelTypeAlias) || x.IsDocumentType(UsnsearchResultsPage.ModelTypeAlias)) && x.IsVisible());
+                            }
+
+                            if (pages.Any())
+                            {
+                                pages = uniqueSettings.EnableRandomOrder ? pages.Randomize() : pages;
+                                pages = pages.Take(pagesToDisplay).ToList();
+
+                                foreach (var subPage in pages)
+                                {
+                                    <div class="item item_text-only items-1 col-12">
+                                        <a href="@subPage.Url()">
+
+                                            @if (subPage.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder != "heading-first")
+                                            {
+                                                <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(subPage.Value<string>("pageListingSecondaryHeading"))</p>
+                                            }
+
+                                            <p class="heading @itemHeadingSizeClass @(backgroundColorLabel)-heading">
+                                                @if (subPage.HasValue("pageListingHeading"))
+                                                {
+                                                    @Html.Raw(subPage.Value<string>("pageListingHeading"))
+                                                }
+                                                else
+                                                {
+                                                    @subPage.Name
+                                                }
+                                            </p>
+
+                                            @if (subPage.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder == "heading-first")
+                                            {
+                                                <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(subPage.Value<string>("pageListingSecondaryHeading"))</p>
+                                            }
+                                        </a>
+                                    </div>
+
+                                }
+                            }
+                        }
+                        else if (landingPage.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || landingPage.IsDocumentType(UsnblogCategoryPage.ModelTypeAlias))
+                        {
+                            string category = null;
+                            IPublishedContent blogLandingPage;
+
+                            if (landingPage.IsDocumentType(UsnblogCategoryPage.ModelTypeAlias))
+                            {
+                                category = landingPage.Id.ToString();
+                                blogLandingPage = landingPage.AncestorOrSelf(UsnblogLandingPage.ModelTypeAlias);
+                            }
+                            else
+                            {
+                                blogLandingPage = landingPage;
+                            }
+
+                            var blogPages = blogLandingPage.Children.First(x => x.IsDocumentType(UsnblogPostsFolder.ModelTypeAlias)).Children.OrderByDescending(y => y.Value<DateTime>("postDate"));
+
+                            //Filter Blog Posts on Category if required
+                            blogPages = category != null && blogPages.Any() ? blogPages.Where(x => x.Value<IEnumerable<IPublishedContent>>("postCategories") != null ? x.Value<IEnumerable<IPublishedContent>>("postCategories").Contains(landingPage) : false).OrderByDescending(y => y.Value<DateTime>("postDate")) : blogPages;
+
+                            //Only get requested number of pages
+                            blogPages = pagesToDisplay != -1 && blogPages.Any() ? blogPages.Take(pagesToDisplay).OrderByDescending(y => y.Value<DateTime>("postDate")) : blogPages;
+
+                            if (blogPages.Any())
+                            {
+                                var blogPagesOrdered = uniqueSettings.EnableRandomOrder ? blogPages.Randomize() : blogPages;
+
+                                foreach (var item in blogPagesOrdered)
+                                {
+                                    <div class="item item_text-only items-1 col-12">
+                                        <a href="@item.Url()">
+
+                                            @if (item.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder != "heading-first")
+                                            {
+                                                <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(item.Value<string>("pageListingSecondaryHeading"))</p>
+                                            }
+
+                                            <p class="heading @itemHeadingSizeClass @(backgroundColorLabel)-heading">
+                                                @if (item.HasValue("pageListingHeading"))
+                                                {
+                                                    @Html.Raw(item.Value<string>("pageListingHeading"))
+                                                }
+                                                else
+                                                {
+                                                    @item.Name
+                                                }
+                                            </p>
+
+                                            @if (item.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder == "heading-first")
+                                            {
+                                                <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(item.Value<string>("pageListingSecondaryHeading"))</p>
+                                            }
+                                        </a>
+                                        <div class="meta @(backgroundColorLabel)-text">
+                                            <p class="date"><time>@(item.Value<DateTime>("postDate").ToString("dd MMM yyyy"))</time></p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                        else if (landingPage.IsDocumentType(UsnlistingPage.ModelTypeAlias) || (landingPage.IsDocumentType(UsnlistingFilterPage.ModelTypeAlias) && landingPage.Parent.Parent.Parent.IsDocumentType(UsnlistingPage.ModelTypeAlias)))
+                            {
+                                string category = null;
+                                IPublishedContent listingLandingPage;
+
+                                if (landingPage.IsDocumentType(UsnlistingFilterPage.ModelTypeAlias))
+                                {
+                                    category = landingPage.Id.ToString();
+                                    listingLandingPage = landingPage.Parent.Parent.Parent;
+                                }
+                                else
+                                {
+                                    listingLandingPage = landingPage;
+                                }
+
+                                var listPages = listingLandingPage.Children.First(x => x.IsDocumentType(UsnlistingPagesFolder.ModelTypeAlias)).Children.OrderBy(y => y.SortOrder);
+
+                                //Filter Pages on Category if required
+                                listPages = category != null && listPages.Any() ? listPages.Where(x => x.Value<IEnumerable<IPublishedContent>>("filters") != null ? x.Value<IEnumerable<IPublishedContent>>("filters").Contains(landingPage) : false).OrderBy(y => y.SortOrder) : listPages;
+
+                                //Only get requested number of pages
+                                listPages = pagesToDisplay != -1 && listPages.Any() ? listPages.Take(pagesToDisplay).OrderBy(y => y.SortOrder) : listPages;
+
+                                if (listPages.Any())
+                                {
+                                    var listPagesOrdered = uniqueSettings.EnableRandomOrder ? listPages.Randomize() : listPages;
+
+                                    foreach (var subPage in listPagesOrdered)
+                                    {
+                                        <div class="item item_text-only items-1 col-12">
+                                            <a href="@subPage.Url()">
+
+                                                @if (subPage.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder != "heading-first")
+                                                {
+                                                    <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(subPage.Value<string>("pageListingSecondaryHeading"))</p>
+                                                }
+
+                                                <p class="heading @itemHeadingSizeClass @(backgroundColorLabel)-heading">
+                                                    @if (subPage.HasValue("pageListingHeading"))
+                                                    {
+                                                        @Html.Raw(subPage.Value<string>("pageListingHeading"))
+                                                    }
+                                                    else
+                                                    {
+                                                        @subPage.Name
+                                                    }
+                                                </p>
+
+                                                @if (subPage.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder == "heading-first")
+                                                {
+                                                    <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(subPage.Value<string>("pageListingSecondaryHeading"))</p>
+                                                }
+                                            </a>
+                                        </div>
+                                    }
+                                }
+
+                            }
+                        else if (landingPage.IsDocumentType(UsnshopPage.ModelTypeAlias) || (landingPage.IsDocumentType(UsnlistingFilterPage.ModelTypeAlias) && landingPage.Parent.Parent.Parent.IsDocumentType(UsnshopPage.ModelTypeAlias)))
+                            {
+                                string category = null;
+                                IPublishedContent shopLandingPage;
+
+                                if (landingPage.IsDocumentType(UsnlistingFilterPage.ModelTypeAlias))
+                                {
+                                    category = landingPage.Id.ToString();
+                                    shopLandingPage = landingPage.Parent.Parent.Parent;
+                                }
+                                else
+                                {
+                                    shopLandingPage = landingPage;
+                                }
+
+                                var productPages = shopLandingPage.Children.First(x => x.IsDocumentType(UsnproductPagesFolder.ModelTypeAlias)).Children.OrderBy(y => y.SortOrder);
+
+                                //Filter Pages on Category if required
+                                productPages = category != null && productPages.Any() ? productPages.Where(x => x.Value<IEnumerable<IPublishedContent>>("filters") != null ? x.Value<IEnumerable<IPublishedContent>>("filters").Contains(landingPage) : false).OrderBy(y => y.SortOrder) : productPages;
+
+                                //Only get requested number of pages
+                                productPages = pagesToDisplay != -1 && productPages.Any() ? productPages.Take(pagesToDisplay).OrderBy(y => y.SortOrder) : productPages;
+
+                                if (productPages.Any())
+                                {
+                                    var productPagesOrdered = uniqueSettings.EnableRandomOrder ? productPages.Randomize() : productPages;
+
+                                    foreach (UsnproductPage productPage in productPagesOrdered)
+                                    {
+                                        <div class="item item_text-only items-1 col-12">
+                                            <a href="@productPage.Url()">
+
+                                                @if (productPage.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder != "heading-first")
+                                                {
+                                                <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(productPage.Value<string>("pageListingSecondaryHeading"))</p>
+                                                }
+
+                                                <p class="heading @itemHeadingSizeClass @(backgroundColorLabel)-heading">
+                                                @if (productPage.HasValue("pageListingHeading"))
+                                                    {
+                                                    @Html.Raw(productPage.Value<string>("pageListingHeading"))
+                                                    }
+                                                    else
+                                                    {
+                                                    @productPage.Name
+                                                    }
+                                                </p>
+
+                                                @if (productPage.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder == "heading-first")
+                                                {
+                                                <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(productPage.Value<string>("pageListingSecondaryHeading"))</p>
+                                                }
+                                            </a>
+                                        </div>
+                                    }
+                                }
+
+                            }
+                    </div>
+
+                    @if (!uniqueSettings.HideLinkToListingPage)
+                    {
+                        <p class="link">
+                            @{
+                                string buttonBgClass = _siteBuilderService.GetBackgroundColorClass(links[listPage].color.sortOrder, "button", websiteStyle);
+                                string buttonBgHoverClass = _siteBuilderService.GetBackgroundColorClass(links[listPage].color.sortOrder, "buttonHover", websiteStyle);
+                            }
+
+                            <a class="btn @(links[listPage].sizeStyle) @buttonBgClass @buttonBgHoverClass @(links[listPage].color.label)-text @(links[listPage].color.label)-borders" href="@(links[listPage].link.LinkUrl)" @Html.Raw(links[listPage].rel) @Html.Raw(links[listPage].link.LinkTarget) @Html.Raw(links[listPage].link.LinkTitle)>
+                                <span></span>
+                                @Html.Raw(links[listPage].icon) @Html.Raw(links[listPage].link.LinkText)@Html.Raw(links[listPage].link.LinkTargetIcon)
+                            </a>
+                        </p>
+                    }
+
+                </div>
+
+                listPage += 1;
+            }
+        </div>
+    }
+}

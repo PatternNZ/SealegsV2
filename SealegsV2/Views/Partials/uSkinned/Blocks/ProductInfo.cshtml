@@ -1,0 +1,64 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBlock>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@using USNSiteBuilder.Core.Interfaces
+@using Umbraco.Cms.Core.Strings
+@inject ISiteBuilderService _siteBuilderService
+@{
+    //Available as Component Block and Split Component Block types
+
+    var content = (IUsn_Cmp_ProductInfo_Content)Model.BlockContent;
+
+    string backgroundColorLabel = ViewData["backgroundColorLabel"].ToString();
+
+    //Clear view data before calling next partial
+    ViewData.Clear();
+    
+    var uniqueSettings = (IUsn_Cmp_ProductInfo_Component_Settings)Model.BlockSettings;
+    var backgroundSettings = Model.BlockSettings as IUsn_Cmp_BackgroundSettings;
+
+    var productPage = content.Product.HasValue() ? content.Product : Model.BaseModel.CurrentPage;
+    int productId = productPage.Id;
+
+    bool selected = content.Product.HasValue() ? true : false;
+
+    string blockLocation = ViewData["blockLocation"] != null ? ViewData["blockLocation"].ToString() : String.Empty;
+
+    //Settings taken from compositions common to all block types
+    var animateSettings = (IUsn_Cmp_AnimateSettings)Model.BlockSettings;
+    AnimationSettings animation = _siteBuilderService.GetAnimationSettings(animateSettings.Animate, animateSettings.AnimationDelay, animateSettings.AnimationDuration, animateSettings.AnimationStyle);
+
+    Usnstyle websiteStyle = (Usnstyle)Model.BaseModel.WebsiteStyle;
+
+    string textAlignmentClass = uniqueSettings.ProductTextAlignment.HasValue() ? uniqueSettings.ProductTextAlignment : "text-left";
+    string headingTag = uniqueSettings.ProductHeadingSize.HasValue() ? (uniqueSettings.ProductHeadingSize == "sm" || uniqueSettings.ProductHeadingSize == "md" || uniqueSettings.ProductHeadingSize == "lg" ? "p" : uniqueSettings.ProductHeadingSize) : "p";
+    string headingClass = uniqueSettings.ProductHeadingSize.HasValue() ? (uniqueSettings.ProductHeadingSize == "sm" || uniqueSettings.ProductHeadingSize == "md" || uniqueSettings.ProductHeadingSize == "lg" ? uniqueSettings.ProductHeadingSize : String.Empty) : String.Empty;
+    string secondaryHeadingClass = uniqueSettings.ProductSecondaryHeadingSize;
+    string buttonColorLabel = uniqueSettings.CartButtonColor.label;
+    string buttonColorClass = _siteBuilderService.GetBackgroundColorClass(uniqueSettings.CartButtonColor.sortOrder, "button", websiteStyle);
+    string buttonHoverColorClass = _siteBuilderService.GetBackgroundColorClass(uniqueSettings.CartButtonColor.sortOrder, "buttonHover", websiteStyle);
+
+    <div class="component-main @textAlignmentClass @animation.AnimationClass" data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
+        
+        @if (productPage.IsDocumentType(UsnproductPage.ModelTypeAlias))
+        {
+            @await Component.InvokeAsync("Product", new {
+                Selected = selected,
+                UniqueIdentifier =  Model.BlockContent.Key.ToString().Replace("-", "_"),
+                ProductId = productId,
+                ThemeFolder = Model.BaseModel.ThemeFolder,
+                GlobalSettingsId = Model.BaseModel.GlobalSettings.Id,
+                WebsiteStyleId = Model.BaseModel.WebsiteStyle.Id,
+                HeadingTag = headingTag,
+                HeadingClass = headingClass,
+                SecondaryHeadingClass = secondaryHeadingClass,
+                BackgroundLabel =  backgroundColorLabel,
+                ButtonColorLabel = buttonColorLabel,
+                ButtonColorClass = buttonColorClass,
+                ButtonHoverColorClass = buttonHoverColorClass,
+                BlockType = "component"
+            })
+        }
+
+    </div>
+}

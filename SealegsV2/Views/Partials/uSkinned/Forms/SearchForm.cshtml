@@ -1,0 +1,44 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@{
+    string location = ViewData["location"].ToString();
+    string actionUrl = String.Empty;
+    IPublishedContent searchResultsPage = null;
+
+    if(location == "header")
+    {
+        UsnglobalSettings globalSettings = (UsnglobalSettings)Model.GlobalSettings;
+        searchResultsPage = globalSettings.SearchResultsPage;
+        actionUrl = searchResultsPage != null ? searchResultsPage.Url() : String.Empty;
+    }
+    else if(location == "searchpage")
+    {
+        actionUrl = Model.Url();
+    }
+
+    if (actionUrl != String.Empty)
+    {
+        Usnstyle websiteStyle = (Usnstyle)Model.WebsiteStyle;
+        string buttonBackgroundClass = websiteStyle.StyleColors.buttonBackgroundClass;
+        string buttonBackgroundHoverClass = websiteStyle.StyleColors.buttonBackgroundHoverClass;
+
+        <div class="form site-search-form site-search" aria-label="@Umbraco.GetDictionaryValue("USN Aria Site Search")">
+            <form role="search" action="@actionUrl" method="get" name="searchForm">
+                <fieldset>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="search_field" aria-label="@Umbraco.GetDictionaryValue("USN Search Form Placeholder")" placeholder="@Umbraco.GetDictionaryValue("USN Search Form Placeholder")" value="@Context.Request.Query["search_field"]">
+                    </div>
+                    <button type="submit" role="button" aria-label="@Umbraco.GetDictionaryValue("USN Aria Search")" class="btn @buttonBackgroundClass @buttonBackgroundHoverClass base-btn-text base-btn-borders btn-search">
+                        <span></span>
+                        <i aria-hidden="true" class="icon usn_ion-ios-search"></i>
+                    </button>
+                </fieldset>
+            </form>
+            <button class="expand-search" data-bs-toggle="collapse" type="button" aria-expanded="false" aria-label="@Umbraco.GetDictionaryValue("USN Aria Expand Site Search")">
+                <em>@Umbraco.GetDictionaryValue("USN Search Form Expand")</em>
+                <i aria-hidden="true" class="icon usn_ion-ios-search search-icon"></i>
+                <i aria-hidden="true" class="icon usn_ion-md-close close-icon"></i>
+            </button>
+        </div>
+    }
+}

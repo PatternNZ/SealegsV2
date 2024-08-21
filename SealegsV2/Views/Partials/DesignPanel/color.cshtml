@@ -1,0 +1,2215 @@
+﻿<div id="design-2" class="usn-cms-grouping usn-design-grouping usn-cms-color-panel">
+
+    <!-- Palette -->
+    <div class="usn-group-section">
+
+        <label class="usn-label">Color palette</label>
+        <span class="note usn-note">Create a color palette to be used in your design. Your choices will appear within the color picker for easy selection.</span>
+
+
+        <div class="usn-colour_palette" id="usn_color_palette">
+
+            <div class="usn-colour_palette-item" ng-repeat="item in styles.themeColors.paletteItems track by $index">
+
+                <div class="usn-colour-item">
+                    <div class="colour-swatch">
+                        <input palettepicker class="usncolorpicker" ng-model="styles.themeColors.paletteItems[$index]" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="usn-colour_palette-button-group">
+                <div class="usn-colour_palette-item usn-colour_palette-buttons">
+                    <button type="button" class="usn-add-colour" ng-click="addPaletteItem()"></button>
+                </div>
+                <div class="usn-colour_palette-item usn-colour_palette-buttons" ng-show="styles.themeColors.paletteItems.length > 0">
+                    <button type="button" class="usn-remove-colour" ng-click="removePaletteItem()"></button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--// Palette -->
+    <!-- Group section -->
+    <div class="usn-group-section">
+
+        <label class="usn-label">Baseline colors</label>
+        <span class="note usn-note">Build up the baseline color palette of your theme..</span>
+
+        <!-- Accordion -->
+        <div class="usn-cms-accordion">
+
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : bodyColorTabStyle, 'tab-open' : !bodyColorTabStyle}">
+                <a ng-click="bodyColorTabStyle = !bodyColorTabStyle">
+                    <span class="usn-color-swatch" style="{{bodyBackgroundSwatch}}"></span>
+                    <span>Body</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : bodyColorTabStyle, 'tab-open' : !bodyColorTabStyle}">
+
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Background color tabs -->
+                        <nav class="usn-cms-color-tabs">
+
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.bodyBackgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Solid
+                                <input value="solid" name="bodyBackgroundStyle" type="radio" ng-model="styles.themeColors.bodyBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'body-bg body-bg', styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle, styles.themeColors.bodyBackgroundGradientDirection, 'bodyBackgroundSwatch')" />
+                            </label>
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.bodyBackgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Gradient
+                                <input value="gradient" name="bodyBackgroundStyle" type="radio" ng-model="styles.themeColors.bodyBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'body-bg body-bg', styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle, styles.themeColors.bodyBackgroundGradientDirection, 'bodyBackgroundSwatch')" />
+                            </label>
+
+                        </nav>
+                        <!--// Background color tabs -->
+                        <!-- Input Row - Tab pane -->
+                        <div class="usn-input-row usn-cms-tab-pane">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--body-bg-color1" colorpicker class="usncolorpicker" ng-model="styles.themeColors.bodyBackground" ng-change="updateSwatchFromBackground(styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle, styles.themeColors.bodyBackgroundGradientDirection,'bodyBackgroundSwatch')" />
+                                    <span>{{styles.themeColors.bodyBackgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half" ng-show="styles.themeColors.bodyBackgroundStyle == 'gradient'">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--body-bg-color2" colorpicker class="usncolorpicker" ng-model="styles.themeColors.bodyBackground2" ng-change="updateSwatchFromBackground(styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle, styles.themeColors.bodyBackgroundGradientDirection,'bodyBackgroundSwatch')" />
+                                    <span>Background 2</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full" ng-show="styles.themeColors.bodyBackgroundStyle == 'gradient'">
+
+                                <!-- Gradient tabs -->
+                                <nav class="usn-cms-color-tabs">
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.bodyBackgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Linear
+                                        <input value="linear" name="bodyBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'body-bg body-bg', styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientDirection,'bodyBackgroundSwatch')" />
+                                    </label>
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.bodyBackgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Radial
+                                        <input value="radial" name="bodyBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'body-bg body-bg', styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientDirection, 'bodyBackgroundSwatch')" />
+                                    </label>
+                                </nav>
+                                <!--// Gradient tabs -->
+                                <!-- Input Row - Tab pane -->
+                                <div class="usn-input-row usn-cms-tab-pane">
+
+                                    <!-- Input Col -->
+                                    <div class="usn-input-col usn-input-col-full">
+
+                                        <!-- Gradient positions -->
+                                        <div class="usn-gradient-position">
+                                            <div class="usn-gradient-inner">
+
+                                                <label class="usn-gradient-point usn-gradient-top-left {{styles.themeColors.bodyBackgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                    <input value="topLeft" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-center {{styles.themeColors.bodyBackgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                    <input value="topCenter" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-right {{styles.themeColors.bodyBackgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                    <input value="topRight" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-left {{styles.themeColors.bodyBackgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                    <input value="middleLeft" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-center {{styles.themeColors.bodyBackgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{styles.themeColors.bodyBackgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="styles.themeColors.bodyBackgroundGradientStyle == 'radial'">
+                                                    <input value="middleCenter" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-right {{styles.themeColors.bodyBackgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                    <input value="middleRight" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-left {{styles.themeColors.bodyBackgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                    <input value="bottomLeft" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-center  {{styles.themeColors.bodyBackgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                    <input value="bottomCenter" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-right {{styles.themeColors.bodyBackgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                    <input value="bottomRight" name="bodyBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.bodyBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.bodyBackgroundStyle, styles.themeColors.bodyBackground, styles.themeColors.bodyBackground2, styles.themeColors.bodyBackgroundGradientStyle,'bodyBackgroundSwatch')" />
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <!--// Gradient positions -->
+
+                                    </div>
+                                    <!--// Input Col -->
+
+                                </div>
+                                <!--// Input Row - Tab pane -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row - Tab pane -->
+
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : headerColorTabStyle, 'tab-open' : !headerColorTabStyle}">
+                <a ng-click="headerColorTabStyle = !headerColorTabStyle">
+                    <span class="usn-color-swatch" style="{{headerBackgroundSwatch}}"></span>
+                    <span>Header</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : headerColorTabStyle, 'tab-open' : !headerColorTabStyle}">
+
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Background color tabs -->
+                        <nav class="usn-cms-color-tabs">
+
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.headerBackgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Solid
+                                <input value="solid" name="headerBackgroundStyle" type="radio" ng-model="styles.themeColors.headerBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'header-bg header-bg', styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle, styles.themeColors.headerBackgroundGradientDirection, 'headerBackgroundSwatch')" />
+                            </label>
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.headerBackgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Gradient
+                                <input value="gradient" name="headerBackgroundStyle" type="radio" ng-model="styles.themeColors.headerBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'header-bg header-bg', styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle, styles.themeColors.headerBackgroundGradientDirection, 'headerBackgroundSwatch')" />
+                            </label>
+
+                        </nav>
+                        <!--// Background color tabs -->
+                        <!-- Input Row - Tab pane -->
+                        <div class="usn-input-row usn-cms-tab-pane">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--header-bg-color1" colorpicker class="usncolorpicker" ng-model="styles.themeColors.headerBackground" ng-change="updateSwatchFromBackground(styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle, styles.themeColors.headerBackgroundGradientDirection,'headerBackgroundSwatch')" />
+                                    <span>{{styles.themeColors.headerBackgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half" ng-show="styles.themeColors.headerBackgroundStyle == 'gradient'">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--header-bg-color2" colorpicker class="usncolorpicker" ng-model="styles.themeColors.headerBackground2" ng-change="updateSwatchFromBackground(styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle, styles.themeColors.headerBackgroundGradientDirection,'headerBackgroundSwatch')" />
+                                    <span>Background 2</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full" ng-show="styles.themeColors.headerBackgroundStyle == 'gradient'">
+
+                                <!-- Gradient tabs -->
+                                <nav class="usn-cms-color-tabs">
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.headerBackgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Linear
+                                        <input value="linear" name="headerBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.headerBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'header-bg header-bg', styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientDirection,'headerBackgroundSwatch')" />
+                                    </label>
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.headerBackgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Radial
+                                        <input value="radial" name="headerBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.headerBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'header-bg header-bg', styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientDirection, 'headerBackgroundSwatch')" />
+                                    </label>
+                                </nav>
+                                <!--// Gradient tabs -->
+                                <!-- Input Row - Tab pane -->
+                                <div class="usn-input-row usn-cms-tab-pane">
+
+                                    <!-- Input Col -->
+                                    <div class="usn-input-col usn-input-col-full">
+
+                                        <!-- Gradient positions -->
+                                        <div class="usn-gradient-position">
+                                            <div class="usn-gradient-inner">
+
+                                                <label class="usn-gradient-point usn-gradient-top-left {{styles.themeColors.headerBackgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                    <input value="topLeft" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-center {{styles.themeColors.headerBackgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                    <input value="topCenter" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-right {{styles.themeColors.headerBackgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                    <input value="topRight" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-left {{styles.themeColors.headerBackgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                    <input value="middleLeft" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-center {{styles.themeColors.headerBackgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{styles.themeColors.headerBackgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="styles.themeColors.headerBackgroundGradientStyle == 'radial'">
+                                                    <input value="middleCenter" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-right {{styles.themeColors.headerBackgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                    <input value="middleRight" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-left {{styles.themeColors.headerBackgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                    <input value="bottomLeft" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-center  {{styles.themeColors.headerBackgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                    <input value="bottomCenter" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-right {{styles.themeColors.headerBackgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                    <input value="bottomRight" name="headerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.headerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.headerBackgroundStyle, styles.themeColors.headerBackground, styles.themeColors.headerBackground2, styles.themeColors.headerBackgroundGradientStyle,'headerBackgroundSwatch')" />
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <!--// Gradient positions -->
+
+                                    </div>
+                                    <!--// Input Col -->
+
+                                </div>
+                                <!--// Input Row - Tab pane -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row - Tab pane -->
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--header-text" colorpicker class="usncolorpicker" ng-model="styles.themeColors.headerText" />
+                                    <span>Text</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--header-borders" colorpicker class="usncolorpicker" ng-model="styles.themeColors.headerBorder" />
+                                    <span>Borders</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--header-highlight" colorpicker class="usncolorpicker" ng-model="styles.themeColors.headerHighlight" />
+                                    <span>Highlight</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : logoColorTabStyle, 'tab-open' : !logoColorTabStyle}">
+                <a ng-click="logoColorTabStyle = !logoColorTabStyle">
+                    <span class="usn-color-swatch" style="background: {{styles.themeColors.logoLink}}"></span>
+                    <span>Logo</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : logoColorTabStyle, 'tab-open' : !logoColorTabStyle}">
+
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--logo-link" colorpicker class="usncolorpicker" ng-model="styles.themeColors.logoLink" />
+                                    <span>Link</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--logo-link-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.logoLinkHover" />
+                                    <span>Link hover</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : mainNavigationColorTabStyle, 'tab-open' : !mainNavigationColorTabStyle}">
+                <a ng-click="mainNavigationColorTabStyle = !mainNavigationColorTabStyle">
+                    <span class="usn-color-swatch" style="background: {{styles.themeColors.mainNavigationLink}}"></span>
+                    <span>Main navigation</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : mainNavigationColorTabStyle, 'tab-open' : !mainNavigationColorTabStyle}">
+
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--main-navigation-link" colorpicker class="usncolorpicker" ng-model="styles.themeColors.mainNavigationLink" />
+                                    <span>Link</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--main-navigation-link-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.mainNavigationLinkHover" />
+                                    <span>Link hover</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--main-navigation-link-active" colorpicker class="usncolorpicker" ng-model="styles.themeColors.mainNavigationLinkActive" />
+                                    <span>Link active</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : secondaryNavigationColorTabStyle, 'tab-open' : !secondaryNavigationColorTabStyle}">
+                <a ng-click="secondaryNavigationColorTabStyle = !secondaryNavigationColorTabStyle">
+                    <span class="usn-color-swatch" style="background: {{styles.themeColors.secondaryNavLink}}"></span>
+                    <span>Secondary navigation</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : secondaryNavigationColorTabStyle, 'tab-open' : !secondaryNavigationColorTabStyle}">
+
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--secondary-navigation-link" colorpicker class="usncolorpicker" ng-model="styles.themeColors.secondaryNavLink" />
+                                    <span>Link</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--secondary-navigation-link-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.secondaryNavLinkHover" />
+                                    <span>Link hover</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : navigationDropdownColorTabStyle, 'tab-open' : !navigationDropdownColorTabStyle}">
+                <a ng-click="navigationDropdownColorTabStyle = !navigationDropdownColorTabStyle">
+                    <span class="usn-color-swatch" style="{{navDropdownBackgroundSwatch}}"></span>
+                    <span>Navigation dropdowns</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : navigationDropdownColorTabStyle, 'tab-open' : !navigationDropdownColorTabStyle}">
+
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Background color tabs -->
+                        <nav class="usn-cms-color-tabs">
+
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.navDropdownBackgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Solid
+                                <input value="solid" name="navDropdownBackgroundStyle" type="radio" ng-model="styles.themeColors.navDropdownBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'navigation-dropdown-bg navigation-dropdown-bg', styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle, styles.themeColors.navDropdownBackgroundGradientDirection, 'navDropdownBackgroundSwatch')" />
+                            </label>
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.navDropdownBackgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Gradient
+                                <input value="gradient" name="navDropdownBackgroundStyle" type="radio" ng-model="styles.themeColors.navDropdownBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'navigation-dropdown-bg navigation-dropdown-bg', styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle, styles.themeColors.navDropdownBackgroundGradientDirection, 'navDropdownBackgroundSwatch')" />
+                            </label>
+
+                        </nav>
+                        <!--// Background color tabs -->
+                        <!-- Input Row - Tab pane -->
+                        <div class="usn-input-row usn-cms-tab-pane">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--navigation-dropdown-color1" colorpicker class="usncolorpicker" ng-model="styles.themeColors.navDropdownBackground" ng-change="updateSwatchFromBackground(styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle, styles.themeColors.navDropdownBackgroundGradientDirection,'navDropdownBackgroundSwatch')" />
+                                    <span>{{styles.themeColors.navDropdownBackgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half" ng-show="styles.themeColors.navDropdownBackgroundStyle == 'gradient'">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--navigation-dropdown-color2" colorpicker class="usncolorpicker" ng-model="styles.themeColors.navDropdownBackground2" ng-change="updateSwatchFromBackground(styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle, styles.themeColors.navDropdownBackgroundGradientDirection,'navDropdownBackgroundSwatch')" />
+                                    <span>Background 2</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full" ng-show="styles.themeColors.navDropdownBackgroundStyle == 'gradient'">
+
+                                <!-- Gradient tabs -->
+                                <nav class="usn-cms-color-tabs">
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.navDropdownBackgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Linear
+                                        <input value="linear" name="navDropdownBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'navigation-dropdown-bg navigation-dropdown-bg', styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientDirection,'navDropdownBackgroundSwatch')" />
+                                    </label>
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.navDropdownBackgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Radial
+                                        <input value="radial" name="navDropdownBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'navigation-dropdown-bg navigation-dropdown-bg', styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientDirection, 'navDropdownBackgroundSwatch')" />
+                                    </label>
+                                </nav>
+                                <!--// Gradient tabs -->
+                                <!-- Input Row - Tab pane -->
+                                <div class="usn-input-row usn-cms-tab-pane">
+
+                                    <!-- Input Col -->
+                                    <div class="usn-input-col usn-input-col-full">
+
+                                        <!-- Gradient positions -->
+                                        <div class="usn-gradient-position">
+                                            <div class="usn-gradient-inner">
+
+                                                <label class="usn-gradient-point usn-gradient-top-left {{styles.themeColors.navDropdownBackgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                    <input value="topLeft" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-center {{styles.themeColors.navDropdownBackgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                    <input value="topCenter" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-right {{styles.themeColors.navDropdownBackgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                    <input value="topRight" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-left {{styles.themeColors.navDropdownBackgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                    <input value="middleLeft" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-center {{styles.themeColors.navDropdownBackgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{styles.themeColors.navDropdownBackgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="styles.themeColors.navDropdownBackgroundGradientStyle == 'radial'">
+                                                    <input value="middleCenter" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-right {{styles.themeColors.navDropdownBackgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                    <input value="middleRight" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-left {{styles.themeColors.navDropdownBackgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                    <input value="bottomLeft" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-center  {{styles.themeColors.navDropdownBackgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                    <input value="bottomCenter" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-right {{styles.themeColors.navDropdownBackgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                    <input value="bottomRight" name="navDropdownBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.navDropdownBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.navDropdownBackgroundStyle, styles.themeColors.navDropdownBackground, styles.themeColors.navDropdownBackground2, styles.themeColors.navDropdownBackgroundGradientStyle,'navDropdownBackgroundSwatch')" />
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <!--// Gradient positions -->
+
+                                    </div>
+                                    <!--// Input Col -->
+
+                                </div>
+                                <!--// Input Row - Tab pane -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row - Tab pane -->
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--navigation-dropdown-link" colorpicker class="usncolorpicker" ng-model="styles.themeColors.mainNavDropdownLink" />
+                                    <span>Link</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--main-navigation-link-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.mainNavDropdownLinkHover" />
+                                    <span>Link hover</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--main-navigation-link-active" colorpicker class="usncolorpicker" ng-model="styles.themeColors.mainNavDropdownLinkActive" />
+                                    <span>Link active</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : contentColorTabStyle, 'tab-open' : !contentColorTabStyle}">
+                <a ng-click="contentColorTabStyle = !contentColorTabStyle">
+                    <span class="usn-color-swatch" style="{{contentBackgroundSwatch}}"></span>
+                    <span>Content</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : contentColorTabStyle, 'tab-open' : !contentColorTabStyle}">
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Background color tabs -->
+                        <nav class="usn-cms-color-tabs">
+
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.contentBackgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Solid
+                                <input value="solid" name="contentBackgroundStyle" type="radio" ng-model="styles.themeColors.contentBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'base-bg base-bg', styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle, styles.themeColors.contentBackgroundGradientDirection, 'contentBackgroundSwatch')" />
+                            </label>
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.contentBackgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Gradient
+                                <input value="gradient" name="contentBackgroundStyle" type="radio" ng-model="styles.themeColors.contentBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'base-bg base-bg', styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle, styles.themeColors.contentBackgroundGradientDirection, 'contentBackgroundSwatch')" />
+                            </label>
+
+                        </nav>
+                        <!--// Background color tabs -->
+                        <!-- Input Row - Tab pane -->
+                        <div class="usn-input-row usn-cms-tab-pane">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-bg-color1" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentBackground" ng-change="updateSwatchFromBackground(styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle, styles.themeColors.contentBackgroundGradientDirection,'contentBackgroundSwatch')" />
+                                    <span>{{styles.themeColors.contentBackgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half" ng-show="styles.themeColors.contentBackgroundStyle == 'gradient'">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-bg-color2" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentBackground2" ng-change="updateSwatchFromBackground(styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle, styles.themeColors.contentBackgroundGradientDirection,'contentBackgroundSwatch')" />
+                                    <span>Background 2</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full" ng-show="styles.themeColors.contentBackgroundStyle == 'gradient'">
+
+                                <!-- Gradient tabs -->
+                                <nav class="usn-cms-color-tabs">
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.contentBackgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Linear
+                                        <input value="linear" name="contentBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.contentBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'base-bg base-bg', styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientDirection,'contentBackgroundSwatch')" />
+                                    </label>
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.contentBackgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Radial
+                                        <input value="radial" name="contentBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.contentBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'base-bg base-bg', styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientDirection, 'contentBackgroundSwatch')" />
+                                    </label>
+                                </nav>
+                                <!--// Gradient tabs -->
+                                <!-- Input Row - Tab pane -->
+                                <div class="usn-input-row usn-cms-tab-pane">
+
+                                    <!-- Input Col -->
+                                    <div class="usn-input-col usn-input-col-full">
+
+                                        <!-- Gradient positions -->
+                                        <div class="usn-gradient-position">
+                                            <div class="usn-gradient-inner">
+
+                                                <label class="usn-gradient-point usn-gradient-top-left {{styles.themeColors.contentBackgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                    <input value="topLeft" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-center {{styles.themeColors.contentBackgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                    <input value="topCenter" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-right {{styles.themeColors.contentBackgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                    <input value="topRight" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-left {{styles.themeColors.contentBackgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                    <input value="middleLeft" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-center {{styles.themeColors.contentBackgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{styles.themeColors.contentBackgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="styles.themeColors.contentBackgroundGradientStyle == 'radial'">
+                                                    <input value="middleCenter" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-right {{styles.themeColors.contentBackgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                    <input value="middleRight" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-left {{styles.themeColors.contentBackgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                    <input value="bottomLeft" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-center  {{styles.themeColors.contentBackgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                    <input value="bottomCenter" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-right {{styles.themeColors.contentBackgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                    <input value="bottomRight" name="contentBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.contentBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.contentBackgroundStyle, styles.themeColors.contentBackground, styles.themeColors.contentBackground2, styles.themeColors.contentBackgroundGradientStyle,'contentBackgroundSwatch')" />
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <!--// Gradient positions -->
+
+                                    </div>
+                                    <!--// Input Col -->
+
+                                </div>
+                                <!--// Input Row - Tab pane -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row - Tab pane -->
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-heading" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentHeading" />
+                                    <span>Heading</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-secondary-heading" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentSecondaryHeading" />
+                                    <span>Secondary heading</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-text" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentText" />
+                                    <span>Text</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-link" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentLink" />
+                                    <span>Link</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-link-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentLinkHover" />
+                                    <span>Link hover</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-borders" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentBorder" />
+                                    <span>Border</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-highlight" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentHighlightBackground" />
+                                    <span>Highlight background</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-highlight-text" colorpicker class="usncolorpicker" ng-model="styles.themeColors.contentHighlightText" />
+                                    <span>Highlight text</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : buttonColorTabStyle, 'tab-open' : !buttonColorTabStyle}">
+                <a ng-click="buttonColorTabStyle = !buttonColorTabStyle">
+                    <span class="usn-color-swatch" style="{{buttonBackgroundSwatch}}"></span>
+                    <span>Buttons</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : buttonColorTabStyle, 'tab-open' : !buttonColorTabStyle}">
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Background color tabs -->
+                        <nav class="usn-cms-color-tabs">
+
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Solid
+                                <input value="solid" name="buttonBackgroundStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'base-btn-bg base-btn-bg', styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle, styles.themeColors.buttonBackgroundGradientDirection, 'buttonBackgroundSwatch')" />
+                            </label>
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Gradient
+                                <input value="gradient" name="buttonBackgroundStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'base-btn-bg base-btn-bg', styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle, styles.themeColors.buttonBackgroundGradientDirection, 'buttonBackgroundSwatch')" />
+                            </label>
+
+                        </nav>
+                        <!--// Background color tabs -->
+                        <!-- Input Row - Tab pane -->
+                        <div class="usn-input-row usn-cms-tab-pane">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-bg-color1" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonBackground" ng-change="updateSwatchFromBackground(styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle, styles.themeColors.buttonBackgroundGradientDirection,'buttonBackgroundSwatch')" />
+                                    <span>{{styles.themeColors.buttonBackgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half" ng-show="styles.themeColors.buttonBackgroundStyle == 'gradient'">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-bg-color2" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonBackground2" ng-change="updateSwatchFromBackground(styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle, styles.themeColors.buttonBackgroundGradientDirection,'buttonBackgroundSwatch')" />
+                                    <span>Background 2</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full" ng-show="styles.themeColors.buttonBackgroundStyle == 'gradient'">
+
+                                <!-- Gradient tabs -->
+                                <nav class="usn-cms-color-tabs">
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Linear
+                                        <input value="linear" name="buttonBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'base-btn-bg base-btn-bg', styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientDirection,'buttonBackgroundSwatch')" />
+                                    </label>
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Radial
+                                        <input value="radial" name="buttonBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'base-btn-bg base-btn-bg', styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientDirection, 'buttonBackgroundSwatch')" />
+                                    </label>
+                                </nav>
+                                <!--// Gradient tabs -->
+                                <!-- Input Row - Tab pane -->
+                                <div class="usn-input-row usn-cms-tab-pane">
+
+                                    <!-- Input Col -->
+                                    <div class="usn-input-col usn-input-col-full">
+
+                                        <!-- Gradient positions -->
+                                        <div class="usn-gradient-position">
+                                            <div class="usn-gradient-inner">
+
+                                                <label class="usn-gradient-point usn-gradient-top-left {{styles.themeColors.buttonBackgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                    <input value="topLeft" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-center {{styles.themeColors.buttonBackgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                    <input value="topCenter" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-right {{styles.themeColors.buttonBackgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                    <input value="topRight" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-left {{styles.themeColors.buttonBackgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                    <input value="middleLeft" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-center {{styles.themeColors.buttonBackgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{styles.themeColors.buttonBackgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="styles.themeColors.buttonBackgroundGradientStyle == 'radial'">
+                                                    <input value="middleCenter" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-right {{styles.themeColors.buttonBackgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                    <input value="middleRight" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-left {{styles.themeColors.buttonBackgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                    <input value="bottomLeft" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-center  {{styles.themeColors.buttonBackgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                    <input value="bottomCenter" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-right {{styles.themeColors.buttonBackgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                    <input value="bottomRight" name="buttonBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundStyle, styles.themeColors.buttonBackground, styles.themeColors.buttonBackground2, styles.themeColors.buttonBackgroundGradientStyle,'buttonBackgroundSwatch')" />
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <!--// Gradient positions -->
+
+                                    </div>
+                                    <!--// Input Col -->
+
+                                </div>
+                                <!--// Input Row - Tab pane -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row - Tab pane -->
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-text" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonText" />
+                                    <span>Text</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-borders" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonBorder" />
+                                    <span>Border</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+
+                        </div>
+                        <!--// Input Row -->
+                        <!-- Background color tabs -->
+                        <nav class="usn-cms-color-tabs">
+
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundHoverStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Solid
+                                <input value="solid" name="buttonBackgroundHoverStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'base-btn-bg base-btn-bg-hover', styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle, styles.themeColors.buttonBackgroundHoverGradientDirection, 'buttonBackgroundHoverSwatch')" />
+                            </label>
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundHoverStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Gradient
+                                <input value="gradient" name="buttonBackgroundHoverStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'base-btn-bg base-btn-bg-hover', styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle, styles.themeColors.buttonBackgroundHoverGradientDirection, 'buttonBackgroundHoverSwatch')" />
+                            </label>
+
+                        </nav>
+                        <!--// Background color tabs -->
+                        <!-- Input Row - Tab pane -->
+                        <div class="usn-input-row usn-cms-tab-pane">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-bg-hover-color1" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonBackgroundHover" ng-change="updateSwatchFromBackground(styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle, styles.themeColors.buttonBackgroundHoverGradientDirection,'buttonBackgroundHoverSwatch')" />
+                                    <span>{{styles.themeColors.buttonBackgroundHoverStyle == 'solid' ? 'BG hover' : 'BG hover 1'}}</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half" ng-show="styles.themeColors.buttonBackgroundHoverStyle == 'gradient'">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-bg-hover-color2" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonBackgroundHover2" ng-change="updateSwatchFromBackground(styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle, styles.themeColors.buttonBackgroundHoverGradientDirection,'buttonBackgroundHoverSwatch')" />
+                                    <span>BG hover 2</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full" ng-show="styles.themeColors.buttonBackgroundHoverStyle == 'gradient'">
+
+                                <!-- Gradient tabs -->
+                                <nav class="usn-cms-color-tabs">
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundHoverGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Linear
+                                        <input value="linear" name="buttonBackgroundHoverGradientStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'base-btn-bg base-btn-bg-hover', styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientDirection,'buttonBackgroundHoverSwatch')" />
+                                    </label>
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.buttonBackgroundHoverGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Radial
+                                        <input value="radial" name="buttonBackgroundHoverGradientStyle" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'base-btn-bg base-btn-bg-hover', styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientDirection, 'buttonBackgroundHoverSwatch')" />
+                                    </label>
+                                </nav>
+                                <!--// Gradient tabs -->
+                                <!-- Input Row - Tab pane -->
+                                <div class="usn-input-row usn-cms-tab-pane">
+
+                                    <!-- Input Col -->
+                                    <div class="usn-input-col usn-input-col-full">
+
+                                        <!-- Gradient positions -->
+                                        <div class="usn-gradient-position">
+                                            <div class="usn-gradient-inner">
+
+                                                <label class="usn-gradient-point usn-gradient-top-left {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                    <input value="topLeft" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-center {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                    <input value="topCenter" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-right {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                    <input value="topRight" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-left {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                    <input value="middleLeft" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-center {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{styles.themeColors.buttonBackgroundHoverGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="styles.themeColors.buttonBackgroundHoverGradientStyle == 'radial'">
+                                                    <input value="middleCenter" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-right {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                    <input value="middleRight" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-left {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                    <input value="bottomLeft" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-center  {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                    <input value="bottomCenter" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-right {{styles.themeColors.buttonBackgroundHoverGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                    <input value="bottomRight" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="styles.themeColors.buttonBackgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.buttonBackgroundHoverStyle, styles.themeColors.buttonBackgroundHover, styles.themeColors.buttonBackgroundHover2, styles.themeColors.buttonBackgroundHoverGradientStyle,'buttonBackgroundHoverSwatch')" />
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <!--// Gradient positions -->
+
+                                    </div>
+                                    <!--// Input Col -->
+
+                                </div>
+                                <!--// Input Row - Tab pane -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row - Tab pane -->
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-text-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonTextHover" />
+                                    <span>Text</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--base-btn-borders-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.buttonBorderHover" />
+                                    <span>Border</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : footerColorTabStyle, 'tab-open' : !footerColorTabStyle}">
+                <a ng-click="footerColorTabStyle = !footerColorTabStyle">
+                    <span class="usn-color-swatch" style="{{footerBackgroundSwatch}}"></span>
+                    <span>Footer</span>
+                </a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : footerColorTabStyle, 'tab-open' : !footerColorTabStyle}">
+                <!-- Group section -->
+                <div class="usn-group-section">
+
+                    <!-- Form Group -->
+                    <div class="usn-form-group">
+
+                        <!-- Background color tabs -->
+                        <nav class="usn-cms-color-tabs">
+
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.footerBackgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Solid
+                                <input value="solid" name="footerBackgroundStyle" type="radio" ng-model="styles.themeColors.footerBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'footer-bg footer-bg', styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle, styles.themeColors.footerBackgroundGradientDirection, 'footerBackgroundSwatch')" />
+                            </label>
+                            <label class="usn-cms-color-tabs-item {{styles.themeColors.footerBackgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                Gradient
+                                <input value="gradient" name="footerBackgroundStyle" type="radio" ng-model="styles.themeColors.footerBackgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'footer-bg footer-bg', styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle, styles.themeColors.footerBackgroundGradientDirection, 'footerBackgroundSwatch')" />
+                            </label>
+
+                        </nav>
+                        <!--// Background color tabs -->
+                        <!-- Input Row - Tab pane -->
+                        <div class="usn-input-row usn-cms-tab-pane">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-bg-color1" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerBackground" ng-change="updateSwatchFromBackground(styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle, styles.themeColors.footerBackgroundGradientDirection,'footerBackgroundSwatch')" />
+                                    <span>{{styles.themeColors.footerBackgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half" ng-show="styles.themeColors.footerBackgroundStyle == 'gradient'">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-bg-color2" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerBackground2" ng-change="updateSwatchFromBackground(styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle, styles.themeColors.footerBackgroundGradientDirection,'footerBackgroundSwatch')" />
+                                    <span>Background 2</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-full" ng-show="styles.themeColors.footerBackgroundStyle == 'gradient'">
+
+                                <!-- Gradient tabs -->
+                                <nav class="usn-cms-color-tabs">
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.footerBackgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Linear
+                                        <input value="linear" name="footerBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.footerBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'footer-bg footer-bg', styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientDirection,'footerBackgroundSwatch')" />
+                                    </label>
+                                    <label class="usn-cms-color-tabs-item {{styles.themeColors.footerBackgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                        Radial
+                                        <input value="radial" name="footerBackgroundGradientStyle" type="radio" ng-model="styles.themeColors.footerBackgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'footer-bg footer-bg', styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientDirection, 'footerBackgroundSwatch')" />
+                                    </label>
+                                </nav>
+                                <!--// Gradient tabs -->
+                                <!-- Input Row - Tab pane -->
+                                <div class="usn-input-row usn-cms-tab-pane">
+
+                                    <!-- Input Col -->
+                                    <div class="usn-input-col usn-input-col-full">
+
+                                        <!-- Gradient positions -->
+                                        <div class="usn-gradient-position">
+                                            <div class="usn-gradient-inner">
+
+                                                <label class="usn-gradient-point usn-gradient-top-left {{styles.themeColors.footerBackgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                    <input value="topLeft" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-center {{styles.themeColors.footerBackgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                    <input value="topCenter" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-top-right {{styles.themeColors.footerBackgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                    <input value="topRight" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-left {{styles.themeColors.footerBackgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                    <input value="middleLeft" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-center {{styles.themeColors.footerBackgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{styles.themeColors.footerBackgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="styles.themeColors.footerBackgroundGradientStyle == 'radial'">
+                                                    <input value="middleCenter" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-mid-right {{styles.themeColors.footerBackgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                    <input value="middleRight" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-left {{styles.themeColors.footerBackgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                    <input value="bottomLeft" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-center  {{styles.themeColors.footerBackgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                    <input value="bottomCenter" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+                                                <label class="usn-gradient-point usn-gradient-bottom-right {{styles.themeColors.footerBackgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                    <input value="bottomRight" name="footerBackgroundGradientDirection" type="radio" ng-model="styles.themeColors.footerBackgroundGradientDirection" ng-click="updateSwatchFromDirection($event, styles.themeColors.footerBackgroundStyle, styles.themeColors.footerBackground, styles.themeColors.footerBackground2, styles.themeColors.footerBackgroundGradientStyle,'footerBackgroundSwatch')" />
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <!--// Gradient positions -->
+
+                                    </div>
+                                    <!--// Input Col -->
+
+                                </div>
+                                <!--// Input Row - Tab pane -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row - Tab pane -->
+                        <!-- Input Row -->
+                        <div class="usn-input-row">
+
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-heading" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerHeading" />
+                                    <span>Heading</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-secondary-heading" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerSecondaryHeading" />
+                                    <span>Secondary heading</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-text" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerText" />
+                                    <span>Text</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-link" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerLink" />
+                                    <span>Link</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-link-hover" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerLinkHover" />
+                                    <span>Link hover</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-borders" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerBorder" />
+                                    <span>Borders</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+                            <!-- Input Col -->
+                            <div class="usn-input-col usn-input-col-half">
+
+                                <!-- USN Color Input -->
+                                <label class="usn-color-input">
+                                    <input data-cssvar="--footer-highlight" colorpicker class="usncolorpicker" ng-model="styles.themeColors.footerHighlight" />
+                                    <span>Highlight</span>
+                                </label>
+                                <!--// USN Color Input -->
+
+                            </div>
+                            <!--// Input Col -->
+
+                        </div>
+                        <!--// Input Row -->
+
+                    </div>
+                    <!--// Form Group -->
+
+                </div>
+                <!--// Group section -->
+            </div>
+            <!--// Item -->
+
+        </div>
+        <!--// Accordion -->
+
+    </div>
+    <!--// Group section -->
+    <!-- Group section -->
+    <div class="usn-group-section" ng-show="styles.themeColors.contentItems.length > 0">
+
+        <label class="usn-label">Additional content colors</label>
+        <span class="note usn-note">Build up the full color palette of your theme by choosing any number of background, headings, text and link color combinations. Add as many combinations as you wish.</span>
+        <!-- Accordion -->
+        <div class="usn-cms-accordion">
+
+            <div ng-repeat="item in styles.themeColors.contentItems">
+
+                <!-- Item -->
+                <div class="usn-accordion-tab" ng-class="{'tab-closed' : item.tabStyle, 'tab-open' : !item.tabStyle}">
+
+                    <a ng-click="item.tabStyle = !item.tabStyle">
+                        <span class="usn-color-swatch" style="{{item.backgroundSwatch}}"></span>
+                        <span>c{{$index+1}}</span>
+                    </a>
+
+
+
+                </div>
+                <div class="usn-accordion-content" ng-class="{'tab-closed' : item.tabStyle, 'tab-open' : !item.tabStyle}">
+                    <!-- Group section -->
+                    <div class="usn-group-section">
+
+                        <!-- Form Group -->
+                        <div class="usn-form-group">
+
+                            <!-- Background color tabs -->
+                            <nav class="usn-cms-color-tabs">
+
+                                <label class="usn-cms-color-tabs-item {{item.backgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Solid
+                                    <input value="solid" name="backgroundStyle" type="radio" ng-model="item.backgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-bg c' + ($index+1) + '-bg', item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection, 'contentAdditionalBackground', $index)" />
+                                </label>
+                                <label class="usn-cms-color-tabs-item {{item.backgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Gradient
+                                    <input value="gradient" name="backgroundStyle" type="radio" ng-model="item.backgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-bg c' + ($index+1) + '-bg', item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection, 'contentAdditionalBackground', $index)" />
+                                </label>
+
+                            </nav>
+                            <!--// Background color tabs -->
+                            <!-- Input Row - Tab pane -->
+                            <div class="usn-input-row usn-cms-tab-pane">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-bg-color1" colorpicker class="usncolorpicker" ng-model="item.background" ng-change="updateSwatchFromBackground(item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection,'contentAdditionalBackground',$index)" />
+                                        <span>{{item.backgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half" ng-show="item.backgroundStyle == 'gradient'">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-bg-color2" colorpicker class="usncolorpicker" ng-model="item.background2" ng-change="updateSwatchFromBackground(item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection,'contentAdditionalBackground',$index)" />
+                                        <span>Background 2</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full" ng-show="item.backgroundStyle == 'gradient'">
+
+                                    <!-- Gradient tabs -->
+                                    <nav class="usn-cms-color-tabs">
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Linear
+                                            <input value="linear" name="backgroundGradientStyle" type="radio" ng-model="item.backgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-bg c' + ($index+1) + '-bg', item.backgroundStyle, item.background, item.background2, item.backgroundGradientDirection,'contentAdditionalBackground',$index)" />
+                                        </label>
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Radial
+                                            <input value="radial" name="backgroundGradientStyle" type="radio" ng-model="item.backgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-bg c' + ($index+1) + '-bg', item.backgroundStyle, item.background, item.background2, item.backgroundGradientDirection, 'contentAdditionalBackground',$index)" />
+                                        </label>
+                                    </nav>
+                                    <!--// Gradient tabs -->
+                                    <!-- Input Row - Tab pane -->
+                                    <div class="usn-input-row usn-cms-tab-pane">
+
+                                        <!-- Input Col -->
+                                        <div class="usn-input-col usn-input-col-full">
+
+                                            <!-- Gradient positions -->
+                                            <div class="usn-gradient-position">
+                                                <div class="usn-gradient-inner">
+
+                                                    <label class="usn-gradient-point usn-gradient-top-left {{item.backgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                        <input value="topLeft" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-center {{item.backgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                        <input value="topCenter" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-right {{item.backgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                        <input value="topRight" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-left {{item.backgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                        <input value="middleLeft" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-center {{item.backgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{item.backgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="item.backgroundGradientStyle == 'radial'">
+                                                        <input value="middleCenter" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-right {{item.backgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                        <input value="middleRight" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-left {{item.backgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                        <input value="bottomLeft" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-center  {{item.backgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                        <input value="bottomCenter" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-right {{item.backgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                        <input value="bottomRight" name="backgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, 'contentAdditionalBackground',$index)" />
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!--// Gradient positions -->
+
+                                        </div>
+                                        <!--// Input Col -->
+
+                                    </div>
+                                    <!--// Input Row - Tab pane -->
+
+                                </div>
+                                <!--// Input Col -->
+
+                            </div>
+                            <!--// Input Row - Tab pane -->
+                            <!-- Input Row -->
+                            <div class="usn-input-row">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-heading" colorpicker class="usncolorpicker" ng-model="item.heading" />
+                                        <span>Heading</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-secondary-heading" colorpicker class="usncolorpicker" ng-model="item.secondaryHeading" />
+                                        <span>Secondary heading</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-text" colorpicker class="usncolorpicker" ng-model="item.text" />
+                                        <span>Text</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-link" colorpicker class="usncolorpicker" ng-model="item.link" />
+                                        <span>Link</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-link-hover" colorpicker class="usncolorpicker" ng-model="item.linkHover" />
+                                        <span>Link hover</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-borders" colorpicker class="usncolorpicker" ng-model="item.borders" />
+                                        <span>Border</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-highlight" colorpicker class="usncolorpicker" ng-model="item.highlightBackground" />
+                                        <span>Highlight background</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-highlight-text" colorpicker class="usncolorpicker" ng-model="item.highlightText" />
+                                        <span>Highlight text</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+
+                            </div>
+                            <!--// Input Row -->
+
+                        </div>
+                        <!--// Form Group -->
+
+                    </div>
+                    <!--// Group section -->
+                </div>
+                <!--// Item -->
+
+            </div>
+
+
+        </div>
+        <!--// Accordion -->
+
+        <button type="button" class="usn-add-more" ng-click="addContentItem()"></button>
+
+    </div>
+    <!--// Group section -->
+    <!-- Group section -->
+    <div class="usn-group-section" ng-show="styles.themeColors.buttonItems.length > 0">
+
+        <label class="usn-label">Additional button colors</label>
+        <span class="note usn-note">Build up a full range of button color combinations to be used for call to actions throughout your website. Add as many combinations as you wish.</span>
+        <!-- Accordion -->
+        <div class="usn-cms-accordion">
+            <div ng-repeat="item in styles.themeColors.buttonItems">
+                <!-- Item -->
+                <div class="usn-accordion-tab" ng-class="{'tab-closed' : item.tabStyle, 'tab-open' : !item.tabStyle}">
+
+                    <a ng-click="item.tabStyle = !item.tabStyle">
+                        <span class="usn-color-swatch" style="{{item.backgroundSwatch}}"></span>
+                        <span>c{{$index+1}}-btn</span>
+                    </a>
+
+
+                </div>
+                <div class="usn-accordion-content" ng-class="{'tab-closed' : item.tabStyle, 'tab-open' : !item.tabStyle}">
+                    <!-- Group section -->
+                    <div class="usn-group-section">
+
+                        <!-- Form Group -->
+                        <div class="usn-form-group">
+
+                            <!-- Background color tabs -->
+                            <nav class="usn-cms-color-tabs">
+
+                                <label class="usn-cms-color-tabs-item {{item.backgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Solid
+                                    <input value="solid" name="buttonBackgroundStyle" type="radio" ng-model="item.backgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-btn-bg c' + ($index+1) + '-btn-bg', item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection, 'buttonAdditionalBackground',$index)" />
+                                </label>
+                                <label class="usn-cms-color-tabs-item {{item.backgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Gradient
+                                    <input value="gradient" name="buttonBackgroundStyle" type="radio" ng-model="item.backgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-btn-bg c' + ($index+1) + '-btn-bg', item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection, 'buttonAdditionalBackground',$index)" />
+                                </label>
+
+                            </nav>
+                            <!--// Background color tabs -->
+                            <!-- Input Row - Tab pane -->
+                            <div class="usn-input-row usn-cms-tab-pane">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-bg-color1" colorpicker class="usncolorpicker" ng-model="item.background" ng-change="updateSwatchFromBackground(item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection,'buttonAdditionalBackground',$index)" />
+                                        <span>{{item.backgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half" ng-show="item.backgroundStyle == 'gradient'">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-bg-color2" colorpicker class="usncolorpicker" ng-model="item.background2" ng-change="updateSwatchFromBackground(item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection,'buttonAdditionalBackground',$index)" />
+                                        <span>Background 2</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full" ng-show="item.backgroundStyle == 'gradient'">
+
+                                    <!-- Gradient tabs -->
+                                    <nav class="usn-cms-color-tabs">
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Linear
+                                            <input value="linear" name="buttonBackgroundGradientStyle" type="radio" ng-model="item.backgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-btn-bg c' + ($index+1) + '-btn-bg', item.backgroundStyle, item.background, item.background2, item.backgroundGradientDirection,'buttonAdditionalBackground',$index)" />
+                                        </label>
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Radial
+                                            <input value="radial" name="buttonBackgroundGradientStyle" type="radio" ng-model="item.backgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-btn-bg c' + ($index+1) + '-btn-bg', item.backgroundStyle, item.background, item.background2, item.backgroundGradientDirection, 'buttonAdditionalBackground',$index)" />
+                                        </label>
+                                    </nav>
+                                    <!--// Gradient tabs -->
+                                    <!-- Input Row - Tab pane -->
+                                    <div class="usn-input-row usn-cms-tab-pane">
+
+                                        <!-- Input Col -->
+                                        <div class="usn-input-col usn-input-col-full">
+
+                                            <!-- Gradient positions -->
+                                            <div class="usn-gradient-position">
+                                                <div class="usn-gradient-inner">
+
+                                                    <label class="usn-gradient-point usn-gradient-top-left {{item.backgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                        <input value="topLeft" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-center {{item.backgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                        <input value="topCenter" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-right {{item.backgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                        <input value="topRight" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-left {{item.backgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                        <input value="middleLeft" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-center {{item.backgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{item.backgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="item.backgroundGradientStyle == 'radial'">
+                                                        <input value="middleCenter" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-right {{item.backgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                        <input value="middleRight" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-left {{item.backgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                        <input value="bottomLeft" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-center  {{item.backgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                        <input value="bottomCenter" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-right {{item.backgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                        <input value="bottomRight" name="buttonBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'buttonAdditionalBackground',$index)" />
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!--// Gradient positions -->
+
+                                        </div>
+                                        <!--// Input Col -->
+
+                                    </div>
+                                    <!--// Input Row - Tab pane -->
+
+                                </div>
+                                <!--// Input Col -->
+
+                            </div>
+                            <!--// Input Row - Tab pane -->
+                            <!-- Input Row -->
+                            <div class="usn-input-row">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-text" colorpicker class="usncolorpicker" ng-model="item.text" />
+                                        <span>Text</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-borders" colorpicker class="usncolorpicker" ng-model="item.border" />
+                                        <span>Border</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+
+
+                            </div>
+                            <!--// Input Row -->
+                            <!-- Background color tabs -->
+                            <nav class="usn-cms-color-tabs">
+
+                                <label class="usn-cms-color-tabs-item {{item.backgroundHoverStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Solid
+                                    <input value="solid" name="buttonBackgroundHoverStyle" type="radio" ng-model="item.backgroundHoverStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-btn-bg-hover c' + ($index+1) + '-btn-bg-hover', item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle, item.backgroundHoverGradientDirection, 'buttonAdditionalHoverBackground',$index)" />
+                                </label>
+                                <label class="usn-cms-color-tabs-item {{item.backgroundHoverStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Gradient
+                                    <input value="gradient" name="buttonBackgroundHoverStyle" type="radio" ng-model="item.backgroundHoverStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-btn-bg-hover c' + ($index+1) + '-btn-bg-hover', item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle, item.backgroundHoverGradientDirection, 'buttonAdditionalHoverBackground',$index)" />
+                                </label>
+
+                            </nav>
+                            <!--// Background color tabs -->
+                            <!-- Input Row - Tab pane -->
+                            <div class="usn-input-row usn-cms-tab-pane">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-bg-hover-color1" colorpicker class="usncolorpicker" ng-model="item.backgroundHover" ng-change="updateSwatchFromBackground(item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle, item.backgroundHoverGradientDirection,'buttonAdditionalHoverBackground',$index)" />
+                                        <span>{{item.backgroundHoverStyle == 'solid' ? 'BG hover' : 'BG hover 1'}}</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half" ng-show="item.backgroundHoverStyle == 'gradient'">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-bg-hover-color2" colorpicker class="usncolorpicker" ng-model="item.backgroundHover2" ng-change="updateSwatchFromBackground(item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle, item.backgroundHoverGradientDirection,'buttonAdditionalHoverBackground',$index)" />
+                                        <span>BG hover 2</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full" ng-show="item.backgroundHoverStyle == 'gradient'">
+
+                                    <!-- Gradient tabs -->
+                                    <nav class="usn-cms-color-tabs">
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundHoverGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Linear
+                                            <input value="linear" name="buttonBackgroundHoverGradientStyle" type="radio" ng-model="item.backgroundHoverGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-btn-bg-hover c' + ($index+1) + '-btn-bg-hover', item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientDirection,'buttonAdditionalHoverBackground',$index)" />
+                                        </label>
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundHoverGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Radial
+                                            <input value="radial" name="buttonBackgroundHoverGradientStyle" type="radio" ng-model="item.backgroundHoverGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-btn-bg-hover c' + ($index+1) + '-btn-bg-hover', item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientDirection, 'buttonAdditionalHoverBackground',$index)" />
+                                        </label>
+                                    </nav>
+                                    <!--// Gradient tabs -->
+                                    <!-- Input Row - Tab pane -->
+                                    <div class="usn-input-row usn-cms-tab-pane">
+
+                                        <!-- Input Col -->
+                                        <div class="usn-input-col usn-input-col-full">
+
+                                            <!-- Gradient positions -->
+                                            <div class="usn-gradient-position">
+                                                <div class="usn-gradient-inner">
+
+                                                    <label class="usn-gradient-point usn-gradient-top-left {{item.backgroundHoverGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                        <input value="topLeft" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-center {{item.backgroundHoverGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                        <input value="topCenter" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-right {{item.backgroundHoverGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                        <input value="topRight" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-left {{item.backgroundHoverGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                        <input value="middleLeft" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-center {{item.backgroundHoverGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{item.backgroundHoverGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="item.backgroundHoverGradientStyle == 'radial'">
+                                                        <input value="middleCenter" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-right {{item.backgroundHoverGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                        <input value="middleRight" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-left {{item.backgroundHoverGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                        <input value="bottomLeft" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-center  {{item.backgroundHoverGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                        <input value="bottomCenter" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-right {{item.backgroundHoverGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                        <input value="bottomRight" name="buttonBackgroundHoverGradientDirection" type="radio" ng-model="item.backgroundHoverGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundHoverStyle, item.backgroundHover, item.backgroundHover2, item.backgroundHoverGradientStyle,'buttonAdditionalHoverBackground',$index)" />
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!--// Gradient positions -->
+
+                                        </div>
+                                        <!--// Input Col -->
+
+                                    </div>
+                                    <!--// Input Row - Tab pane -->
+
+                                </div>
+                                <!--// Input Col -->
+
+                            </div>
+                            <!--// Input Row - Tab pane -->
+                            <!-- Input Row -->
+                            <div class="usn-input-row">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-text-hover" colorpicker class="usncolorpicker" ng-model="item.textHover" />
+                                        <span>Text</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-btn-borders-hover" colorpicker class="usncolorpicker" ng-model="item.borderHover" />
+                                        <span>Border</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+
+
+                            </div>
+                            <!--// Input Row -->
+
+                        </div>
+                        <!--// Form Group -->
+
+                    </div>
+                    <!--// Group section -->
+                </div>
+                <!--// Item -->
+            </div>
+
+        </div>
+        <!--// Accordion -->
+
+        <button type="button" class="usn-add-more" ng-click="addButtonItem()"></button>
+
+    </div>
+    <!--// Group section -->
+    <!-- Group section -->
+    <div class="usn-group-section" ng-show="styles.themeColors.labelItems.length > 0">
+
+        <label class="usn-label">Label colors</label>
+        <!-- Accordion -->
+        <div class="usn-cms-accordion">
+            <div ng-repeat="item in styles.themeColors.labelItems">
+                <!-- Item -->
+                <div class="usn-accordion-tab" ng-class="{'tab-closed' : item.tabStyle, 'tab-open' : !item.tabStyle}">
+
+                    <a ng-click="item.tabStyle = !item.tabStyle">
+                        <span class="usn-color-swatch" style="{{item.backgroundSwatch}}"></span>
+                        <span>Label {{$index+1}}</span>
+                    </a>
+
+
+                </div>
+                <div class="usn-accordion-content" ng-class="{'tab-closed' : item.tabStyle, 'tab-open' : !item.tabStyle}">
+                    <!-- Group section -->
+                    <div class="usn-group-section">
+
+                        <!-- Form Group -->
+                        <div class="usn-form-group">
+
+                            <!-- Background color tabs -->
+                            <nav class="usn-cms-color-tabs">
+
+                                <label class="usn-cms-color-tabs-item {{item.backgroundStyle == 'solid' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Solid
+                                    <input value="solid" name="labelBackgroundStyle" type="radio" ng-model="item.backgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-label-bg c' + ($index+1) + '-label-bg', item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection, 'labelBackground',$index)" />
+                                </label>
+                                <label class="usn-cms-color-tabs-item {{item.backgroundStyle == 'gradient' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                    Gradient
+                                    <input value="gradient" name="labelBackgroundStyle" type="radio" ng-model="item.backgroundStyle" ng-click="updateSwatchFromBackgroundStyle($event, 'c' + ($index+1) + '-label-bg c' + ($index+1) + '-label-bg', item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection, 'labelBackground',$index)" />
+                                </label>
+
+                            </nav>
+                            <!--// Background color tabs -->
+                            <!-- Input Row - Tab pane -->
+                            <div class="usn-input-row usn-cms-tab-pane">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-label-bg-color1" colorpicker class="usncolorpicker" ng-model="item.background" ng-change="updateSwatchFromBackground(item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection,'labelBackground',$index)" />
+                                        <span>{{item.backgroundStyle == 'solid' ? 'Background' : 'Background 1'}}</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-half" ng-show="item.backgroundStyle == 'gradient'">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-label-bg-color2" colorpicker class="usncolorpicker" ng-model="item.background2" ng-change="updateSwatchFromBackground(item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle, item.backgroundGradientDirection,'labelBackground',$index)" />
+                                        <span>Background 2</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full" ng-show="item.backgroundStyle == 'gradient'">
+
+                                    <!-- Gradient tabs -->
+                                    <nav class="usn-cms-color-tabs">
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundGradientStyle == 'linear' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Linear
+                                            <input value="linear" name="labelBackgroundGradientStyle" type="radio" ng-model="item.backgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-label-bg c' + ($index+1) + '-label-bg', item.backgroundStyle, item.background, item.background2, item.backgroundGradientDirection,'labelBackground',$index)" />
+                                        </label>
+                                        <label class="usn-cms-color-tabs-item {{item.backgroundGradientStyle == 'radial' ? 'usn-cms-color-tabs-item-open' : ''}}">
+                                            Radial
+                                            <input value="radial" name="labelBackgroundGradientStyle" type="radio" ng-model="item.backgroundGradientStyle" ng-click="updateSwatchFromGradientStyle($event, 'c' + ($index+1) + '-label-bg c' + ($index+1) + '-label-bg', item.backgroundStyle, item.background, item.background2, item.backgroundGradientDirection, 'labelBackground',$index)" />
+                                        </label>
+                                    </nav>
+                                    <!--// Gradient tabs -->
+                                    <!-- Input Row - Tab pane -->
+                                    <div class="usn-input-row usn-cms-tab-pane">
+
+                                        <!-- Input Col -->
+                                        <div class="usn-input-col usn-input-col-full">
+
+                                            <!-- Gradient positions -->
+                                            <div class="usn-gradient-position">
+                                                <div class="usn-gradient-inner">
+
+                                                    <label class="usn-gradient-point usn-gradient-top-left {{item.backgroundGradientDirection == 'topLeft' ? 'usn-active' : ''}}">
+                                                        <input value="topLeft" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-center {{item.backgroundGradientDirection == 'topCenter' ? 'usn-active' : ''}}">
+                                                        <input value="topCenter" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-top-right {{item.backgroundGradientDirection == 'topRight' ? 'usn-active' : ''}}">
+                                                        <input value="topRight" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-left {{item.backgroundGradientDirection == 'middleLeft' ? 'usn-active' : ''}}">
+                                                        <input value="middleLeft" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-center {{item.backgroundGradientDirection == 'middleCenter' ? 'usn-active' : ''}} {{item.backgroundGradientStyle == 'linear' ? 'hidden' : ''}}" ng-show="item.backgroundGradientStyle == 'radial'">
+                                                        <input value="middleCenter" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-mid-right {{item.backgroundGradientDirection == 'middleRight' ? 'usn-active' : ''}}">
+                                                        <input value="middleRight" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-left {{item.backgroundGradientDirection == 'bottomLeft' ? 'usn-active' : ''}}">
+                                                        <input value="bottomLeft" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-center  {{item.backgroundGradientDirection == 'bottomCenter' ? 'usn-active' : ''}}">
+                                                        <input value="bottomCenter" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+                                                    <label class="usn-gradient-point usn-gradient-bottom-right {{item.backgroundGradientDirection == 'bottomRight' ? 'usn-active' : ''}}">
+                                                        <input value="bottomRight" name="labelBackgroundGradientDirection" type="radio" ng-model="item.backgroundGradientDirection" ng-click="updateSwatchFromDirection($event, item.backgroundStyle, item.background, item.background2, item.backgroundGradientStyle,'labelBackground',$index)" />
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!--// Gradient positions -->
+
+                                        </div>
+                                        <!--// Input Col -->
+
+                                    </div>
+                                    <!--// Input Row - Tab pane -->
+
+                                </div>
+                                <!--// Input Col -->
+
+                            </div>
+                            <!--// Input Row - Tab pane -->
+                            <!-- Input Row -->
+                            <div class="usn-input-row">
+
+                                <!-- Input Col -->
+                                <div class="usn-input-col usn-input-col-full">
+
+                                    <!-- USN Color Input -->
+                                    <label class="usn-color-input">
+                                        <input data-cssvar="--c{{$index+1}}-label-text" colorpicker class="usncolorpicker" ng-model="item.text" />
+                                        <span>Text</span>
+                                    </label>
+                                    <!--// USN Color Input -->
+
+                                </div>
+                                <!--// Input Col -->
+
+
+
+                            </div>
+                            <!--// Input Row -->
+
+                        </div>
+                        <!--// Form Group -->
+
+                    </div>
+                    <!--// Group section -->
+                </div>
+                <!--// Item -->
+            </div>
+
+        </div>
+        <!--// Accordion -->
+
+        <button type="button" class="usn-add-more" ng-click="addLabelItem()"></button>
+
+    </div>
+    <!--// Group section -->
+
+</div>

@@ -1,0 +1,38 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBlock>
+@using Microsoft.Extensions.Options
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@inject IOptions<USNAppSettings> _appSettings;
+@{
+    //Available as Component Block only
+
+    var content = (Usn_Cb_Breadcrumb)Model.BlockContent;
+    var settings = (Usn_Cbs_Breadcrumb)Model.BlockSettings;
+
+    AnimationSettings animation = (AnimationSettings)ViewData["animation"];
+
+    int itemLevel = 1;
+
+    <section class="breadcrumb-trail @animation.AnimationClass" data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
+        
+            <nav aria-label="@Umbraco.GetDictionaryValue("USN Aria Breadcrumb")">
+                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    @foreach (var item in Model.BaseModel.Ancestors().Where(x => x.IsVisible() && !x.HideNodeFromPath(_appSettings)).OrderBy(x => x.Level))
+                    {
+                        string breadcrumbLinkText = item.HasValue("breadcrumbLinkText") ? item.Value<string>("breadcrumbLinkText") : item.Name;
+
+                        <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="@item.Url()" itemtype="https://schema.org/Thing" itemprop="item"><span itemprop="name"><i class="icon before"></i>@Html.Raw(breadcrumbLinkText)</span></a><meta itemprop="position" content="@itemLevel" /></li>
+
+                        itemLevel += 1;
+                    }
+
+                    @{
+                        string breadcrumbLinkTextPage = Model.BaseModel.HasValue("breadcrumbLinkText") ? Model.BaseModel.Value<string>("breadcrumbLinkText") : Model.BaseModel.Name;
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item active" aria-current="page"><span itemprop="name"><i class="icon before"></i>@Html.Raw(breadcrumbLinkTextPage)</span><meta itemprop="position" content="@itemLevel" /></li>
+                    }
+                </ol>
+            </nav>
+        
+    </section>
+    
+}

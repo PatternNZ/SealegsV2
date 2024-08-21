@@ -1,0 +1,184 @@
+/*  
+---------------------------------------------------
+Page Components - Large Breakpoint
+---------------------------------------------------  
+*/
+
+
+/*  
+---------------------------------------------------
+Sticky
+
+Choose preset class 'Sticky' to sticky anything
+---------------------------------------------------  
+*/
+
+/* Default - additional spacing for sticky inside Split Component */
+.item_block.sticky {
+    top: var(--base-spacing);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      YES
+    Anchor Nav present:         NO
+    Anchor Nav Sticky:          NO
+*/
+
+body:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky {
+    top: calc(var(--large-header) - 1px);
+}
+body:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky {
+    top: calc(var(--large-header) + var(--base-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      NO
+    Anchor Nav present:         NO
+    Anchor Nav Sticky:          NO
+*/
+
+html.nav-up body.hide_header-on-scroll-lg:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky {
+    top: 0;
+}
+html.nav-up body.hide_header-on-scroll-lg:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky {
+    top: var(--base-spacing);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      YES
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          60px
+*/
+
+body:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc(var(--large-header) + 60px - 1px);
+}
+body:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc(var(--large-header) + 60px + var(--base-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      NO
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          60px
+*/
+
+html.nav-up body.hide_header-on-scroll-lg:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc(60px - 1px);
+}
+
+html.nav-up body.hide_header-on-scroll-lg:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc(60px + var(--base-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      YES
+    Header half size on scroll: YES (Headers 04, 05, 09, 10, 13, 14, 18)
+    Anchor Nav present:         NO
+    Anchor Nav Sticky:          NO
+    Anchor Nav height:          0
+*/
+
+html.nav-up body.header-04-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky,
+html.nav-up body.header-05-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky,
+html.nav-up body.header-09-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky,
+html.nav-up body.header-10-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky,
+html.nav-up body.header-13-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky,
+html.nav-up body.header-14-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky,
+html.nav-up body.header-18-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .sticky {
+    top: calc((var(--large-header) / 2) - 1px);
+}
+
+html.nav-up body.header-04-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky,
+html.nav-up body.header-05-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky,
+html.nav-up body.header-09-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky,
+html.nav-up body.header-10-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky,
+html.nav-up body.header-13-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky,
+html.nav-up body.header-14-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky,
+html.nav-up body.header-18-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .item_block.sticky {
+    top: calc((var(--large-header) / 2) + var(--base-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      YES
+    Header half size on scroll: YES (Headers 04, 05, 09, 10, 13, 14, 18)
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          60px
+*/
+
+html.nav-up body.header-04-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+html.nav-up body.header-05-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+html.nav-up body.header-09-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+html.nav-up body.header-10-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+html.nav-up body.header-13-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+html.nav-up body.header-14-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+html.nav-up body.header-18-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc((var(--large-header) / 2) + 60px - 1px);
+}
+
+html.nav-up body.header-04-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+html.nav-up body.header-05-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+html.nav-up body.header-09-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+html.nav-up body.header-10-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+html.nav-up body.header-13-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+html.nav-up body.header-14-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+html.nav-up body.header-18-lg:not(.no-header):not(.hide_header-on-scroll-lg):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc((var(--large-header) / 2) + 60px + var(--base-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             NO
+    Show Header on scroll:      NO
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          60px
+*/
+
+body.no-header .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc(60px - 1px);
+}
+
+body.no-header .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc(60px + var(--base-spacing) - 1px);
+}
+
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      YES + NO
+    Header on side:             YES (Headers 11, 12, 15, 16)
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          60px
+*/
+
+body.header-11-lg .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+body.header-12-lg .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+body.header-15-lg .component.usn_cmp_anchornavigation.sticky ~ .sticky,
+body.header-16-lg .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc(60px - 1px);
+}
+
+body.header-11-lg .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+body.header-12-lg .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+body.header-15-lg .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky,
+body.header-16-lg .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc(60px + var(--base-spacing) - 1px);
+}

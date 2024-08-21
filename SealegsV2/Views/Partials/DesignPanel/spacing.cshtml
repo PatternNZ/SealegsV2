@@ -1,0 +1,1615 @@
+﻿<div id="design-3" class="usn-cms-grouping usn-design-grouping usn-cms-spacing-panel">
+
+    <!-- Group section -->
+    <div class="usn-group-section">
+
+        <!-- Accordion -->
+        <div class="usn-cms-accordion">
+
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : siteSpacingTabStyle, 'tab-open' : !siteSpacingTabStyle}">
+                <a ng-click="siteSpacingTabStyle = !siteSpacingTabStyle"><span>Site</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : siteSpacingTabStyle, 'tab-open' : !siteSpacingTabStyle}">
+
+                <!-- Form Group -->
+                <div class="usn-form-group">
+                    <label class="usn-label">Site width</label>
+                    <span class="note usn-note">Set the width of your site container.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Fixed width</label>
+                            <switch ng-model="styles.themeSpacing.fixedWidth"></switch>
+                            <span class="switcher-status" ng-class="{ active: styles.themeSpacing.fixedWidth }">{{styles.themeSpacing.fixedWidth == true ? 'Yes' : 'No'}}</span>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half" ng-show="styles.themeSpacing.fixedWidth">
+
+                            <label class="usn-label">Maximum width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.siteWidth" min="0" ng-change="updateCssVariable('--site-max-width',styles.themeSpacing.siteWidth + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+                    <span class="usn-alert usn-alert-small"><strong>Please note:</strong> When a 'Maximum width' is set, you will only be able to preview it when the design editor drawer is closed.</span>
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Site padding</label>
+                    <span class="note usn-note">
+                        Set the padding applied from the viewport edge.
+                    </span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Small screens</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.sitePaddingSmall" min="0" ng-change="updateCssVariable('--site-spacing_sm',styles.themeSpacing.sitePaddingSmall + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Large screens</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.sitePaddingLarge" min="0" ng-change="updateCssVariable('--site-spacing_lg',styles.themeSpacing.sitePaddingLarge + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Site box shadow</label>
+                    <span class="note usn-note">Set the box shadows used for your site container. This will only be visible when you have set a maximum site width on your site container.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Horizontal</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.siteBoxShadowHorizontal" ng-change="updateCssVariable('--site-box-shadow_h',styles.themeSpacing.siteBoxShadowHorizontal + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Vertical</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.siteBoxShadowVertical" ng-change="updateCssVariable('--site-box-shadow_v',styles.themeSpacing.siteBoxShadowVertical + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Blur</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.siteBoxShadowBlur" ng-change="updateCssVariable('--site-box-shadow_v',styles.themeSpacing.siteBoxShadowBlur + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Opacity</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.siteBoxShadowOpacity" ng-change="updateCssVariable('--site-box-shadow_o',styles.themeSpacing.siteBoxShadowOpacity + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Notification padding</label>
+                    <span class="note usn-note">
+                        Set the padding from the viewport edges.
+                    </span>
+
+                    <label class="usn-label">Small screens</label>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Below</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.notificationPaddingBottomSmall" ng-change="updateCssVariable('--notification-spacing_below_sm',styles.themeSpacing.notificationPaddingBottomSmall + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Beside</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.notificationPaddingSideSmall" ng-change="updateCssVariable('--notification-spacing_side_sm',styles.themeSpacing.notificationPaddingSideSmall + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                    <label class="usn-label">Large screens</label>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Below</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.notificationPaddingBottomLarge" ng-change="updateCssVariable('--notification-spacing_below_lg',styles.themeSpacing.notificationPaddingBottomLarge + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Beside</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.notificationPaddingSideLarge" ng-change="updateCssVariable('--notification-spacing_side_lg',styles.themeSpacing.notificationPaddingSideLarge + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Back to top</label>
+                    <span class="note usn-note">
+                        Set the size and padding from the viewport edges of your 'Back to top' button.
+                    </span>
+
+                    <label class="usn-label">Small screens</label>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+
+                            <label class="usn-label">Height</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.backToTopSizeSmall" ng-change="updateCssVariable('--backtotop-size_sm',styles.themeSpacing.backToTopSizeSmall + 'px')" required>
+                                </div>
+                            </div>
+                            <span class="note usn-note">On small screens your back to top button will be full width.</span>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Below</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.backToTopPaddingBottomSmall" ng-change="updateCssVariable('--backtotop-spacing_below_sm',styles.themeSpacing.backToTopPaddingBottomSmall + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Beside</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.backToTopPaddingSideSmall" ng-change="updateCssVariable('--backtotop-spacing_side_sm',styles.themeSpacing.backToTopPaddingSideSmall + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                    <label class="usn-label">Large screens</label>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+
+                            <label class="usn-label">Width and height</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.backToTopSizeLarge" ng-change="updateCssVariable('--backtotop-size_lg',styles.themeSpacing.backToTopSizeLarge + 'px')" required>
+                                </div>
+                            </div>
+                            <span class="note usn-note">On large screens your back to top button width and height will be the same.</span>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Below</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.backToTopPaddingBottomLarge" ng-change="updateCssVariable('--backtotop-spacing_below_lg',styles.themeSpacing.backToTopPaddingBottomLarge + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Beside</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.backToTopPaddingSideLarge" ng-change="updateCssVariable('--backtotop-spacing_side_lg',styles.themeSpacing.backToTopPaddingSideLarge + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : headerSpacingTabStyle, 'tab-open' : !headerSpacingTabStyle}">
+                <a ng-click="headerSpacingTabStyle = !headerSpacingTabStyle"><span>Header</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : headerSpacingTabStyle, 'tab-open' : !headerSpacingTabStyle}">
+                <!-- Form Group -->
+                <div class="usn-form-group">
+                    <label class="usn-label">Header width</label>
+                    <span class="note usn-note">Set the width of your header container.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Fixed width</label>
+                            <switch ng-model="styles.themeSpacing.headerFixedWidth"></switch>
+                            <span class="switcher-status" ng-class="{ active: styles.themeSpacing.headerFixedWidth }">{{styles.themeSpacing.headerFixedWidth == true ? 'Yes' : 'No'}}</span>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half" ng-show="styles.themeSpacing.headerFixedWidth">
+
+                            <label class="usn-label">Maximum width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.headerWidth" min="0" ng-change="updateCssVariable('--header-max-width',styles.themeSpacing.headerWidth + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Header height</label>
+                    <span class="note usn-note">
+                        Set the height of your header on various screen sizes.
+                    </span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Small</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.headerSmallHeight" min="0" ng-change="updateCssVariable('--small-header',styles.themeSpacing.headerSmallHeight + 'px')" required>
+                                </div>
+                            </div>
+                            <span class="note usn-note">Height on small screens.</span>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Large</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.headerLargeHeight" min="0" ng-change="updateCssVariable('--large-header',styles.themeSpacing.headerLargeHeight + 'px')" required>
+                                </div>
+                            </div>
+                            <span class="note usn-note">Height on large screens.</span>
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Main Navigation</label>
+                    <span class="note usn-note">Set the width of the dropdowns in your main navigation.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Single column width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.mainNavSingleColumnWidth" ng-change="updateCssVariable('--nav-main-dropdown-width',styles.themeSpacing.mainNavSingleColumnWidth + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Multi column width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.mainNavMultiColumnWidth" ng-change="updateCssVariable('--nav-main-dropdown-width_wide',styles.themeSpacing.mainNavMultiColumnWidth + 'px')" required>
+                                </div>
+                            </div>
+                            <span class="note usn-note">This layout is used once there are {{styles.themeSpacing.mainNavMultiColumnItems + 1}} child items in the dropdown</span>
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Box shadow</label>
+                    <span class="note usn-note">
+                        Set the box shadow of your site header.
+                    </span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Horizontal</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.headerBoxShadowHorizontal" ng-change="updateCssVariable('--header-box-shadow_h',styles.themeSpacing.headerBoxShadowHorizontal + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Vertical</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.headerBoxShadowVertical" ng-change="updateCssVariable('--header-box-shadow_v',styles.themeSpacing.headerBoxShadowVertical + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Blur</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.headerBoxShadowBlur" ng-change="updateCssVariable('--header-box-shadow_b',styles.themeSpacing.headerBoxShadowBlur + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Opacity</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.headerBoxShadowOpacity" ng-change="updateCssVariable('--header-box-shadow_o',styles.themeSpacing.headerBoxShadowOpacity + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : logoSpacingTabStyle, 'tab-open' : !logoSpacingTabStyle}">
+                <a ng-click="logoSpacingTabStyle = !logoSpacingTabStyle"><span>Logo</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : logoSpacingTabStyle, 'tab-open' : !logoSpacingTabStyle}">
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Logo padding</label>
+                    <span class="note usn-note">Set the padding around the site logo in the header.</span>
+
+                    <label class="usn-label">Small screens</label>
+                    <span class="note usn-note">Set the padding around the site logo when the small header height is used.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Top</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoSmallPaddingTop" ng-change="updateCssVariable('--logo_sm-padding_top',styles.themeSpacing.logoSmallPaddingTop + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Right</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoSmallPaddingRight" ng-change="updateCssVariable('--logo_sm-padding_right',styles.themeSpacing.logoSmallPaddingRight + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Bottom</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoSmallPaddingBottom" ng-change="updateCssVariable('--logo_sm-padding_bottom',styles.themeSpacing.logoSmallPaddingBottom + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Left</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoSmallPaddingLeft" ng-change="updateCssVariable('--logo_sm-padding_left',styles.themeSpacing.logoSmallPaddingLeft + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                    <label class="usn-label">Large screens</label>
+                    <span class="note usn-note">Set the padding around the site logo when the large header height is used.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Top</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoLargePaddingTop" ng-change="updateCssVariable('--logo_lg-padding_top',styles.themeSpacing.logoLargePaddingTop + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Right</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoLargePaddingRight" ng-change="updateCssVariable('--logo_lg-padding_right',styles.themeSpacing.logoLargePaddingRight + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Bottom</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoLargePaddingBottom" ng-change="updateCssVariable('--logo_lg-padding_bottom',styles.themeSpacing.logoLargePaddingBottom + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Left</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.logoLargePaddingLeft" ng-change="updateCssVariable('--logo_lg-padding_left',styles.themeSpacing.logoLargePaddingLeft + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : generalSpacingTabStyle, 'tab-open' : !generalSpacingTabStyle}">
+                <a ng-click="generalSpacingTabStyle = !generalSpacingTabStyle"><span>General</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : generalSpacingTabStyle, 'tab-open' : !generalSpacingTabStyle}">
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Item padding</label>
+                    <span class="note usn-note">Set the padding used on individual items.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Small items</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.generalPaddingSmallItems" ng-change="updateCssVariable('--base-half-spacing',styles.themeSpacing.generalPaddingSmallItems + 'px')" required>
+                                </div>
+                            </div>
+                            <span class="note usn-note">Padding of small items</span>
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Large items</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.generalPaddingLargeItems" ng-change="updateCssVariable('--base-spacing',styles.themeSpacing.generalPaddingLargeItems + 'px')" required>
+                                </div>
+                            </div>
+                            <span class="note usn-note">Padding of large items</span>
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Borders</label>
+                    <span class="note usn-note">Set the width and radius of borders.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.generalBorderWidth" ng-change="updateCssVariable('--base-border-width',styles.themeSpacing.generalBorderWidth + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Radius</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.generalBorderRadius" ng-change="updateCssVariable('--base-border-radius',styles.themeSpacing.generalBorderRadius + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Box shadow</label>
+                    <span class="note usn-note">Set the box shadow settings.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Horizontal</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.generalBoxShadowHorizontal" ng-change="updateCssVariable('--base-box-shadow_h',styles.themeSpacing.generalBoxShadowHorizontal + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Vertical</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.generalBoxShadowVertical" ng-change="updateCssVariable('--base-box-shadow_v',styles.themeSpacing.generalBoxShadowVertical + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Blur</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.generalBoxShadowBlur" ng-change="updateCssVariable('--base-box-shadow_b',styles.themeSpacing.generalBoxShadowBlur + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Opacity</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.generalBoxShadowOpacity" ng-change="updateCssVariable('--base-box-shadow_o',styles.themeSpacing.generalBoxShadowOpacity + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : componentsSpacingTabStyle, 'tab-open' : !componentsSpacingTabStyle}">
+                <a ng-click="componentsSpacingTabStyle = !componentsSpacingTabStyle"><span>Components</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : componentsSpacingTabStyle, 'tab-open' : !componentsSpacingTabStyle}">
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Padding</label>
+                    <span class="note usn-note">Set the spacing at the bottom of a component when the 'Full' page layout option <strong>is not selected</strong>.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.componentPaddingFullLayout" ng-change="updateCssVariable('--content-col_pc-spacing',styles.themeSpacing.componentPaddingFullLayout + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Padding</label>
+                    <span class="note usn-note">Set the spacing at the top and bottom of a component when the 'Full' page layout option <strong>is selected</strong>.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+
+                            <label class="usn-label">Desktop<i class="usn-icon fa fa-desktop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.componentPaddingDesktop" ng-change="updateCssVariable('--pc-spacing_xl',styles.themeSpacing.componentPaddingDesktop + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Laptop<i class="usn-icon fa fa-laptop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.componentPaddingLaptop" ng-change="updateCssVariable('--pc-spacing_lg',styles.themeSpacing.componentPaddingLaptop + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Tablet<i class="usn-icon fa fa-tablet after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.componentPaddingTablet" ng-change="updateCssVariable('--pc-spacing_md',styles.themeSpacing.componentPaddingTablet + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile landscape after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.componentPaddingLandscapeMobile" ng-change="updateCssVariable('--pc-spacing_sm',styles.themeSpacing.componentPaddingLandscapeMobile + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.componentPaddingPortraitMobile" ng-change="updateCssVariable('--pc-spacing',styles.themeSpacing.componentPaddingPortraitMobile + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Intro width</label>
+                    <span class="note usn-note">Set the width of the 'Intro' column on components when the 'Full' page layout option <strong>is selected</strong>.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+
+                            <label class="usn-label">Desktop<i class="usn-icon fa fa-desktop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentIntroWidthDesktop" ng-change="updateCssVariable('--intro-col_xl',styles.themeSpacing.componentIntroWidthDesktop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Laptop<i class="usn-icon fa fa-laptop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentIntroWidthLaptop" ng-change="updateCssVariable('--intro-col_lg',styles.themeSpacing.componentIntroWidthLaptop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Tablet<i class="usn-icon fa fa-tablet after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentIntroWidthTablet" ng-change="updateCssVariable('--intro-col_md',styles.themeSpacing.componentIntroWidthTablet + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile landscape after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentIntroWidthLandscapeMobile" ng-change="updateCssVariable('--intro-col_sm',styles.themeSpacing.componentIntroWidthLandscapeMobile + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentIntroWidthPortraitMobile" ng-change="updateCssVariable('--intro-col',styles.themeSpacing.componentIntroWidthPortraitMobile + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Outro width</label>
+                    <span class="note usn-note">Set the width of the 'Outro' column on components when the 'Full' page layout option <strong>is selected</strong>.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+
+                            <label class="usn-label">Desktop<i class="usn-icon fa fa-desktop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentOutroWidthDesktop" ng-change="updateCssVariable('--outro-col_xl',styles.themeSpacing.componentOutroWidthDesktop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Laptop<i class="usn-icon fa fa-laptop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentOutroWidthLaptop" ng-change="updateCssVariable('--outro-col_lg',styles.themeSpacing.componentOutroWidthLaptop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Tablet<i class="usn-icon fa fa-tablet after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentOutroWidthTablet" ng-change="updateCssVariable('--outro-col_md',styles.themeSpacing.componentOutroWidthTablet + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile landscape after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentOutroWidthLandscapeMobile" ng-change="updateCssVariable('--outro-col_sm',styles.themeSpacing.componentOutroWidthLandscapeMobile + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentOutroWidthPortraitMobile" ng-change="updateCssVariable('--outro-col',styles.themeSpacing.componentOutroWidthPortraitMobile + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Centered column width</label>
+                    <span class="note usn-note">Set the width of the content of a component when you have chosen the option 'Center' and the 'Full' page layout option <strong>is selected</strong>.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+
+                            <label class="usn-label">Desktop<i class="usn-icon fa fa-desktop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentCenterWidthDesktop" ng-change="updateCssVariable('--center-col_xl',styles.themeSpacing.componentCenterWidthDesktop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Laptop<i class="usn-icon fa fa-laptop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentCenterWidthLaptop" ng-change="updateCssVariable('--center-col_lg',styles.themeSpacing.componentCenterWidthLaptop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Tablet<i class="usn-icon fa fa-tablet after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentCenterWidthTablet" ng-change="updateCssVariable('--center-col_md',styles.themeSpacing.componentCenterWidthTablet + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile landscape after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentCenterWidthLandscapeMobile" ng-change="updateCssVariable('--center-col_sm',styles.themeSpacing.componentCenterWidthLandscapeMobile + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentCenterWidthPortraitMobile" ng-change="updateCssVariable('--outro-col',styles.themeSpacing.componentCenterWidthPortraitMobile + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Banners</label>
+                    <span class="note usn-note">Set the width of the content column found in banners.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+
+                            <label class="usn-label">Desktop<i class="usn-icon fa fa-desktop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentBannerWidthDesktop" ng-change="updateCssVariable('--banner-col_xl',styles.themeSpacing.componentBannerWidthDesktop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Laptop<i class="usn-icon fa fa-laptop after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentBannerWidthLaptop" ng-change="updateCssVariable('--banner-col_lg',styles.themeSpacing.componentBannerWidthLaptop + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Tablet<i class="usn-icon fa fa-tablet after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentBannerWidthTablet" ng-change="updateCssVariable('--banner-col_md',styles.themeSpacing.componentBannerWidthTablet + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile landscape after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentBannerWidthLandscapeMobile" ng-change="updateCssVariable('--banner-col_sm',styles.themeSpacing.componentBannerWidthLandscapeMobile + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Mobile<i class="usn-icon fa fa-mobile after"></i></label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.componentBannerWidthPortraitMobile" ng-change="updateCssVariable('--banner-col',styles.themeSpacing.componentBannerWidthPortraitMobile + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : formsSpacingTabStyle, 'tab-open' : !formsSpacingTabStyle}">
+                <a ng-click="formsSpacingTabStyle = !formsSpacingTabStyle"><span>Forms</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : formsSpacingTabStyle, 'tab-open' : !formsSpacingTabStyle}">
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Borders</label>
+                    <span class="note usn-note">Set the width and radius of form field borders.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.formBorderWidth" ng-change="updateCssVariable('--form-field-border-width',styles.themeSpacing.formBorderWidth + 'px')" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Radius</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.formBorderRadius" ng-change="updateCssVariable('--form-field-border-radius',styles.themeSpacing.formBorderRadius + 'px')" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : buttonsSpacingTabStyle, 'tab-open' : !buttonsSpacingTabStyle}">
+                <a ng-click="buttonsSpacingTabStyle = !buttonsSpacingTabStyle"><span>Buttons</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : buttonsSpacingTabStyle, 'tab-open' : !buttonsSpacingTabStyle}">
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Borders</label>
+                    <span class="note usn-note">Set the width and radius of button borders.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonBorderWidth" ng-change="updateCssVariable('--btn-border-width',styles.themeSpacing.buttonBorderWidth + 'px')" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-half">
+
+                            <label class="usn-label">Radius</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonBorderRadius" ng-change="updateCssVariable('--btn-border-radius',styles.themeSpacing.buttonBorderRadius + 'px')" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Box shadow</label>
+                    <span class="note usn-note">Set the box shadows of buttons.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Horizontal</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonBoxShadowHorizontal" ng-change="updateCssVariable('--btn-box-shadow_h',styles.themeSpacing.buttonBoxShadowHorizontal + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Vertical</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonBoxShadowVertical" ng-change="updateCssVariable('--btn-box-shadow_v',styles.themeSpacing.buttonBoxShadowVertical + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Blur</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonBoxShadowBlur" ng-change="updateCssVariable('--btn-box-shadow_b',styles.themeSpacing.buttonBoxShadowBlur + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Opacity</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.buttonBoxShadowOpacity" ng-change="updateCssVariable('--btn-box-shadow_o',styles.themeSpacing.buttonBoxShadowOpacity + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Padding</label>
+                    <span class="note usn-note">Set the padding of all buttons in your site.</span>
+
+                    <label class="usn-label">Small buttons</label>
+                    <span class="note usn-note">Set the padding of small buttons.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Top</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonSmallPaddingTop" ng-change="updateCssVariable('--btn_sm-padding_top',styles.themeSpacing.buttonSmallPaddingTop + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Right</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonSmallPaddingRight" ng-change="updateCssVariable('--btn_sm-padding_right',styles.themeSpacing.buttonSmallPaddingRight + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Bottom</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonSmallPaddingBottom" ng-change="updateCssVariable('--btn_sm-padding_bottom',styles.themeSpacing.buttonSmallPaddingBottom + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Left</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonSmallPaddingLeft" ng-change="updateCssVariable('--btn_sm-padding_left',styles.themeSpacing.buttonSmallPaddingLeft + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                    <label class="usn-label">Medium buttons</label>
+                    <span class="note usn-note">Set the padding of medium buttons.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Top</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonMediumPaddingTop" ng-change="updateCssVariable('--btn-padding_top',styles.themeSpacing.buttonMediumPaddingTop + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Right</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonMediumPaddingRight" ng-change="updateCssVariable('--btn-padding_right',styles.themeSpacing.buttonMediumPaddingRight + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Bottom</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonMediumPaddingBottom" ng-change="updateCssVariable('--btn-padding_bottom',styles.themeSpacing.buttonMediumPaddingBottom + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Left</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonMediumPaddingLeft" ng-change="updateCssVariable('--btn-padding_left',styles.themeSpacing.buttonMediumPaddingLeft + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                    <label class="usn-label">Large buttons</label>
+                    <span class="note usn-note">Set the padding of large buttons.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Top</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonLargePaddingTop" ng-change="updateCssVariable('--btn_lg-padding_top',styles.themeSpacing.buttonLargePaddingTop + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Right</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonLargePaddingRight" ng-change="updateCssVariable('--btn_lg-padding_right',styles.themeSpacing.buttonLargePaddingRight + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Bottom</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonLargePaddingBottom" ng-change="updateCssVariable('--btn_lg-padding_bottom',styles.themeSpacing.buttonLargePaddingBottom + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-quarter">
+
+                            <label class="usn-label">Left</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.buttonLargePaddingLeft" ng-change="updateCssVariable('--btn_lg-padding_left',styles.themeSpacing.buttonLargePaddingLeft + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+            </div>
+            <!--// Item -->
+            <!-- Item -->
+            <div class="usn-accordion-tab" ng-class="{'tab-closed' : modalSpacingTabStyle, 'tab-open' : !modalSpacingTabStyle}">
+                <a ng-click="modalSpacingTabStyle = !modalSpacingTabStyle"><span>Modal windows</span></a>
+            </div>
+            <div class="usn-accordion-content" ng-class="{'tab-closed' : modalSpacingTabStyle, 'tab-open' : !modalSpacingTabStyle}">
+                <!-- Form Group -->
+                <div class="usn-form-group">
+
+                    <label class="usn-label">Components</label>
+                    <span class="note usn-note">Control the settings of components inside modal windows.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+                            <label class="usn-label">Maximum width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.modalComponentMaxWidth" ng-change="updateCssVariable('--modal-components-max-width',styles.themeSpacing.modalComponentMaxWidth  + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                    <label class="usn-label">Pods</label>
+                    <span class="note usn-note">Control the settings of pods inside modal windows.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+                            <label class="usn-label">Maximum width</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units pixels">
+                                    <input class="usn-form-control" type="number" min="0" ng-model="styles.themeSpacing.modalPodMaxWidth" ng-change="updateCssVariable('--modal-pods-max-width',styles.themeSpacing.modalPodMaxWidth  + 'px')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                    <label class="usn-label">Backdrop</label>
+                    <span class="note usn-note">Control the backdrop settings inside modal windows.</span>
+
+                    <!-- Input Row -->
+                    <div class="usn-input-row">
+                        <!-- Input Col -->
+                        <div class="usn-input-col usn-input-col-full">
+                            <label class="usn-label">Opacity</label>
+                            <div class="usn-input">
+                                <div class="usn-input-wrap usn-input-units percentage">
+                                    <input class="usn-form-control" type="number" min="0" max="100" ng-model="styles.themeSpacing.modalOpacity" ng-change="updateCssVariable('--modal-opacity',styles.themeSpacing.modalOpacity  + '%')" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--// Input Col -->
+                    </div>
+                    <!--// Input Row -->
+
+                </div>
+                <!--// Form Group -->
+
+            </div>
+            <!--// Item -->
+
+        </div>
+        <!--// Accordion -->
+
+    </div>
+    <!--// Group section -->
+
+</div>

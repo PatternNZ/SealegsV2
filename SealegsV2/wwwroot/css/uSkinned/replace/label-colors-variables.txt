@@ -1,0 +1,6 @@
+--c{position}-label-bg-color1: {backgroundColor1};
+--c{position}-label-bg-color2:  {backgroundColor2};
+--c{position}-label-bg-start-perc: {backgroundStartPerc};
+--c{position}-label-bg-stop-perc: {backgroundStopPerc};
+--c{position}-label-bg-angle: {backgroundAngle};
+--c{position}-label-text: {text};

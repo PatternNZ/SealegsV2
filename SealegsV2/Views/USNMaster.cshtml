@@ -1,0 +1,81 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@using USNSiteBuilder.Core.Interfaces
+@inject ISiteBuilderService _siteBuilderService
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html dir="@Model.TextDirection" lang="@Model.HrefLangTag" class="no-js usn">
+<head>
+    @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/GooglePrefetch", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/HeaderOpeningScripts", Model)
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=2">
+    @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/SEOPageHead", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/StyleSheets", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/Icons", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/ScriptVariables", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/HeaderScripts", Model)
+    @RenderSection("Head", false)
+</head>
+<!body @RenderSection("BodyTag", false)>
+
+    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/AfterOpeningBodyScripts", Model)
+
+    @if (Model.BodyBgImageStyle.HasValue())
+    {
+        string currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
+    <div class="image background-image body-background-image lazyload" @Html.Raw(Model.BodyBgImageStyle) role="img" aria-label="@(_siteBuilderService.GetAlternativeText(Model.BodyBgImage.HasValue("alternativeText") ? Model.BodyBgImage.Value<string>("alternativeText") : String.Empty, currentCulture))"></div>
+    }
+
+    <!-- Skip links -->
+    <a class="skip-to-content" id="skip-to-content-link" href="#site-content">@Umbraco.GetDictionaryValue("USN Skip to Content")</a>
+    <a class="skip-to-content" id="skip-to-footer-link" href="#site-footer">@Umbraco.GetDictionaryValue("USN Skip to Footer")</a>
+    <!--// Skip links -->
+
+    <!-- Site -->
+    <div id="site">
+
+        <!-- Header -->
+        @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/HeaderSection", Model)
+        <!--// Header -->
+        <!-- Content -->
+        <main id="site-content" tabindex="-1">
+
+            @await Html.PartialAsync(Model.ThemeFolder + "/BlockContainers/TopComponents", Model)
+            @RenderBody()
+            @await Html.PartialAsync(Model.ThemeFolder + "/BlockContainers/BottomComponents", Model)
+
+        </main>
+        <!--// Content -->
+        <!-- Footer -->
+        @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteFooterSection/FooterSection", Model)
+        <!--// Footer -->
+
+    </div>
+    <!--// Site -->
+
+    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/Notification", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteFooterSection/FooterScripts", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/BeforeClosingBodyScripts", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/LinkedModalWindows", Model)
+    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/TriggeredModalWindows", Model)
+</!body>
+<!--
+    ____        _ ____              _ __  __             _____ __   _                      __
+   / __ )__  __(_) / /_   _      __(_) /_/ /_     __  __/ ___// /__(_)___  ____  ___  ____/ /
+  / __  / / / / / / __/  | | /| / / / __/ __ \   / / / /\__ \/ //_/ / __ \/ __ \/ _ \/ __  /
+ / /_/ / /_/ / / / /_    | |/ |/ / / /_/ / / /  / /_/ /___/ / ,< / / / / / / / /  __/ /_/ /
+/_____/\__,_/_/_/\__/    |__/|__/_/\__/_/ /_/   \__,_//____/_/|_/_/_/ /_/_/ /_/\___/\__,_/
+
+Find out more at uSkinned.net
+
+-->
+@if (UmbracoContext.InPreviewMode)
+{
+    @await Html.PartialAsync("DesignPanel/DesignPanel", Model)
+}
+</html>
