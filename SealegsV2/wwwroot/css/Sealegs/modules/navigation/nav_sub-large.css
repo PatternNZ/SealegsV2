@@ -1,0 +1,12 @@
+/*  
+---------------------------------------------------
+Sub Navigation
+---------------------------------------------------  
+*/
+
+/* If sub nav is directly below filters */
+.listing_filter-form.listing_filter-form_sidebar + nav.sub {
+    padding-top: 0;
+    border-top: 0 none;
+    padding-top: 0;
+}

@@ -1,0 +1,74 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@{
+    int blogLandingPageID = Convert.ToInt32(ViewData["blogLandingPageID"]);
+    UsnblogLandingPage landing = (UsnblogLandingPage)Umbraco.Content(blogLandingPageID);
+
+    var categoryFolder = landing.Children<UsnblogCategories>().FirstOrDefault();
+
+    if (categoryFolder != null && categoryFolder.Children.Any())
+    {
+        <!-- SUB - FILTER -->
+        <nav class="sub">
+            <p class="heading sm"><a href="@landing.Url()">@Umbraco.GetDictionaryValue("USN Blog Categories")</a></p>
+            @{Traverse(categoryFolder);}
+        </nav>
+        <!--// SUB -->
+    }
+}
+
+@{
+    void Traverse(IPublishedContent parent)
+    {
+        if (parent.Children.Any())
+        {
+            bool hasSubPages = false;
+
+            <ul>
+                @foreach (var node in parent.Children)
+                {
+                    if (node != null && node.IsVisible())
+                    {
+                        string selected = Array.IndexOf(Model.Path.Split(','), node.Id.ToString()) >= 0 ? "active" : String.Empty;
+
+                        string subPageClass = String.Empty;
+
+                        if (node.Children.Any(x => x.IsVisible()))
+                        {
+                            subPageClass = String.Format(" class=\"has-child {0}\"", selected);
+                            hasSubPages = true;
+                        }
+                        else
+                        {
+                            subPageClass = String.Format(" class=\"no-child {0}\"", selected);
+                            hasSubPages = false;
+                        }
+
+                        string linkName = node.Name;
+
+                        if (node.HasValue("subNavigationLinkText"))
+                        {
+                            linkName = node.Value<string>("subNavigationLinkText");
+                        }
+
+                        <li @Html.Raw(subPageClass)>
+                            <span>
+                                <a href="@node.Url()" rel="NOINDEX, FOLLOW">
+                                    @node.Name
+                                </a>
+                            </span>
+                            @if (hasSubPages)
+                            {
+                                <button class="expand-subpages" type="button" aria-expanded="false" aria-label="@Umbraco.GetDictionaryValue("USN Aria Expand Sub Pages") @Html.Raw(linkName)">
+                                    <span aria-hidden="true">@Umbraco.GetDictionaryValue("USN Aria Expand Sub Pages") @Html.Raw(linkName)</span>
+                                </button>
+
+                                Traverse(node);
+                            }
+                        </li>
+                    }
+                }
+            </ul>
+        }
+    }
+}

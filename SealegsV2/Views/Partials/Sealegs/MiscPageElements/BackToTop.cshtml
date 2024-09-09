@@ -1,0 +1,23 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@{
+    Usnstyle websiteStyle = (Usnstyle)Model.WebsiteStyle;
+
+    string positionClass = websiteStyle.StyleLayout.backToTopHorizontalPosition.HasValue() ? websiteStyle.StyleLayout.backToTopHorizontalPosition.ToString() : "position-right";
+
+    if (websiteStyle.StyleLayout.displayBackToTopOption)
+    {
+        string buttonBackgroundClass = websiteStyle.StyleColors.buttonBackgroundClass;
+        string buttonBackgroundHoverClass = websiteStyle.StyleColors.buttonBackgroundHoverClass;
+
+        <!-- Back to top -->
+        <div class="usn_back-to-top @positionClass">
+            <button id="back-to-top-link" aria-label="@Umbraco.GetDictionaryValue("USN Back To Top")" class="btn base-btn-bg @buttonBackgroundClass @buttonBackgroundHoverClass base-btn-text base-btn-borders btn-back-to-top">
+                <span></span>
+                <i aria-hidden="true" class="icon"></i><span aria-hidden="true" class="d-none">@Umbraco.GetDictionaryValue("USN Back To Top")</span>
+            </button>
+        </div>
+        <!--// Back to top -->
+    }
+}

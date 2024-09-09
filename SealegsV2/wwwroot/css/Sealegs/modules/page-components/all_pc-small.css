@@ -1,0 +1,113 @@
+/*  
+---------------------------------------------------
+Page Components - Small Breakpoint
+---------------------------------------------------  
+*/
+
+
+/*  
+---------------------------------------------------
+Sticky
+
+Choose preset class 'Sticky' to sticky anything
+---------------------------------------------------  
+*/
+
+/* Default - additional spacing for sticky inside Split Component */
+.item_block.sticky {
+    top: var(--base-half-spacing);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      YES
+    Anchor Nav present:         NO
+    Anchor Nav Sticky:          NO
+*/
+
+body:not(.no-header) .sticky {
+    top: calc(var(--small-header) - 1px);
+}
+
+body:not(.no-header) .item_block.sticky {
+    top: calc(var(--small-header) + var(--base-half-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      NO
+    Anchor Nav present:         NO
+    Anchor Nav Sticky:          NO
+*/
+
+html.nav-up body.hide_header-on-scroll-sm:not(.no-header) .sticky {
+    top: 0;
+}
+
+html.nav-up body.hide_header-on-scroll-sm:not(.no-header) .item_block.sticky {
+    top: var(--base-half-spacing);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      YES
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          45px
+*/
+
+body:not(.no-header) .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc(var(--small-header) + 45px - 1px);
+}
+
+body:not(.no-header) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc(var(--small-header) + 45px + var(--base-half-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             YES
+    Show Header on scroll:      NO
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          45px
+*/
+
+html.nav-up body.hide_header-on-scroll-sm:not(.no-header) .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc(45px - 1px);
+}
+
+html.nav-up body.hide_header-on-scroll-sm:not(.no-header) .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc(45px + var(--base-half-spacing) - 1px);
+}
+
+
+/*  
+    Header present:             NO
+    Show Header on scroll:      NO
+    Anchor Nav present:         YES
+    Anchor Nav Sticky:          YES
+    Anchor Nav height:          45px
+*/
+
+body.no-header .component.usn_cmp_anchornavigation.sticky ~ .sticky {
+    top: calc(45px - 1px);
+}
+
+body.no-header .component.usn_cmp_anchornavigation.sticky ~ .component .item_block.sticky {
+    top: calc(45px + var(--base-half-spacing) - 1px);
+}
+
+
+
+/* Ignore sticky rules for split component blocks on small screen */
+@media (min-width:0) and (max-width:767px) {
+    .item_block.sticky,
+    body:not(.no-header) .item_block.sticky {
+        position: relative !important;
+        top: 0 !important;
+    }
+}

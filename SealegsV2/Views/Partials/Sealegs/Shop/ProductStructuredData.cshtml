@@ -1,0 +1,37 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using System.Web;
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@{
+    UsnproductPage productPage = (UsnproductPage)Model.CurrentPage;
+    UsnglobalSettings globalSettings = (UsnglobalSettings)Model.GlobalSettings;
+
+    string productName = productPage.ProductName.HasValue() ? productPage.ProductName : Model.Name;
+    var canonical = Model.HasValue("overrideCanonicalURL") ? Model.Value<string>("overrideCanonicalURL") : Model.Url(mode: UrlMode.Absolute);
+    string imageMarkup = String.Empty;
+
+    if(productPage.PageListingImage.HasValue())
+    {
+        imageMarkup = "\"image\":\"{0}\",";
+        string productImage = productPage.PageListingImage.Url(mode: UrlMode.Absolute);
+        imageMarkup = String.Format(imageMarkup, productImage);
+    }
+
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org/",
+        "@@type": "Product",
+        "name": "@HttpUtility.JavaScriptStringEncode(productName)",
+        @Html.Raw(imageMarkup)
+        "description": "@HttpUtility.JavaScriptStringEncode(productPage.ProductData.snipcartProduct.shortDescription)",
+        "brand": "@HttpUtility.JavaScriptStringEncode(globalSettings.WebsiteName)",
+        "offers": {
+            "@@type": "Offer",
+            "priceCurrency": "@HttpUtility.JavaScriptStringEncode(globalSettings.CurrencyCode)",
+            "price": "@HttpUtility.JavaScriptStringEncode(productPage.CurrentPrice)",
+            "url": "@canonical"
+        }
+    }
+    </script>
+     
+}

@@ -1,0 +1,91 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@{
+    if (Model.HasProperty("hideSubNavigation") && !Model.Value<bool>("hideSubNavigation"))
+    {
+        bool inThisSection = (bool)ViewData["inThisSection"];
+
+        var parent = Model.AncestorOrSelf(2);
+
+        var pages = parent.Children.Where(x => (x.IsDocumentType(Usnpage.ModelTypeAlias) || x.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || x.IsDocumentType(UsnlistingPage.ModelTypeAlias) || x.IsDocumentType(UsnshopPage.ModelTypeAlias)) && x.IsVisible());
+
+        if (pages.Any())
+        {
+            if (inThisSection)
+            {
+                @:<div class="in-this-section d-lg-none"><button class="expand-sub" type="button" aria-expanded="false" aria-label="@Umbraco.GetDictionaryValue("USN Aria Expand Sub Pages")">@Umbraco.GetDictionaryValue("USN Sub Navigation Section")<i aria-hidden="true" class="icon usn_ion-md-add after"></i></button>
+            }
+
+            <!-- Sub Navigation -->
+            <nav aria-label="@Umbraco.GetDictionaryValue("USN Aria Sub Pages")" class="sub">
+                <p class="heading sm">
+                    <a href="@parent.Url()">
+                        @(parent.HasValue("subNavigationLinkText") ? Html.Raw(parent.Value<string>("subNavigationLinkText")).ToString() : parent.Name)
+                    </a>
+                </p>
+                @{Traverse(parent);}
+            </nav>
+            <!--// Sub Navigation -->
+
+            if (inThisSection)
+            {
+            @:</div>
+            }
+        }
+    }
+}
+
+@{
+    void Traverse(IPublishedContent parent)
+    {
+        if (parent.Children.Any(x => (x.IsDocumentType(Usnpage.ModelTypeAlias) || x.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || x.IsDocumentType(UsnlistingPage.ModelTypeAlias) || x.IsDocumentType(UsnshopPage.ModelTypeAlias) || x.IsDocumentType(UsnsearchResultsPage.ModelTypeAlias)) && x.IsVisible()))
+        {
+            bool hasSubPages = false;
+
+            <ul>
+                @foreach (var node in parent.Children.Where(x => (x.IsDocumentType(Usnpage.ModelTypeAlias) || x.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || x.IsDocumentType(UsnlistingPage.ModelTypeAlias) || x.IsDocumentType(UsnshopPage.ModelTypeAlias) || x.IsDocumentType(UsnsearchResultsPage.ModelTypeAlias)) && x.IsVisible()))
+                {
+                    if (node != null)
+                    {
+                        string selected = Array.IndexOf(Model.Path.Split(','), node.Id.ToString()) >= 0 ? "active" : "";
+
+                        string subPageClass = String.Empty;
+
+                        if (node.Children.Any(x => (x.IsDocumentType(Usnpage.ModelTypeAlias) || x.IsDocumentType(UsnblogLandingPage.ModelTypeAlias) || x.IsDocumentType(UsnlistingPage.ModelTypeAlias) || x.IsDocumentType(UsnshopPage.ModelTypeAlias) || x.IsDocumentType(UsnsearchResultsPage.ModelTypeAlias)) && x.IsVisible()))
+                        {
+                            subPageClass = String.Format(" class=\"has-child {0}\"", selected);
+                            hasSubPages = true;
+                        }
+                        else
+                        {
+                            subPageClass = String.Format(" class=\"no-child {0}\"", selected);
+                            hasSubPages = false;
+                        }
+
+                        string linkName = node.Name;
+
+                        if (node.HasValue("subNavigationLinkText"))
+                        {
+                            linkName = node.Value<string>("subNavigationLinkText");
+                        }
+
+                        <li @Html.Raw(subPageClass)>
+                            <span>
+                                <a href="@node.Url()">@Html.Raw(linkName)</a>
+                            </span>
+                            @if (hasSubPages)
+                            {
+                                <button class="expand-subpages" type="button" aria-expanded="false" aria-label="@Umbraco.GetDictionaryValue("USN Aria Expand Sub Pages") @Html.Raw(linkName)">
+                                    <span aria-hidden="true">@Umbraco.GetDictionaryValue("USN Aria Expand Sub Pages") @Html.Raw(linkName)</span>
+                                </button>
+
+                                Traverse(node);
+                            }
+                        </li>
+                    }
+                }
+                
+            </ul>
+        }
+    }
+}

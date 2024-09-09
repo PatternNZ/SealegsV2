@@ -1,0 +1,18 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@{
+    UsnglobalSettings globalSettings = (UsnglobalSettings)Model.GlobalSettings;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Templates</title>
+</head>
+
+<body>
+    <div id="snipcart-templates">
+        <!-- Snipcart Template overrides will appear here. Controlled via Global (Node) > Settings (Node) > Shop (Tab) -->
+        @Html.Raw(globalSettings.SnipcartGlobal.customizationTemplates)
+    </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBlock>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@using USNSiteBuilder.Core.Interfaces
+@using Umbraco.Cms.Core.Strings
+@inject ISiteBuilderService _siteBuilderService
+@{
+    // Available as Pod Block type only
+
+    var content = (Usn_Pb_PodProductInfo)Model.BlockContent;
+    Usnstyle websiteStyle = (Usnstyle)Model.BaseModel.WebsiteStyle;
+
+    //Settings taken from compositions common to all pod block types
+    var uniqueSettings = (IUsn_Cmp_ProductInfo_Pod_Settings)Model.BlockSettings;
+    var animateSettings = (IUsn_Cmp_AnimateSettings)Model.BlockSettings;
+    var itemCommonBlockSettings = (IUsn_Cmp_CommonBlockSettings)Model.BlockSettings;
+
+    var page = content.Product.HasValue() ? content.Product : Model.BaseModel.CurrentPage;
+    int productId = page.Id;
+
+    bool selected = content.Product.HasValue() ? true : false;
+    string headingTag = uniqueSettings.ProductHeadingSize.HasValue() ? (uniqueSettings.ProductHeadingSize == "sm" || uniqueSettings.ProductHeadingSize == "md" || uniqueSettings.ProductHeadingSize == "lg" ? "p" : uniqueSettings.ProductHeadingSize) : "p";
+    string headingClass = uniqueSettings.ProductHeadingSize.HasValue() ? (uniqueSettings.ProductHeadingSize == "sm" || uniqueSettings.ProductHeadingSize == "md" || uniqueSettings.ProductHeadingSize == "lg" ? uniqueSettings.ProductHeadingSize : String.Empty) : String.Empty;
+    string secondaryHeadingClass = uniqueSettings.ProductSecondaryHeadingSize;
+    string buttonColorLabel = uniqueSettings.CartButtonColor.label;
+    string buttonColorClass = _siteBuilderService.GetBackgroundColorClass(uniqueSettings.CartButtonColor.sortOrder, "button", websiteStyle);
+    string buttonHoverColorClass = _siteBuilderService.GetBackgroundColorClass(uniqueSettings.CartButtonColor.sortOrder, "buttonHover", websiteStyle);
+    
+    string backgroundColorLabel = ViewData["backgroundColorLabel"].ToString();
+    string blockLocation = ViewData["blockLocation"] != null ? ViewData["blockLocation"].ToString() : String.Empty;
+    string leftOffsetDesktop = ViewData["leftOffsetDesktop"] != null ? ViewData["leftOffsetDesktop"].ToString() : String.Empty;
+    string leftOffsetTablet = ViewData["leftOffsetTablet"] != null ? ViewData["leftOffsetTablet"].ToString() : String.Empty;
+    string colWidthDesktop = ViewData["colWidthDesktop"] != null ? ViewData["colWidthDesktop"].ToString() : String.Empty;
+    string colWidthTablet = ViewData["colWidthTablet"] != null ? ViewData["colWidthTablet"].ToString() : String.Empty;
+    string itemClass = ViewData["itemClass"] != null ? ViewData["itemClass"].ToString() : String.Empty;
+
+    AnimationSettings animation = _siteBuilderService.GetAnimationSettings(animateSettings.Animate, animateSettings.AnimationDelay, animateSettings.AnimationDuration, animateSettings.AnimationStyle);
+
+    string overlayImageClass = uniqueSettings.TextPosition == "item_text-boxed item_overlay" ? _siteBuilderService.GetBackgroundColorClass(uniqueSettings.OverlayBackgroundColor.sortOrder, "content", websiteStyle) : String.Empty;
+    backgroundColorLabel = uniqueSettings.TextPosition == "item_text-boxed item_overlay" ? uniqueSettings.OverlayBackgroundColor.label : backgroundColorLabel;
+    string itemTextAlignment = uniqueSettings.ProductTextAlignment.HasValue() ? uniqueSettings.ProductTextAlignment : "text-left";
+    ImageSettings imageSettings = _siteBuilderService.GetImageSettings(uniqueSettings.ImageStyle, uniqueSettings.BoxPad);
+    string itemStyleClass = uniqueSettings.TextPosition.HasValue() ? uniqueSettings.TextPosition : "item_text-below";
+    string blockLocationClass = blockLocation == "footer" ? "footer-item " + leftOffsetDesktop + " " + leftOffsetTablet + " " + colWidthDesktop + " " + colWidthTablet + " col-12 col" : String.Empty;
+    string itemBackgroundClass = uniqueSettings.TextPosition != "item_text-boxed item_overlay" && uniqueSettings.AddBackgroundColor ? "item_has-bg" : String.Empty;
+    backgroundColorLabel = uniqueSettings.TextPosition != "item_text-boxed item_overlay" && uniqueSettings.AddBackgroundColor ? uniqueSettings.BackgroundColor.label : backgroundColorLabel;
+    string innerBackgroundClass = uniqueSettings.TextPosition != "item_text-boxed item_overlay" && uniqueSettings.AddBackgroundColor ? _siteBuilderService.GetBackgroundColorClass(uniqueSettings.BackgroundColor.sortOrder, "content", websiteStyle) : String.Empty;
+    string podStyle = "usn_pod_" + _siteBuilderService.GetBlockStyleName(content.ContentType.Alias);
+
+    <div class="item @itemBackgroundClass @blockLocationClass @itemClass @itemStyleClass @podStyle @itemTextAlignment @itemCommonBlockSettings.CustomClasses @animation.AnimationClass" data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
+        @if (!itemCommonBlockSettings.HideFromWebsite)
+        {
+            //Note this check only gets hit with footer pods, this check is done before this partial view in other scenarios.
+            //This maintains the gap in the footer for this element.
+
+            <div class="inner @innerBackgroundClass @overlayImageClass @imageSettings.CircleClass">
+
+                @if(page.IsDocumentType(UsnproductPage.ModelTypeAlias))
+                {
+                    var productPage = (UsnproductPage)page;
+                    
+                    @if (!uniqueSettings.HideImage && productPage.PageListingImage.HasValue() && uniqueSettings.TextPosition != "item_text-above")
+                    {
+                        <div class="image @overlayImageClass @imageSettings.CircleClass">
+                            @await Html.PartialAsync(Model.BaseModel.ThemeFolder + "/MiscPageElements/Image", productPage.PageListingImage, new ViewDataDictionary(ViewData) { { "imageSettings", imageSettings }, { "themeFolder", Model.BaseModel.ThemeFolder } })
+                        </div>
+                    }
+
+                    @await Component.InvokeAsync("Product", new {
+                        Selected = selected,
+                        UniqueIdentifier =  Model.BlockContent.Key.ToString().Replace("-", "_"),
+                        ProductId = productId,
+                        ThemeFolder = Model.BaseModel.ThemeFolder,
+                        GlobalSettingsId = Model.BaseModel.GlobalSettings.Id,
+                        WebsiteStyleId = Model.BaseModel.WebsiteStyle.Id,
+                        HeadingTag = headingTag,
+                        HeadingClass = headingClass,
+                        SecondaryHeadingClass = secondaryHeadingClass,
+                        BackgroundLabel =  backgroundColorLabel,
+                        ButtonColorLabel = buttonColorLabel,
+                        ButtonColorClass = buttonColorClass,
+                        ButtonHoverColorClass = buttonHoverColorClass,
+                        BlockType = "pod"
+                    })
+
+                    @if (!uniqueSettings.HideImage && productPage.PageListingImage.HasValue() && uniqueSettings.TextPosition == "item_text-above")
+                    {
+                        <div class="image @overlayImageClass @imageSettings.CircleClass">
+                            @await Html.PartialAsync(Model.BaseModel.ThemeFolder + "/MiscPageElements/Image", productPage.PageListingImage, new ViewDataDictionary(ViewData) { { "imageSettings", imageSettings }, { "themeFolder", Model.BaseModel.ThemeFolder } })
+                        </div>
+                    }
+
+                    @if (productPage.Labels.Any())
+                    {
+                        <!-- Labels -->
+                        <div class="labels">
+                            @foreach (var label in productPage.Labels)
+                            {
+                                var labelContent = (Usn_Cbi_LabelItem)label.Content;
+
+                                <span class="label item-label @labelContent.Color.label-label-bg  @labelContent.Color.label-label-text">@labelContent.Label</span>
+                            }
+
+                        </div>
+                        <!-- Labels -->
+                    }
+                }
+            </div>
+        }
+    </div>
+}

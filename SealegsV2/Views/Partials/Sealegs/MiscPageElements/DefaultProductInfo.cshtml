@@ -1,0 +1,90 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@{
+    string blockFieldAlias = ViewData["blockFieldAlias"].ToString();
+    
+    if (blockFieldAlias == "mainContent" && !Model.Value<bool>("hideDefaultProductPlaceholder"))
+    {
+        <section class="content component usn_cmp_productinfo">  
+            <div class="component-inner">
+                <div class="container">
+
+
+                    <div class="info shop_product-info text-left">
+
+                        <!-- Labels -->
+                        <div class="labels">
+                            <span class="label c1-bg c1-text">Label</span>
+                            <span class="label c2-bg c2-text">Label</span>
+                            <span class="label base-bg base-text">Label</span>
+                        </div>
+                        <!--// Labels -->
+                        <!-- Headings -->
+                        <p class="secondary-heading base-secondary-heading">Secondary</p>
+                        <p class="heading base-heading">Heading</p>
+                        <!--// Headings -->
+                        <!-- Price -->
+                        <p class="price base-text">
+                            <!--span class="standard">£12.99</span-->
+                            <span class="now">£12.99</span>
+                            <span class="was">£16.99</span>
+                        </p>
+                        <!--// Price -->
+                        <!-- Form - Product options -->
+                        <div class="form shop_product-options_form">
+
+                            <!-- Fieldset -->
+                            <fieldset>
+
+                                <!-- Form group - Dropdown -->
+                                <div class="form-group dropdown">
+                                    <label for="dropdown1">Dropdown</label>
+                                    <select id="dropdown1" name="dropdown1" class="form-control">
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                    </select>
+                                </div>
+                                <!-- Form group - Dropdown -->
+                                <!-- Form group - Dropdown - Hidden label -->
+                                <div class="form-group dropdown no-label">
+                                    <label for="dropdown2" class="d-none">No label here see</label>
+                                    <select id="dropdown2" name="dropdown2" class="form-control">
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                    </select>
+                                </div>
+                                <!-- Form group - Dropdown - Hidden label -->
+                                <!-- Form group - Quantity -->
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input class="form-control" id="quantity" name="quantity" type="number">
+                                </div>
+                                <!-- Form group - Quantity -->
+
+                            </fieldset>
+                            <!--// Fieldset -->
+                            <!-- Buttons -->
+                            <div class="buttons shop_buttons">
+                                <button role="button" class="btn btn-block base-btn-bg base-btn-bg-solid base-btn-bg-hover-solid base-btn-text base-btn-borders">
+                                    <span></span>
+                                    Add to cart
+                                </button>
+                            </div>
+                            <!--// Buttons -->
+
+                        </div>
+                        <!--// Form - Product options -->
+                        <!-- Text -->
+                        <div class="text base-text">
+                            <p>Product desc in here...</p>
+                        </div>
+                        <!--// Text -->
+
+                    </div>
+                    <!--// Product info -->
+           
+                </div>
+            </div>
+        </section>
+    }
+}

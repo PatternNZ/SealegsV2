@@ -1,0 +1,57 @@
+/*  
+---------------------------------------------------
+Body - Small Breakpoint
+---------------------------------------------------  
+*/
+
+#site {
+    width:calc(100% - var(--site-spacing_sm) - var(--site-spacing_sm));
+}
+
+body.max-width #site {
+    max-width: calc(var(--site-max-width) - var(--site-spacing_sm) - var(--site-spacing_sm));
+}
+
+body.transparent-header-sm.full-page:not(.no-header) header#site-header + #site-content > .component:first-of-type:not(.usn_cmp_banner):not(.p-0) { 
+    padding-top: calc(var(--pc-spacing) + var(--small-header));
+}
+body.transparent-header-sm:not(.no-header) header#site-header + #site-content > .component.pt-0:first-of-type:not(.usn_cmp_banner),
+body.transparent-header-sm:not(.no-header) header#site-header + #site-content > .component.p-0:first-of-type:not(.usn_cmp_banner) { 
+    margin-top: var(--small-header);
+}
+
+body.transparent-header-sm:not(.full-page):not(.no-header) header#site-header + #site-content > .component:first-of-type:not(.usn_cmp_banner) { 
+    margin-top: var(--small-header);
+}
+
+/* Faux header background when transparent header used on non full-page content, except banners */
+body.transparent-header-sm:not(.full-page):not(.no-header) header#site-header + #site-content > .component:first-of-type:not(.usn_cmp_banner)::before { 
+    content: "";
+    position: absolute; top: calc(var(--small-header) * -1); left: 0; right: 0;
+    width: 100%; height: var(--small-header);
+    background: rgba(var(--header-bg-color1), 1); 
+}
+body.transparent-header-sm:not(.full-page):not(.no-header) header#site-header.header-bg-linear + #site-content > .component:first-of-type:not(.usn_cmp_banner)::before { 
+    background: linear-gradient(var(--header-bg-angle), rgba(var(--header-bg-color1), 1) 0%, rgba(var(--header-bg-color2), 1) 100%);
+}
+body.transparent-header-sm:not(.full-page):not(.no-header) header#site-header.header-bg-radial + #site-content > .component:first-of-type:not(.usn_cmp_banner)::before { 
+    background: radial-gradient(farthest-side at var(--header-bg-start-perc) var(--header-bg-stop-perc), rgba(var(--header-bg-color1), 1) 0%, rgba(var(--header-bg-color2), 1) 100%);
+}
+
+
+/*  
+---------------------------------------------------
+Columns
+---------------------------------------------------  
+*/
+
+.heading-col { 
+    padding-bottom:var(--base-half-spacing);
+}
+
+.content-col { 
+    margin-bottom:var(--base-spacing);
+}
+.content-col:only-child { 
+    margin:0;
+}

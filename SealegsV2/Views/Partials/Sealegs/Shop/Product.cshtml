@@ -1,0 +1,136 @@
+﻿@inherits UmbracoViewPage<ProductInformationViewModel>
+@using USNSiteBuilder.Core
+@using USNSiteBuilder.Core.Extensions
+@using USNSiteBuilder.Core.Models
+@using Umbraco.Cms.Core.Strings
+@using USNSiteBuilder.Core.Interfaces
+@inject ISiteBuilderService _siteBuilderService
+@{
+    if(Model.DisplayProductInformation)
+    {
+        var productPage = (UsnproductPage)Model.ProductPage;
+        var websiteStyle = (Usnstyle)Model.WebsiteStyle;
+        var globalSettings = (UsnglobalSettings)Model.GlobalSettings;
+
+        <div class="info shop_product-info">
+
+            @if (Model.BlockType == "component" && productPage.Labels.Any())
+            {
+                <!-- Labels -->
+                <div class="labels">
+                    @foreach (var label in productPage.Labels)
+                    {
+                        var labelContent = (Usn_Cbi_LabelItem)label.Content;
+
+                        <span class="label item-label @labelContent.Color.label-label-bg  @labelContent.Color.label-label-text">@labelContent.Label</span>
+                    }
+
+                </div>
+                <!-- Labels -->
+            }
+
+            <!-- Headings -->
+            @if (Model.ProductSubHeading.HasValue() && websiteStyle.StyleLayout.headingOrder != "heading-first")
+            {
+                <p class="secondary-heading @Model.SecondaryHeadingClass @(Model.BackgroundLabel)-secondary-heading">@Html.Raw(Model.ProductSubHeading)</p>
+            }
+
+            @if (Model.ProductHeading.HasValue())
+            {
+                @Html.Raw(String.Format("<{0} class=\"heading {1}  {2}-heading\">{3}</{0}>", Model.HeadingTag, Model.HeadingClass,  Model.BackgroundLabel,  Model.ProductHeading))
+            }
+
+            @if (Model.ProductSubHeading.HasValue() && websiteStyle.StyleLayout.headingOrder == "heading-first")
+            {
+                <p class="secondary-heading @Model.SecondaryHeadingClass @(Model.BackgroundLabel)-secondary-heading">@Html.Raw(Model.ProductSubHeading)</p>
+            }
+            <!--// Headings -->
+            @if (productPage.CurrentPrice.HasValue() || productPage.PreviousPrice.HasValue())
+            {
+                <!-- Price -->
+                <p class="price">
+                    @if (productPage.CurrentPrice.HasValue() && !productPage.PreviousPrice.HasValue())
+                    {
+                        <span class="standard @(Model.BackgroundLabel)-text">@Html.Raw(_siteBuilderService.GetPriceFormat(productPage.Id, globalSettings.CurrencyFormat,  globalSettings.CurrencySymbol,productPage.CurrentPrice, true ))</span>
+                    }
+                    else if (productPage.CurrentPrice.HasValue() && productPage.PreviousPrice.HasValue())
+                    {
+                        <span class="now @(Model.BackgroundLabel)-heading">@Html.Raw(_siteBuilderService.GetPriceFormat(productPage.Id, globalSettings.CurrencyFormat,  globalSettings.CurrencySymbol,productPage.CurrentPrice, true ))</span>
+                    }
+                    @if (productPage.PreviousPrice.HasValue())
+                    {
+                        <span class="was @(Model.BackgroundLabel)-text">@Html.Raw(_siteBuilderService.GetPriceFormat(productPage.Id, globalSettings.CurrencyFormat,  globalSettings.CurrencySymbol,productPage.PreviousPrice, false ))</span>
+                    }
+                </p>
+                <!--// Price -->
+            }
+
+            @if (productPage.ProductDescription.HasValue())
+            {
+                <!-- Text -->
+                <div class="text @(Model.BackgroundLabel)-text">
+                    @Html.Raw(productPage.ProductDescription)
+                </div>
+                <!--// Text -->
+            }
+
+            @if (productPage.UseAlternativeProductUrl && productPage.AlternativeProductUrl.HasValue() && _siteBuilderService.DisplayLink(productPage.AlternativeProductUrl, false))
+            {
+                string buttonBgClass = _siteBuilderService.GetBackgroundColorClass(productPage.AlternativeProductUrl.color.sortOrder, "button", websiteStyle);
+                string buttonBgHoverClass = _siteBuilderService.GetBackgroundColorClass(productPage.AlternativeProductUrl.color.sortOrder, "buttonHover", websiteStyle);
+
+                <!-- Buttons -->
+                <div class="buttons shop_buttons">
+                    <a class="btn @productPage.AlternativeProductUrl.sizeStyle @buttonBgClass @buttonBgHoverClass @(productPage.AlternativeProductUrl.color.label)-text @(productPage.AlternativeProductUrl.color.label)-borders" href="@(productPage.AlternativeProductUrl.link.LinkUrl)" @Html.Raw(productPage.AlternativeProductUrl.rel) @Html.Raw(productPage.AlternativeProductUrl.link.LinkTarget) @Html.Raw(productPage.AlternativeProductUrl.link.LinkTitle)>
+                        <span></span>
+                        @Html.Raw(productPage.AlternativeProductUrl.icon)@Html.Raw(productPage.AlternativeProductUrl.link.LinkText)@Html.Raw(productPage.AlternativeProductUrl.link.LinkTargetIcon)
+                    </a>
+                </div>
+                <!--// Buttons -->
+            }
+            else if (!productPage.UseAlternativeProductUrl && globalSettings.Shop == "snipcart" && !globalSettings.SnipcartGlobal.snipcartApiKey.IsNullOrWhiteSpace() && productPage.CurrentPrice.HasValue())
+            {
+                if (productPage.CurrentPrice.HasValue() && productPage.ProductData.snipcartProduct.productOptions != null && productPage.ProductData.snipcartProduct.productOptions.Any())
+                {
+                    int position = 1;
+
+                    <!-- Form - Product options -->
+                    <div class="form shop_product-options_form">
+
+                        <!-- Fieldset -->
+                        <fieldset>
+                            @foreach (var productOption in productPage.ProductData.snipcartProduct.productOptions)
+                            {
+                                <!-- Form group - Dropdown -->
+                                <div class="form-group dropdown  @(productOption.hideLabel ? "no-label" : "")">
+                                    <label for="snpdrp-@Model.UniqueId-@position" @(productOption.hideLabel ? " class=d-none " : "")>@productOption.name</label>
+                                    <select id="snpdrp-@Model.UniqueId-@position" name="snpdrp-@Model.UniqueId-@position" class="form-control snpdrp-@Model.UniqueId snpdrp-@productPage.Id-@position" onchange="usnUpdatePrice(@position, '@Model.UniqueId', @productPage.Id, this)">
+                                        <option value="">@Umbraco.GetDictionaryValue("USN Shop Dropdown Select") @productOption.name</option>
+                                        @foreach (var item in productOption.items)
+                                        {
+                                            <option value="@item.name">@item.name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <!-- Form group - Dropdown -->
+                                position += 1;
+                            }
+                        </fieldset>
+                        <!--// Fieldset -->
+                    </div>
+                }
+                            
+
+                <!-- Buttons -->
+                <div class="buttons shop_buttons">
+                    <button id="snpbtn-@Model.UniqueId" role="button" class="btn @Model.ButtonColorClass @Model.ButtonHoverColorClass  @(Model.ButtonColorLabel)-btn-text  @(Model.ButtonColorLabel)-btn-borders snipcart-add-item snpbtn-@productPage.Id" @Html.Raw(_siteBuilderService.BuildSnipcartProductDefinition(productPage))>
+                        <span></span>
+                        @Umbraco.GetDictionaryValue("USN Shop Add to Cart")
+                    </button>
+                </div>
+                <!--// Buttons -->
+            }
+        
+        </div>
+    }
+}

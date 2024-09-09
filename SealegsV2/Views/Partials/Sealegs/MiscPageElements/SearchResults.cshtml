@@ -1,0 +1,164 @@
+﻿@inherits UmbracoViewPage<SiteBuilderBaseViewModel>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@using System.Text.RegularExpressions
+@using Umbraco.Cms.Core.Strings
+@using Examine
+@using Examine.Search
+@using System.Threading
+@using Umbraco.Cms.Core
+@using USNSiteBuilder.Core
+@inject IExamineManager _examineManager
+@{
+    string itemHeadingSizeClass = Model.Value<string>("itemHeadingSize");
+    var path = Context.Request.Path;
+    var query = Context.Request.QueryString;
+
+    int itemsPerPage = Model.Value<int>("searchResultsPageSize"); // How many items per page
+    int currentPagePosition; // The page we are viewing
+    string originalSearchTerm = String.Empty;
+    string searchTerm = String.Empty;
+    long totalNodes = 0;
+    int totalPages = 0;
+    IEnumerable<IPublishedContent> finalSearchList = null;
+
+    IPublishedContent rootNode;
+
+    if (Model.HasProperty("searchStartPage") && Model.HasValue("searchStartPage"))
+    {
+        rootNode = Model.Value<IPublishedContent>("searchStartPage");
+    }
+    else
+    {
+        rootNode = Model.Root();
+    }
+
+    if (!String.IsNullOrEmpty(Context.Request.Query["search_field"]))
+    {
+        //Makes search query safe
+        //Match all characters that DO NOT (^) match (\w alphanumeric characters) and \s (white space and tab) and - (hyphen) and replace them with ""
+        originalSearchTerm = Context.Request.Query["search_field"].ToString().Trim();
+        searchTerm = Regex.Replace(originalSearchTerm, @"[^\w\s-]", "");
+
+        //Match any white space character
+        searchTerm = Regex.Replace(searchTerm, @"\s+", " ");
+    }
+
+    if (!int.TryParse(Context.Request.Query["page"], out currentPagePosition))
+    {
+        currentPagePosition = 1;
+    }
+
+    if (!String.IsNullOrEmpty(searchTerm) && _examineManager.TryGetIndex(Constants.UmbracoIndexes.ExternalIndexName, out IIndex index))
+    {
+        var searcher = index.Searcher;
+
+        int cultureCount = rootNode.Cultures.Count;
+
+        string currentCulture = Thread.CurrentThread.CurrentUICulture.Name.ToLower();
+
+        string publishedField = cultureCount == 1 ? "__Published" : string.Concat("__Published_", currentCulture);
+        string combinedField = cultureCount == 1 ? "combinedField" : string.Concat("combinedField_", currentCulture);
+
+        var criteria = searcher.CreateQuery("content", BooleanOperation.And)
+                .GroupedOr(new List<string> { combinedField }, searchTerm)
+                .And()
+                .Field(publishedField, "y")
+                .And()
+                .Field(USNConstants.SearchablePathExamineField, rootNode.Id.ToString())
+                .Not()
+                .Field(USNConstants.HideFromInternalSearchExamineField, "1")
+                .Not()
+                .Field("__NodeTypeAlias", USNConstants.SitemapXMLNodeAlias)
+                .Not()
+                .Field("__NodeTypeAlias", USNConstants.RobotsTXTNodeAlias);
+
+        //Protected content is hidden by default unless displayeProtectedContent is true
+        if(!Model.Value<bool>("displayProtectedContent"))
+        {
+            criteria.Not().Field(USNConstants.IsProtectedExamineField, "true");
+        }
+
+        QueryOptions queryOptions = new QueryOptions((currentPagePosition - 1) * itemsPerPage, itemsPerPage);
+        var searchResult = criteria.Execute(queryOptions);
+        totalNodes = searchResult.TotalItemCount;
+
+        totalPages = (int)Math.Ceiling(totalNodes / (double)itemsPerPage);
+
+        if (currentPagePosition > totalPages)
+        {
+            currentPagePosition = totalPages;
+        }
+        else if (currentPagePosition < 1)
+        {
+            currentPagePosition = 1;
+        }
+
+        finalSearchList = searchResult.ToPublishedSearchResults(UmbracoContext.PublishedSnapshot.Content).Select(x => x.Content);
+
+    }
+
+    if (totalNodes == 0)
+    {
+        if (!String.IsNullOrEmpty(searchTerm))
+        {
+            <p>@Umbraco.GetDictionaryValue("USN Search Results Nothing Found")</p>
+        }
+        @await Html.PartialAsync(Model.ThemeFolder + "/Forms/SearchForm", Model, new ViewDataDictionary(ViewData) { { "location", "searchpage" } })
+    }
+    else
+    {
+        //Only display introduction on first page
+        if (currentPagePosition == 1 && Model.HasValue("listingIntroduction"))
+        {
+              <div class="row component-introduction">
+                <div class="info col">
+                    <div class="text">
+                        @Html.Raw(Model.Value<IHtmlEncodedString>("listingIntroduction"))
+                    </div>
+                </div>
+            </div>
+        }
+
+        //Please note the dictionary item should have a {0} and {1} placeholder for string formatting.
+        string searchResultsFeedback = Umbraco.GetDictionaryValue("USN Search Results Feedback");
+
+        //Html encode search term to avoid malicious injection of script code.
+        searchResultsFeedback = String.Format(searchResultsFeedback, System.Web.HttpUtility.HtmlEncode(originalSearchTerm), totalNodes);
+
+        <p>@Html.Raw(searchResultsFeedback)</p>
+        @await Html.PartialAsync(Model.ThemeFolder + "/Forms/SearchForm", Model, new ViewDataDictionary(ViewData) { { "location", "searchpage" } })
+
+        <div class="component-main row listing listing_basic-grid listing_search-results">
+            @foreach (var item in finalSearchList)
+            {
+                <div class="item items-1 col-12">
+                    <div class="inner">
+                        <a href="@item.Url()">
+                            <div class="info">
+                                <p class="heading @itemHeadingSizeClass base-heading">@(item.HasValue("onPageTitle") && !item.Value<bool>("hidePageTitle") ? item.Value<string>("onPageTitle") : item.Name)</p>
+                                @if (item.HasValue("pageSummary"))
+                                {
+                                    <div class="text base-text">@Html.Raw(item.Value<IHtmlEncodedString>("pageSummary"))</div>
+                                }
+                                else if (item.Value<SiteBuilderSEOMeta>("titleAndDescription") != null && !item.Value<SiteBuilderSEOMeta>("titleAndDescription").Description.IsNullOrWhiteSpace())
+                                {
+                                    <div class="text base-text">@Html.Raw(Html.ReplaceLineBreaks(item.Value<SiteBuilderSEOMeta>("titleAndDescription").Description))</div>
+                                }
+                                <p class="url base-text">@Umbraco.GetDictionaryValue("USN Search Results Link Label") <span class="base-link">@item.Url()</span></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        if (totalPages > 1)
+        {
+            <!-- PAGINATION -->
+            @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/Paging", new ViewDataDictionary(ViewData) { { "totalPageCount", totalPages }, { "pageNumber", currentPagePosition }, { "path", path }, { "query", query } })
+            <!--// PAGINATION -->
+        }
+    }
+
+}

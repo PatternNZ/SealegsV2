@@ -1,0 +1,66 @@
+/*  
+---------------------------------------------------
+Body - Large Breakpoint
+---------------------------------------------------  
+*/
+
+#site {
+    width:calc(100% - var(--site-spacing_lg) - var(--site-spacing_lg));
+}
+
+body.max-width #site {
+    max-width:calc(var(--site-max-width) - var(--site-spacing_lg) - var(--site-spacing_lg));
+}
+
+body.transparent-header-lg.full-page:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) header#site-header + #site-content > .component:first-of-type:not(.usn_cmp_banner):not(.p-0) { 
+    padding-top: calc(var(--pc-spacing_md) + var(--large-header));
+}
+body.transparent-header-lg:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) header#site-header + #site-content > .component.pt-0:first-of-type:not(.usn_cmp_banner),
+body.transparent-header-lg:not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) header#site-header + #site-content > .component.p-0:first-of-type:not(.usn_cmp_banner) { 
+    margin-top: var(--large-header);
+}
+
+body.transparent-header-lg:not(.full-page):not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) header#site-header + #site-content > .component:first-of-type:not(.usn_cmp_banner) { 
+    margin-top: var(--large-header);
+}
+
+/* Faux header background when transparent header used on non full-page content, except banners */
+body.transparent-header-lg:not(.full-page):not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) header#site-header + #site-content > .component:first-of-type:not(.usn_cmp_banner)::before { 
+    content: "";
+    position: absolute; top: calc(var(--large-header) * -1); left: 0; right: 0;
+    width: 100%; height: var(--large-header);
+    background: rgba(var(--header-bg-color1), 1); 
+}
+body.transparent-header-lg:not(.full-page):not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) header#site-header.header-bg-linear + #site-content > .component:first-of-type:not(.usn_cmp_banner)::before { 
+    background: linear-gradient(var(--header-bg-angle), rgba(var(--header-bg-color1), 1) 0%, rgba(var(--header-bg-color2), 1) 100%);
+}
+body.transparent-header-lg:not(.full-page):not(.no-header):not(.header-11-lg):not(.header-12-lg):not(.header-15-lg):not(.header-16-lg) header#site-header.header-bg-radial + #site-content > .component:first-of-type:not(.usn_cmp_banner)::before { 
+    background: radial-gradient(farthest-side at var(--header-bg-start-perc) var(--header-bg-stop-perc), rgba(var(--header-bg-color1), 1) 0%, rgba(var(--header-bg-color2), 1) 100%);
+}
+
+
+/*  
+---------------------------------------------------
+Columns
+---------------------------------------------------  
+*/
+
+.heading-col { 
+    padding-bottom:var(--base-spacing);
+}
+
+.content-col {}
+
+.sidebar-col {}
+
+.sidebar-col.sticky-col {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    transition: all 0.35s ease-in-out 0s;
+}
+
+.show_header-on-scroll-lg .sidebar-col.sticky-col,
+.nav-down .hide_header-on-scroll-lg .sidebar-col.sticky-col {
+    top: var(--large-header);
+}

@@ -1,0 +1,27 @@
+
+/*	
+--------------------------------------------------
+Additional Colors - Labels
+-------------------------------------------------- 
+*/
+
+/* Label backgrounds Solid */
+.c{position}-label-bg,
+.c{position}-label-bg.c{position}-label-bg-solid { 
+    background: rgba(var(--c{position}-label-bg-color1), 1); 
+}
+
+/* Label backgrounds Linear */
+.c{position}-label-bg.c{position}-label-bg-linear { 
+    background: linear-gradient(var(--c{position}-label-bg-angle), rgba(var(--c{position}-label-bg-color1), 1) 0%, rgba(var(--c{position}-label-bg-color2), 1) 100%); 
+}
+
+/* Label backgrounds Radial */
+.c{position}-label-bg.c{position}-label-bg-radial { 
+    background: radial-gradient(farthest-side at var(--c{position}-label-bg-start-perc) var(--c{position}-label-bg-stop-perc), rgba(var(--c{position}-label-bg-color1), 1) 0%, rgba(var(--c{position}-label-bg-color2), 1) 100%); 
+}
+
+/* Label text */
+.c{position}-label-text { 
+    color: rgba(var(--c{position}-label-text), 1);
+}

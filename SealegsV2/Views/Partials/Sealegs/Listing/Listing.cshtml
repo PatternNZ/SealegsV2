@@ -1,0 +1,249 @@
+﻿@inherits UmbracoViewPage<ListingViewModel>
+@using USNSiteBuilder.Core.Models
+@using USNSiteBuilder.Core.Extensions
+@using Umbraco.Cms.Core.Strings
+@using USNSiteBuilder.Core.Interfaces
+@inject ISiteBuilderService _siteBuilderService
+@{
+    string itemTextPosition = Model.ListSettings.Value<string>("itemTextPosition").HasValue() ? Model.ListSettings.Value<string>("itemTextPosition") : "item_text-below";
+    string itemHeadingSizeClass = Model.ListSettings.Value<string>("itemHeadingSize");
+    string itemSecondaryHeadingSizeClass = Model.ListSettings.Value<string>("itemSecondaryHeadingSize");
+    string itemTextAlignmentClass = Model.ListSettings.Value<string>("itemTextAlignment").HasValue() ? Model.ListSettings.Value<string>("itemTextAlignment") : "text-left";
+    string overlayImageClass = itemTextPosition == "item_text-boxed item_overlay" ? Model.ListSettings.Value<SiteBuilderSelectedColor>("overlayBackgroundColor").label + "-bg" : String.Empty;
+    ImageSettings imageSettings = _siteBuilderService.GetImageSettings(Model.ListSettings.Value<string>("listingImageStyle"));
+    string listSpacingClass = Model.ListSettings.Value<bool>("removeItemSpacing") ? "listing_no-spacing" : String.Empty;
+    bool hideImage = Model.ListSettings.Value<bool>("hideImage");
+    string verticalAlignmentClass = itemTextPosition == "item_text-boxed item_overlay" ? (Model.ListSettings.HasValue("overlayTextPosition") ? Model.ListSettings.Value<string>("overlayTextPosition") : "align-self-center") : String.Empty;
+
+    string backgroundColorLabel = itemTextPosition == "item_text-boxed item_overlay" ? Model.ListSettings.Value<SiteBuilderSelectedColor>("overlayBackgroundColor").label : "base";
+    backgroundColorLabel = itemTextPosition != "item_text-boxed item_overlay" && Model.ListSettings.Value<bool>("addBackgroundColor") ? Model.ListSettings.Value<SiteBuilderSelectedColor>("itemBackgroundColor").label : backgroundColorLabel;
+    string itemBackgroundClass = itemTextPosition != "item_text-boxed item_overlay" && Model.ListSettings.Value<bool>("addBackgroundColor") ? "item_has-bg" : String.Empty;
+    string innerBackgroundClass = itemTextPosition != "item_text-boxed item_overlay" && Model.ListSettings.Value<bool>("addBackgroundColor") ? _siteBuilderService.GetBackgroundColorClass(Model.ListSettings.Value<SiteBuilderSelectedColor>("itemBackgroundColor").sortOrder, "content", Model.WebsiteStyle) : String.Empty;
+    string itemListClass = Model.ListType == "shop" ? "item-shop" : "item-default";
+
+    var websiteStyle = (Usnstyle)Model.WebsiteStyle;
+    var globalSettings = (UsnglobalSettings)Model.GlobalSettings;
+
+    string buttonBackgroundClass = websiteStyle.StyleColors.buttonBackgroundClass;
+    string buttonBackgroundHoverClass = websiteStyle.StyleColors.buttonBackgroundHoverClass;
+
+    string itemsPerRowValue = String.Empty;
+
+    if (itemTextPosition == "item_text-below" || itemTextPosition == "item_text-above" || itemTextPosition == "item_text-boxed item_overlay")
+    {
+        itemsPerRowValue = Model.ListSettings.Value<string>("itemsPerRow8");
+    }
+    else if (itemTextPosition == "item_text-left" || itemTextPosition == "item_text-right")
+    {
+        itemsPerRowValue = Model.ListSettings.Value<string>("itemsPerRow4");
+    }
+    else
+    {
+        itemsPerRowValue = Model.ListSettings.Value<string>("itemsPerRow8");
+    }
+
+    string itemsPerRowClass = itemsPerRowValue.HasValue() ? itemsPerRowValue : "items-1";
+
+    @if (Model.CurrentPagePosition == 1 && Model.CurrentListingPage.HasValue("listingIntroduction"))
+    {
+        //Only display introduction on first page
+        <div class="row component-introduction">
+            <div class="info col">
+                <div class="text">
+                    @(Model.CurrentListingPage.Value<IHtmlEncodedString>("listingIntroduction"))
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Row - Selected -->
+    <div class="row">
+    
+        <!-- Item - Filter selected -->
+        <div class="item item_filter-selected col-12">
+            <div class="inner">
+                      
+            <!-- Filter summary -->
+            <div class="filter-summary">
+                <div class="filter-selected">@Model.FilteredPages.TotalItems @Umbraco.GetDictionaryValue("USN List Results")</div>        
+            </div>
+            <!--// Filter summary -->
+        
+            @if ((Model.MainListingPage.Id == Model.CurrentListingPage.Id) && Model.SelectedFilters.Any() || Model.SearchText.HasValue())
+            {
+                <!-- Filters -->
+                <div class="filters">
+                    @foreach(var item in Model.SelectedFilters)
+                    {
+                        var filterItem = Umbraco.Content(item);
+                        var filterGroupId = filterItem.Parent.Id;
+                        var filterType = filterItem.Parent.Value("filterType");
+
+                        <button type="submit" role="button" aria-label="@Umbraco.GetDictionaryValue("USN List Clear") @filterItem.Name" class="btn btn-sm" onclick="usnRemoveFilter(@Model.CurrentListingPage.Id,@filterItem.Id, @filterGroupId, '@filterType','@Model.PageLayout')">
+                            <span></span>
+                            @filterItem.Name<i class="icon usn_ion-ios-close after"></i>
+                        </button>
+                    }
+                    @if(Model.SearchText.HasValue())
+                    {
+                        <button type="submit" role="button" aria-label="@Umbraco.GetDictionaryValue("USN List Clear") @Model.SearchText" class="btn btn-sm" onclick="usnRemoveTextFilter(@Model.CurrentListingPage.Id,'@Model.PageLayout')">
+                            <span></span>
+                            &quot;@Model.SearchText&quot;<i class="icon usn_ion-ios-close after"></i>
+                        </button>
+                    }
+                    <button class="btn btn-sm" aria-label="@Umbraco.GetDictionaryValue("USN List Clear All")" onclick="usnClearAllFilters(@Model.CurrentListingPage.Id)">@Umbraco.GetDictionaryValue("USN List Clear All")</button>
+                </div>
+                <!--// Filters -->
+            }
+
+            </div>
+        </div>
+        <!--// Item - Filter selected -->
+    
+    </div>
+    <!--/// Row - Selected option buttons -->
+
+    @if (Model.FilteredPages.Pages.Any())
+    {
+        <div class="row component-main listing listing_basic-grid @listSpacingClass">
+            @foreach (var item in Model.FilteredPages.Pages.Take(Model.ItemsPerPage))
+            {
+                string pageName = item.HasValue("pageListingHeading") ? item.Value<string>("pageListingHeading") : (item.HasValue("productName") ? item.Value<string>("productName") : item.Name);
+
+                <div class="item @itemListClass @itemBackgroundClass @itemsPerRowClass col-12 @itemTextPosition @itemTextAlignmentClass">
+                    <div class="inner @innerBackgroundClass @imageSettings.CircleClass">
+                        @if (Model.ListType != "shop" || (Model.ListType == "shop" && !globalSettings.DisplayProductCta))
+                        {
+                            @:<a href="@item.Url()">
+                        }
+                        @if (!hideImage && item.Value<IPublishedContent>("pageListingImage") != null && itemTextPosition != "item_text-above")
+                            {
+                                <div class="image @overlayImageClass @imageSettings.CircleClass">
+                                    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/Image", item.Value<IPublishedContent>("pageListingImage"), new ViewDataDictionary(ViewData) { { "imageSettings", imageSettings }, { "themeFolder", Model.ThemeFolder } })
+                                </div>
+                            }
+                            <div class="info @verticalAlignmentClass">
+
+                                @if (item.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder != "heading-first")
+                                {
+                                    <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(item.Value<string>("pageListingSecondaryHeading"))</p>
+                                }
+
+                                <p class="heading @itemHeadingSizeClass @(backgroundColorLabel)-heading">@Html.Raw(pageName)</p>
+
+                                @if (item.HasValue("pageListingSecondaryHeading") && websiteStyle.StyleLayout.headingOrder == "heading-first")
+                                {
+                                    <p class="secondary-heading @itemSecondaryHeadingSizeClass @(backgroundColorLabel)-secondary-heading">@Html.Raw(item.Value<string>("pageListingSecondaryHeading"))</p>
+                                }
+
+                                @if (item.HasValue("pageSummary"))
+                                {
+                                    <div class="text @(backgroundColorLabel)-text">@(item.Value<IHtmlEncodedString>("pageSummary"))</div>
+                                }
+
+                                @if (Model.ListType == "shop" && (item.HasValue("currentPrice") || item.HasValue("previousPrice")))
+                                {
+                                     var productPage = (UsnproductPage)item;
+
+                                    <p class="price">
+                                        @if (productPage.CurrentPrice.HasValue() && !productPage.PreviousPrice.HasValue())
+                                        {
+                                            <span class="standard @(backgroundColorLabel)-text">@Html.Raw(_siteBuilderService.GetPriceFormat(item.Id, globalSettings.CurrencyFormat, globalSettings.CurrencySymbol,productPage.CurrentPrice, false ))</span>
+                                        }
+                                        else if (productPage.CurrentPrice.HasValue() && productPage.PreviousPrice.HasValue())
+                                        {
+                                            <span class="now @(backgroundColorLabel)-heading">
+                                            @Html.Raw(_siteBuilderService.GetPriceFormat(item.Id, globalSettings.CurrencyFormat, globalSettings.CurrencySymbol, productPage.CurrentPrice, false ))</span>
+                                        }
+                                        @if (item.HasValue("previousPrice"))
+                                        {
+                                            <span class="was @(backgroundColorLabel)-text">@Html.Raw(_siteBuilderService.GetPriceFormat(item.Id, globalSettings.CurrencyFormat,  globalSettings.CurrencySymbol,item.Value<string>("previousPrice"), false ))</span>
+                                        }
+                                    </p>
+                                }
+
+                                @if (Model.ListType == "shop" && globalSettings.DisplayProductCta)
+                                {
+                                    var productPage = (UsnproductPage)item;
+
+                                    <!-- Link -->
+                                    <p class="link @(backgroundColorLabel)-text">
+                                    
+                                        @if (productPage.UseAlternativeProductUrl && productPage.AlternativeProductUrl.HasValue() && _siteBuilderService.DisplayLink(productPage.AlternativeProductUrl, false))
+                                        {
+                                             <a class="btn @buttonBackgroundClass @buttonBackgroundHoverClass base-btn-text base-btn-borders" href="@(productPage.AlternativeProductUrl.link.LinkUrl)" @Html.Raw(productPage.AlternativeProductUrl.rel) @Html.Raw(productPage.AlternativeProductUrl.link.LinkTarget) @Html.Raw(productPage.AlternativeProductUrl.link.LinkTitle)>
+                                                <span></span>
+                                                @Html.Raw(productPage.AlternativeProductUrl.icon)@Html.Raw(productPage.AlternativeProductUrl.link.LinkText)@Html.Raw(productPage.AlternativeProductUrl.link.LinkTargetIcon)
+                                            </a>
+                                            
+                                        }
+                                        else if(!productPage.UseAlternativeProductUrl && globalSettings.Shop == "snipcart" && !globalSettings.SnipcartGlobal.snipcartApiKey.IsNullOrWhiteSpace() && productPage.CurrentPrice.HasValue())
+                                        {
+                                            <!-- Add to cart -->
+                                            <button id="snpbtn-list-@item.Id" role="button" @Html.Raw(_siteBuilderService.BuildSnipcartProductDefinition(productPage)) class="btn @buttonBackgroundClass @buttonBackgroundHoverClass base-btn-text base-btn-borders snipcart-add-item snpbtn-@productPage.Id">
+                                                <span></span>
+                                                @Umbraco.GetDictionaryValue("USN Shop Add to Cart")
+                                            </button>
+                                            <!--// Add to cart -->
+                                        }
+
+                                        <!-- More info link -->
+                                        <a class="link_non-btn" href="@item.Url()">@Umbraco.GetDictionaryValue("USN Shop Product Detail Link")</a>
+                                        <!--// More info link -->
+
+                                    </p>
+                                    <!--// Link -->            
+                                }
+
+                            </div>
+
+                            @if (item.Value<IPublishedContent>("pageListingImage") != null && itemTextPosition == "item_text-above")
+                            {
+                                <div class="image @overlayImageClass @imageSettings.CircleClass">
+                                    @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/Image", item.Value<IPublishedContent>("pageListingImage"), new ViewDataDictionary(ViewData) { { "imageSettings", imageSettings }, { "themeFolder", Model.ThemeFolder } })
+                                </div>
+                            }
+
+                        @if (Model.ListType == "shop")
+                        {
+                            var productPage = (UsnproductPage)item;
+
+                            if (productPage.Labels.Any())
+                            {
+                                <!-- Labels -->
+                                <div class="labels">
+                                    @foreach (var label in productPage.Labels)
+                                    {
+                                        var labelContent = (Usn_Cbi_LabelItem)label.Content;
+
+                                        <span class="label item-label @labelContent.Color.label-label-bg  @labelContent.Color.label-label-text">@labelContent.Label</span>
+                                    }
+              
+                                </div>
+                                <!-- Labels -->
+                            }
+                        }
+                        @if (Model.ListType != "shop" || (Model.ListType == "shop" && !globalSettings.DisplayProductCta))
+                        {
+                            @:</a>
+                        }
+
+
+                    </div>
+                </div>
+            }
+        </div>
+
+        if (Model.FilteredPages.TotalPageCount > 1)
+        {
+            <!-- PAGINATION -->
+                @await Html.PartialAsync(Model.ThemeFolder + "/MiscPageElements/Paging", Model.CurrentListingPage, new ViewDataDictionary(ViewData) { { "totalPageCount", Model.FilteredPages.TotalPageCount }, { "pageNumber", Model.CurrentPagePosition }, { "path", Model.Path }, { "query", Model.Query } })
+            <!--// PAGINATION -->
+        }
+
+    }
+    else
+    {
+        <p>@Umbraco.GetDictionaryValue("USN Listing Nothing Found")</p>
+    }
+}
