@@ -15,7 +15,7 @@
     var animateSettings = (IUsn_Cmp_AnimateSettings)Model.BlockSettings;
 
     bool disableModalLinks = Convert.ToBoolean(ViewData["disableModalLinks"]);
-
+    bool fullWidthRight = Model.BlockSettings.FullWidthRight;
     var galleryItems = content.ImageVideo.Where(x => !x.Settings.Value<bool>("hideFromWebsite"));
 
     if (galleryItems.HasValue() && galleryItems.Any())

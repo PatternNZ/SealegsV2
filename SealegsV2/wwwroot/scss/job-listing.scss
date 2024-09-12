@@ -1,0 +1,330 @@
+﻿@import "variables";
+.job-listing-component {
+    .header-line {
+        background: $color-black;
+        font-weight: 700;
+        font-size: 22px;
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+
+        color: $color-c1;
+    }
+
+    .jobs {
+        font-size: 0;
+
+        .job {
+            font-family: Helvetica;
+            background-color: black;
+            font-size: 14px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 49%;
+            margin-bottom: 2%;
+            padding: 40px 40px 100px 40px;
+            position: relative;
+
+            @media (max-width:700px) {
+                width: 100%;
+
+                &:nth-child(even) {
+                    margin-left: 0 !important;
+                }
+            }
+
+            &:nth-child(even) {
+                margin-left: 2%;
+            }
+
+            color: #fff;
+
+            .job-title {
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .job-location {
+                font-weight: 700;
+                margin-bottom: 25px;
+                font-size: 13px;
+            }
+
+            .job-description {
+                p {
+                    margin-bottom: 5px;
+                }
+
+                font-weight: 300;
+                margin-bottom: 20px;
+            }
+
+            .job-expires {
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            .job-apply-button {
+                text-transform: uppercase;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                color: #000;
+                position: absolute;
+                bottom: 40px;
+                left: 40px;
+                min-width: 110px;
+            }
+        }
+    }
+
+    .no-jobs {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .more-jobs {
+        padding: 40px;
+        background-color: #000;
+        font-size: 0;
+        color: #fff;
+
+        .more-jobs-text {
+            font-size: 14px;
+            display: inline-block;
+            vertical-align: middle;
+            width: 70%;
+
+            @media (max-width:700px) {
+                width: 100%;
+            }
+
+            .more-jobs-heading {
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .more-jobs-description {
+            }
+        }
+
+        .more-jobs-button {
+            @media (max-width:700px) {
+                width: 100%;
+            }
+
+            width: 30%;
+            display: inline-block;
+
+            a {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            vertical-align: middle;
+            text-align: right;
+        }
+    }
+}
+
+
+/*Job application {{ */
+
+.job-application-component {
+    .button-wrapper {
+        display: block;
+    }
+
+    .back-to-listing-button {
+        &:hover {
+            color:#fff!important;
+        }
+        &.at-top {
+            margin-bottom: 40px;
+        }
+
+        &.at-bottom {
+            margin-top: 40px;
+        }
+    }
+
+    &.no-job {
+        .job-details {
+        }
+
+        .job-application {
+            width: 100%;
+        }
+    }
+
+    font-size: 0;
+
+    .job-details {
+        background-color: white;
+        font-size: 14px;
+        width: 50%;
+        display: inline-block;
+        vertical-align: top;
+        padding: 35px;
+
+
+        @media (max-width:710px) {
+            width: 100%;
+        }
+
+        .job-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .job-location {
+            font-family: Helvetica;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .job-description {
+            font-family: helvetica;
+            font-size: 14px;
+        }
+
+        .job-expiry-date {
+            font-weight: 700;
+            margin-top: 30px;
+        }
+    }
+
+    .job-application {
+        @media (max-width:710px) {
+            width: 100%;
+        }
+
+        background-color: #000;
+        font-size: 14px;
+        width: 50%;
+        display: inline-block;
+        vertical-align: top;
+        padding: 35px;
+        color: #fff;
+
+        .application-header {
+            font-family: helvetica;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .application-description {
+            font-family: helvetica;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 25px;
+
+            h2 {
+                color: #fff;
+            }
+        }
+
+        .mandatory {
+            font-family: helvetica;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .application-form-wrapper {
+            .upload-file-wrapper {
+                position: relative;
+                cursor: pointer;
+                display: inline-block;
+                vertical-align: middle;
+                width: 150px;
+                overflow: hidden;
+                height: 40px;
+
+                input {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    z-index: 100;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+
+                .upload-file-label {
+                    background-color: #ffe700;
+                    color: #000;
+                    height: 40px;
+                    line-height: 40px;
+                    position: absolute;
+                    cursor: pointer;
+                    pointer-events: none;
+                    text-align: center;
+                    font-weight: bold;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    text-transform: uppercase;
+                    z-index: 101;
+                }
+            }
+
+            .form-group {
+                &.contains-checkbox {
+                    display: flex;
+
+                    .checkbox-wrapper {
+                        vertical-align: middle;
+                    }
+
+                    label {
+                        flex-grow: 1;
+                        margin-left: 15px;
+                        vertical-align: middle;
+                    }
+                }
+
+
+                .contactButton {
+                    width: 100%;
+                    max-width: 300px;
+                }
+
+                &.file-upload {
+                    > label {
+                        display: block;
+                    }
+
+                    .upload-file-details {
+                        vertical-align: middle;
+                        display: inline-block;
+                        vertical-align: middle;
+
+                        .file-size {
+                            vertical-align: middle;
+                            display: inline-block;
+                        }
+                    }
+                }
+
+                input {
+                }
+            }
+        }
+    }
+}
+
+
+
+
+/* }}*/

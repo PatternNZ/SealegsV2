@@ -1,0 +1,105 @@
+﻿.image-border-grey img {
+  border: #CCC solid 1px !important;
+}
+
+.image-border-black img {
+  border: #000 solid 1px !important;
+}
+
+.image-border-red img {
+  border: red solid 1px !important;
+}
+
+.image-padding img {
+  padding: 20px;
+}
+
+.image-margin img {
+  margin: 20px;
+}
+
+.image-padding-left img {
+  padding-left: 20px;
+}
+
+.image-padding-top img {
+  padding-top: 20px;
+}
+
+.image-padding-right img {
+  padding-right: 20px;
+}
+
+.image-padding-bottom img {
+  padding-bottom: 20px;
+}
+
+.image-margin-left img {
+  margin-left: 20px;
+}
+
+.image-margin-top img {
+  margin-top: 20px;
+}
+
+.image-margin-right img {
+  margin-right: 20px;
+}
+
+.image-margin-bottom img {
+  margin-bottom: 20px;
+}
+
+.container-border-grey {
+  border: #CCC solid 1px !important;
+}
+
+.container-border-black {
+  border: #000 solid 1px !important;
+}
+
+.container-border-red {
+  border: red solid 1px !important;
+}
+
+.container-padding img {
+  padding: 20px;
+}
+
+.container-margin {
+  margin: 20px;
+}
+
+.container-padding-left {
+  padding-left: 20px;
+}
+
+.container-padding-top {
+  padding-top: 20px;
+}
+
+.container-padding-right {
+  padding-right: 20px;
+}
+
+.container-padding-bottom {
+  padding-bottom: 20px;
+}
+
+.container-margin-left {
+  margin-left: 20px;
+}
+
+.container-margin-top {
+  margin-top: 20px;
+}
+
+.container-margin-right {
+  margin-right: 20px;
+}
+
+.container-margin-bottom {
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22file:///D:/websites/TRGroupV2/TRGroupV2/wwwroot/scss/premade-styles.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%22AAAC;EACA;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC;;;AAGD;EACC%22%7D */
