@@ -139,10 +139,10 @@ Contents
     --logo_sm-padding_bottom: 10px;
     --logo_sm-padding_left: 10px;
 
-    --logo_lg-padding_top: 15px;
+    --logo_lg-padding_top: 20px;
     --logo_lg-padding_right: 20px;
-    --logo_lg-padding_bottom: 15px;
-    --logo_lg-padding_left: 20px;
+    --logo_lg-padding_bottom: 20px;
+    --logo_lg-padding_left: 30px;
 
     --base-spacing: 30px;
     --base-half-spacing: 15px;
@@ -202,9 +202,9 @@ Contents
     --btn_sm-padding_left: 10px;
 
     --btn-padding_top: 8px;
-    --btn-padding_right: 12px;
+    --btn-padding_right: 24px;
     --btn-padding_bottom: 8px;
-    --btn-padding_left: 12px;
+    --btn-padding_left: 24px;
 
     --btn_lg-padding_top:  10px;
     --btn_lg-padding_right:  14px;
@@ -285,17 +285,17 @@ Contents
     --base-btn-borders-hover: 51, 51, 51;
     
     /* Footer */
-    --footer-bg-color1: 41, 146, 228;
-    --footer-bg-color2:  255, 255, 255;
+    --footer-bg-color1: 38, 52, 68;
+    --footer-bg-color2:  0, 0, 0;
     --footer-bg-start-perc: 50%;
     --footer-bg-stop-perc: 50%;
-    --footer-bg-angle: 90deg;
+    --footer-bg-angle: -180deg;
     --footer-heading: 255, 255, 255;
-    --footer-secondary-heading: 38, 52, 68;
+    --footer-secondary-heading: 255, 255, 255;
     --footer-text: 255, 255, 255;
     --footer-link: 255, 255, 255;
-    --footer-link-hover: 41, 146, 228;
-    --footer-borders: 38, 52, 68;
+    --footer-link-hover: 237, 241, 247;
+    --footer-borders: 255, 255, 255;
     --footer-highlight: 255, 255, 255;
 
     --c1-bg-color1: 38, 52, 68;
@@ -307,7 +307,7 @@ Contents
 --c1-secondary-heading: 255, 255, 255;
 --c1-text: 255, 255, 255;
 --c1-link: 255, 255, 255;
---c1-link-hover: 108, 108, 108;
+--c1-link-hover: 41, 146, 228;
 --c1-borders: 255, 255, 255;
 --c1-highlight: 255, 255, 255;
 --c1-highlight-text: 38, 52, 68;
@@ -359,14 +359,14 @@ Contents
 --c2-btn-bg-stop-perc: 50%;
 --c2-btn-bg-angle: 90deg;
 --c2-btn-text: 255, 255, 255;
---c2-btn-borders: 41, 146, 228;
+--c2-btn-borders: 255, 255, 255;
 --c2-btn-bg-hover-color1:  36, 128, 199;
 --c2-btn-bg-hover-color2:  255, 255, 255;
 --c2-btn-bg-hover-start-perc: 50%;
 --c2-btn-bg-hover-stop-perc: 50%;
 --c2-btn-bg-hover-angle: 90deg;
 --c2-btn-text-hover: 255, 255, 255;
---c2-btn-borders-hover: 36, 128, 199;
+--c2-btn-borders-hover: 255, 255, 255;
 --c3-btn-bg-color1:  255, 255, 255;
 --c3-btn-bg-color2:  0, 0, 0;
 --c3-btn-bg-start-perc: 50%;
@@ -407,7 +407,7 @@ Contents
 
     /* Fonts tab */
     
-    --body-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --body-typography_font-name: 'Manrope',sans-serif;
     --body-typography_font-weight: 400;
     --body-typography_font-style: normal;
     --body-typography_font-line-height: 150%;
@@ -427,10 +427,10 @@ Contents
     --h1-typography_font-letter-spacing: -0.06px;
     --h1-typography_font-transform: None;
 
-    --h1-typography_font-size: 30px; 
-    --h1-typography_font-size_sm: 35px; 
-    --h1-typography_font-size_md: 40px; 
-    --h1-typography_font-size_lg: 45px; 
+    --h1-typography_font-size: 40px; 
+    --h1-typography_font-size_sm: 40px; 
+    --h1-typography_font-size_md: 50px; 
+    --h1-typography_font-size_lg: 50px; 
     --h1-typography_font-size_xl: 50px; 
 
     --h2-typography_font-name: 'Manrope',sans-serif;
@@ -440,14 +440,14 @@ Contents
     --h2-typography_font-letter-spacing: 0px;
     --h2-typography_font-transform: None;
 
-    --h2-typography_font-size: 30px; 
+    --h2-typography_font-size: 32px; 
     --h2-typography_font-size_sm: 32px; 
-    --h2-typography_font-size_md: 36px; 
-    --h2-typography_font-size_lg: 40px; 
+    --h2-typography_font-size_md: 40px; 
+    --h2-typography_font-size_lg: 45px; 
     --h2-typography_font-size_xl: 45px; 
 
-    --h3-typography_font-name: 'Helvetica',Arial, sans-serif;
-    --h3-typography_font-weight: 700;
+    --h3-typography_font-name: 'Manrope',sans-serif;
+    --h3-typography_font-weight: 400;
     --h3-typography_font-style: normal;
     --h3-typography_font-line-height: 120%;
     --h3-typography_font-letter-spacing: 0px;
@@ -459,34 +459,34 @@ Contents
     --h3-typography_font-size_lg: 32px; 
     --h3-typography_font-size_xl: 36px; 
 
-    --h4-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --h4-typography_font-name: 'Manrope',sans-serif;
     --h4-typography_font-weight: 700;
     --h4-typography_font-style: normal;
     --h4-typography_font-line-height: 120%;
     --h4-typography_font-letter-spacing: 0px;
     --h4-typography_font-transform: None;
 
-    --h4-typography_font-size: 24px; 
+    --h4-typography_font-size: 26px; 
     --h4-typography_font-size_sm: 26px; 
-    --h4-typography_font-size_md: 28px; 
-    --h4-typography_font-size_lg: 30px; 
-    --h4-typography_font-size_xl: 34px; 
+    --h4-typography_font-size_md: 26px; 
+    --h4-typography_font-size_lg: 26px; 
+    --h4-typography_font-size_xl: 26px; 
 
-    --h5-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --h5-typography_font-name: 'Manrope',sans-serif;
     --h5-typography_font-weight: 700;
     --h5-typography_font-style: normal;
     --h5-typography_font-line-height: 120%;
     --h5-typography_font-letter-spacing: 0px;
-    --h5-typography_font-transform: None;
+    --h5-typography_font-transform: Uppercase;
 
     --h5-typography_font-size: 22px; 
-    --h5-typography_font-size_sm: 24px; 
-    --h5-typography_font-size_md: 26px; 
-    --h5-typography_font-size_lg: 28px; 
-    --h5-typography_font-size_xl: 28px; 
+    --h5-typography_font-size_sm: 22px; 
+    --h5-typography_font-size_md: 22px; 
+    --h5-typography_font-size_lg: 22px; 
+    --h5-typography_font-size_xl: 22px; 
 
-    --h6-typography_font-name: 'Helvetica',Arial, sans-serif;
-    --h6-typography_font-weight: 700;
+    --h6-typography_font-name: 'Manrope',sans-serif;
+    --h6-typography_font-weight: 400;
     --h6-typography_font-style: normal;
     --h6-typography_font-line-height: 120%;
     --h6-typography_font-letter-spacing: 0px;
@@ -498,8 +498,8 @@ Contents
     --h6-typography_font-size_lg: 24px; 
     --h6-typography_font-size_xl: 24px; 
 
-    --p-heading-typography_font-name: 'Helvetica',Arial, sans-serif;
-    --p-heading-typography_font-weight: 700;
+    --p-heading-typography_font-name: 'Manrope',sans-serif;
+    --p-heading-typography_font-weight: 400;
     --p-heading-typography_font-style: normal;
     --p-heading-typography_font-line-height: 120%;
     --p-heading-typography_font-letter-spacing: 0px;
@@ -511,7 +511,7 @@ Contents
     --p-heading-typography_font-size_lg: 28px; 
     --p-heading-typography_font-size_xl: 28px; 
 
-    --p-heading_small-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --p-heading_small-typography_font-name: 'Manrope',sans-serif;
     --p-heading_small-typography_font-weight: 700;
     --p-heading_small-typography_font-style: normal;
     --p-heading_small-typography_font-line-height: 120%;
@@ -537,7 +537,7 @@ Contents
     --p-heading_large-typography_font-size_lg: 42px; 
     --p-heading_large-typography_font-size_xl: 42px; 
 
-    --p-intro-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --p-intro-typography_font-name: 'Manrope',sans-serif;
     --p-intro-typography_font-weight: 400;
     --p-intro-typography_font-style: normal;
     --p-intro-typography_font-line-height: 140%;
@@ -550,23 +550,23 @@ Contents
     --p-intro-typography_font-size_lg: 22px; 
     --p-intro-typography_font-size_xl: 22px; 
 
-    --p-intro_small-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --p-intro_small-typography_font-name: 'Manrope',sans-serif;
     --p-intro_small-typography_font-weight: 400;
     --p-intro_small-typography_font-style: normal;
     --p-intro_small-typography_font-line-height: 140%;
     --p-intro_small-typography_font-letter-spacing: 0px;
     --p-intro_small-typography_font-transform: None;
 
-    --p-intro_small-typography_font-size: 20px; 
-    --p-intro_small-typography_font-size_sm: 20px; 
-    --p-intro_small-typography_font-size_md: 20px; 
-    --p-intro_small-typography_font-size_lg: 20px; 
-    --p-intro_small-typography_font-size_xl: 20px;  
+    --p-intro_small-typography_font-size: 18px; 
+    --p-intro_small-typography_font-size_sm: 18px; 
+    --p-intro_small-typography_font-size_md: 18px; 
+    --p-intro_small-typography_font-size_lg: 18px; 
+    --p-intro_small-typography_font-size_xl: 18px;  
 
-    --p-intro_large-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --p-intro_large-typography_font-name: 'Manrope',sans-serif;
     --p-intro_large-typography_font-weight: 400;
     --p-intro_large-typography_font-style: normal;
-    --p-intro_large-typography_font-line-height: 130%;
+    --p-intro_large-typography_font-line-height: 146%;
     --p-intro_large-typography_font-letter-spacing: -0.15px;
     --p-intro_large-typography_font-transform: None;
 
@@ -576,7 +576,7 @@ Contents
     --p-intro_large-typography_font-size_lg: 30px; 
     --p-intro_large-typography_font-size_xl: 30px;  
 
-    --secondary-heading-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --secondary-heading-typography_font-name: 'Manrope',sans-serif;
     --secondary-heading-typography_font-weight: 400;
     --secondary-heading-typography_font-style: normal;
     --secondary-heading-typography_font-line-height: 120%;
@@ -589,7 +589,7 @@ Contents
     --secondary-heading-typography_font-size_lg: 14px; 
     --secondary-heading-typography_font-size_xl: 14px;  
 
-    --secondary-heading_small-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --secondary-heading_small-typography_font-name: 'Manrope',sans-serif;
     --secondary-heading_small-typography_font-weight: 400;
     --secondary-heading_small-typography_font-style: normal;
     --secondary-heading_small-typography_font-line-height: 120%;
@@ -615,9 +615,9 @@ Contents
     --secondary-heading_large-typography_font-size_lg: 18px; 
     --secondary-heading_large-typography_font-size_xl: 18px;  
 
-    --blockquote-typography_font-name: 'Helvetica',Arial, sans-serif;
-    --blockquote-typography_font-weight: 700;
-    --blockquote-typography_font-style: italic;
+    --blockquote-typography_font-name: 'Manrope',sans-serif;
+    --blockquote-typography_font-weight: 400;
+    --blockquote-typography_font-style: normal;
     --blockquote-typography_font-line-height: 140%;
     --blockquote-typography_font-letter-spacing: -0.25px;
     --blockquote-typography_font-transform: None;
@@ -628,9 +628,9 @@ Contents
     --blockquote-typography_font-size_lg: 22px; 
     --blockquote-typography_font-size_xl: 22px;  
 
-    --blockquote_small-typography_font-name: 'Helvetica',Arial, sans-serif;
-    --blockquote_small-typography_font-weight: 700;
-    --blockquote_small-typography_font-style: italic;
+    --blockquote_small-typography_font-name: 'Manrope',sans-serif;
+    --blockquote_small-typography_font-weight: 400;
+    --blockquote_small-typography_font-style: normal;
     --blockquote_small-typography_font-line-height: 140%;
     --blockquote_small-typography_font-letter-spacing: -0.25px;
     --blockquote_small-typography_font-transform: None;
@@ -641,25 +641,25 @@ Contents
     --blockquote_small-typography_font-size_lg: 18px; 
     --blockquote_small-typography_font-size_xl: 18px;  
 
-    --blockquote_large-typography_font-name: 'Helvetica',Arial, sans-serif;
-    --blockquote_large-typography_font-weight: 700;
-    --blockquote_large-typography_font-style: italic;
+    --blockquote_large-typography_font-name: 'Manrope',sans-serif;
+    --blockquote_large-typography_font-weight: 400;
+    --blockquote_large-typography_font-style: normal;
     --blockquote_large-typography_font-line-height: 140%;
     --blockquote_large-typography_font-letter-spacing: -0.25px;
     --blockquote_large-typography_font-transform: None;
 
-    --blockquote_large-typography_font-size: 26px; 
-    --blockquote_large-typography_font-size_sm: 26px; 
-    --blockquote_large-typography_font-size_md: 26px; 
-    --blockquote_large-typography_font-size_lg: 26px; 
-    --blockquote_large-typography_font-size_xl: 26px;  
+    --blockquote_large-typography_font-size: 30px; 
+    --blockquote_large-typography_font-size_sm: 30px; 
+    --blockquote_large-typography_font-size_md: 30px; 
+    --blockquote_large-typography_font-size_lg: 30px; 
+    --blockquote_large-typography_font-size_xl: 30px;  
 
-    --btn-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --btn-typography_font-name: 'Manrope',sans-serif;
     --btn-typography_font-weight: 700;
     --btn-typography_font-style: normal;
     --btn-typography_font-line-height: 150%;
     --btn-typography_font-letter-spacing: 0px;
-    --btn-typography_font-transform: Uppercase;
+    --btn-typography_font-transform: None;
 
     --btn-typography_font-size: 16px; 
     --btn-typography_font-size_sm: 16px; 
@@ -667,12 +667,12 @@ Contents
     --btn-typography_font-size_lg: 16px; 
     --btn-typography_font-size_xl: 16px;  
 
-    --btn_small-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --btn_small-typography_font-name: 'Manrope',sans-serif;
     --btn_small-typography_font-weight: 700;
     --btn_small-typography_font-style: normal;
     --btn_small-typography_font-line-height: 150%;
     --btn_small-typography_font-letter-spacing: 0px;
-    --btn_small-typography_font-transform: Uppercase;
+    --btn_small-typography_font-transform: None;
 
     --btn_small-typography_font-size: 12px; 
     --btn_small-typography_font-size_sm: 12px; 
@@ -680,12 +680,12 @@ Contents
     --btn_small-typography_font-size_lg: 12px; 
     --btn_small-typography_font-size_xl: 12px;   
 
-    --btn_large-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --btn_large-typography_font-name: 'Manrope',sans-serif;
     --btn_large-typography_font-weight: 700;
     --btn_large-typography_font-style: normal;
     --btn_large-typography_font-line-height: 150%;
     --btn_large-typography_font-letter-spacing: 0px;
-    --btn_large-typography_font-transform: Uppercase;
+    --btn_large-typography_font-transform: None;
 
     --btn_large-typography_font-size: 20px; 
     --btn_large-typography_font-size_sm: 20px; 
@@ -706,7 +706,7 @@ Contents
     --main-navigation-typography_font-size_lg: 16px; 
     --main-navigation-typography_font-size_xl: 16px; 
 
-    --main-navigation_dropdowns-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --main-navigation_dropdowns-typography_font-name: 'Manrope',sans-serif;
     --main-navigation_dropdowns-typography_font-weight: 400;
     --main-navigation_dropdowns-typography_font-style: normal;
     --main-navigation_dropdowns-typography_font-line-height: 150%;
@@ -732,7 +732,7 @@ Contents
     --secondary-navigation-typography_font-size_lg: 14px; 
     --secondary-navigation-typography_font-size_xl: 14px;  
 
-    --sub-navigation-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --sub-navigation-typography_font-name: 'Manrope',sans-serif;
     --sub-navigation-typography_font-weight: 400;
     --sub-navigation-typography_font-style: normal;
     --sub-navigation-typography_font-line-height: 150%;
@@ -745,7 +745,7 @@ Contents
     --sub-navigation-typography_font-size_lg: 16px; 
     --sub-navigation-typography_font-size_xl: 16px;  
 
-    --footer-navigation-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --footer-navigation-typography_font-name: 'Manrope',sans-serif;
     --footer-navigation-typography_font-weight: 400;
     --footer-navigation-typography_font-style: normal;
     --footer-navigation-typography_font-line-height: 150%;
@@ -758,7 +758,7 @@ Contents
     --footer-navigation-typography_font-size_lg: 13px; 
     --footer-navigation-typography_font-size_xl: 13px;  
 
-    --breadcrumb-navigation-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --breadcrumb-navigation-typography_font-name: 'Manrope',sans-serif;
     --breadcrumb-navigation-typography_font-weight: 400;
     --breadcrumb-navigation-typography_font-style: normal;
     --breadcrumb-navigation-typography_font-line-height: 150%;
@@ -771,7 +771,7 @@ Contents
     --breadcrumb-navigation-typography_font-size_lg: 14px; 
     --breadcrumb-navigation-typography_font-size_xl: 14px;  
 
-    --anchor-navigation-typography_font-name: 'Helvetica',Arial, sans-serif;
+    --anchor-navigation-typography_font-name: 'Manrope',sans-serif;
     --anchor-navigation-typography_font-weight: 400;
     --anchor-navigation-typography_font-style: normal;
     --anchor-navigation-typography_font-line-height: 150%;
@@ -2517,14 +2517,7 @@ a:active .btn.c1-btn-text {
 .umbraco-forms .btn-bg_c1-btn-bg.c1-btn-bg-hover-radial input[type="submit"]:hover { 
     background: radial-gradient(farthest-side at var(--c1-btn-bg-hover-start-perc) var(--c1-btn-bg-hover-stop-perc), rgba(var(--c1-btn-bg-hover-color1), 1) 0%, rgba(var(--c1-btn-bg-hover-color2), 1) 100%); 
 }
-.c4-btn-bg {
-    background-color: transparent !important;
-    border-width: 2px;
-}
-.c4-btn-bg:hover {
-    background-color: transparent !important;
-}
-    
+
 
 /*	
 --------------------------------------------------
@@ -2728,14 +2721,7 @@ a:active .btn.c2-btn-text {
 .umbraco-forms .btn-bg_c2-btn-bg.c2-btn-bg-hover-radial input[type="submit"]:hover { 
     background: radial-gradient(farthest-side at var(--c2-btn-bg-hover-start-perc) var(--c2-btn-bg-hover-stop-perc), rgba(var(--c2-btn-bg-hover-color1), 1) 0%, rgba(var(--c2-btn-bg-hover-color2), 1) 100%); 
 }
-.c4-btn-bg {
-    background-color: transparent !important;
-    border-width: 2px;
-}
-.c4-btn-bg:hover {
-    background-color: transparent !important;
-}
-    
+
 
 /*	
 --------------------------------------------------
@@ -2939,14 +2925,7 @@ a:active .btn.c3-btn-text {
 .umbraco-forms .btn-bg_c3-btn-bg.c3-btn-bg-hover-radial input[type="submit"]:hover { 
     background: radial-gradient(farthest-side at var(--c3-btn-bg-hover-start-perc) var(--c3-btn-bg-hover-stop-perc), rgba(var(--c3-btn-bg-hover-color1), 1) 0%, rgba(var(--c3-btn-bg-hover-color2), 1) 100%); 
 }
-.c4-btn-bg {
-    background-color: transparent !important;
-    border-width: 2px;
-}
-.c4-btn-bg:hover {
-    background-color: transparent !important;
-}
-    
+
 
 /*	
 --------------------------------------------------
@@ -3150,14 +3129,7 @@ a:active .btn.c4-btn-text {
 .umbraco-forms .btn-bg_c4-btn-bg.c4-btn-bg-hover-radial input[type="submit"]:hover { 
     background: radial-gradient(farthest-side at var(--c4-btn-bg-hover-start-perc) var(--c4-btn-bg-hover-stop-perc), rgba(var(--c4-btn-bg-hover-color1), 1) 0%, rgba(var(--c4-btn-bg-hover-color2), 1) 100%); 
 }
-.c4-btn-bg {
-    background-color: transparent !important;
-    border-width: 2px;
-}
-.c4-btn-bg:hover {
-    background-color: transparent !important;
-}
-    
+
 
 
 
@@ -3189,14 +3161,82 @@ Additional Colors - Labels
 }
 
 
-/*Buttons*/
-.transparent-button .btn {
-    background-color: transparent !important;
-    border-width: 2px
+/* Chevron link styling */
+.chevron {
+  position: relative;
+  display: inline-block; /* Allows it to be centred like text */
+  height: 50px; /* Height should be double the border width for a balanced look */
+  width: 50px; /* Width to match the chevron's height */
+  margin: 0 auto; /* Centres the chevron */
+  text-decoration: none; /* Remove underline from link */
 }
-.transparent-button .btn.c4-btn-bg:hover {
-    background-color: transparent !important;
+
+/* Chevron arrow pseudo-elements */
+.chevron::before,
+.chevron::after {
+  position: absolute;
+  display: block;
+  content: "";
+  border: 25px solid transparent; /* Adjust size of the chevron */
 }
+
+/* Chevron pointing upwards - change 'top' to 'left', 'right', or 'bottom' to rotate */
+.chevron::before {
+  top: 0;
+  border-top-color: #6c6c6c; /* Chevron colour */
+}
+
+.chevron:hover::before {
+  border-top-color: #d8d8d8; /* Chevron hover colour */
+}
+
+.chevron::after {
+  top: -10px; /* Adjust thickness or gap between layers */
+  border-top-color: #fff; /* Match background colour for cut-out effect */
+}
+
+/*custom table*/
+ /* Remove any borders from the table itself */
+.no-vertical-borders {
+    border-collapse: collapse; /* Ensure borders collapse for a clean look */
+    border: none; /* Remove any border from the table */
+}
+
+/* Remove all vertical borders while keeping horizontal ones */
+.no-vertical-borders td,
+.no-vertical-borders th {
+    border-left: none; /* Remove left border */
+    border-right: none; /* Remove right border */
+    border-bottom: 1px solid #ddd; /* Keep bottom border for horizontal lines */
+    border-top: 1px solid #ddd; /* Keep top border for horizontal lines */
+}
+
+/* Thicker border for the bottom of the first row */
+.no-vertical-borders tr:first-child td,
+.no-vertical-borders tr:first-child th {
+    border-bottom: 2px solid #333; /* Thicker border for the first row's bottom */
+}
+
+/* Ensure no border on the left side of the first column */
+.no-vertical-borders td:first-child,
+.no-vertical-borders th:first-child {
+    border-left: none; /* Remove left border for the first column */
+}
+
+/* Remove any border from tbody */
+.no-vertical-borders tbody {
+    border-left: none; /* Ensure no left border on tbody */
+    border-right: none; /* Ensure no right border on tbody */
+}
+
+
+/*transparent button background*/
+.transparent-button .btn,
+.item .inner a:hover .link .c4-btn-bg span {
+    background-color: transparent !important;
+    border-width: 2px;
+}
+
 
 /*Hero Block Item in blog landing pages*/
 .hero-block .component-main .item {

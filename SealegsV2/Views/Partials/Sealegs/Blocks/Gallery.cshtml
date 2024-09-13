@@ -5,6 +5,7 @@
 @using Microsoft.Extensions.Options
 @inject ISiteBuilderService _siteBuilderService
 @inject IOptions<USNAppSettings> _appSettings
+@inject Umbraco.Cms.Core.Web.IUmbracoContextAccessor UmbracoContextAccessor
 @{
     //Available as Component Block and Split Component Block types
 
@@ -15,7 +16,17 @@
     var animateSettings = (IUsn_Cmp_AnimateSettings)Model.BlockSettings;
 
     bool disableModalLinks = Convert.ToBoolean(ViewData["disableModalLinks"]);
-    bool fullWidthRight = Model.BlockSettings.FullWidthRight;
+
+
+    IPublishedContent currentPage = null;
+    if (UmbracoContextAccessor.TryGetUmbracoContext(out var umbracoContext))
+    {
+        currentPage = umbracoContext.PublishedRequest?.PublishedContent as IPublishedContent;
+
+    }
+
+    bool fullWidthRight = Model.BlockSettings.Value<bool>("FullWidthRight");
+
     var galleryItems = content.ImageVideo.Where(x => !x.Settings.Value<bool>("hideFromWebsite"));
 
     if (galleryItems.HasValue() && galleryItems.Any())
@@ -27,8 +38,11 @@
         CarouselSettings carouselSettings = _siteBuilderService.GetCarouselSettings(false, uniqueSettings.ItemsPerRow, uniqueSettings.EnableCarousel, uniqueSettings.AutoRotateSpeed, uniqueSettings.ShowDots, uniqueSettings.ShowArrows);
         ImageSettings imageSettings = _siteBuilderService.GetImageSettings(uniqueSettings.ImageStyle, uniqueSettings.BoxPad);
         galleryItems = uniqueSettings.EnableRandomOrder ? galleryItems.Randomize() : galleryItems;
-
-        <div class="component-main row @carouselSettings.CarouselRowClass listing @listSpacingClass listing_basic-grid listing_gallery" @Html.Raw(carouselSettings.SlickAttributes)>
+                    @if (fullWidthRight)
+            {
+                    <div class="white-cover-left"></div>
+            }
+        <div class="component-main row @carouselSettings.CarouselRowClass listing @listSpacingClass listing_basic-grid listing_gallery @(fullWidthRight ? " full-width-right " : " ")" @Html.Raw(carouselSettings.SlickAttributes)>
 
             @foreach (var galleryItem in galleryItems)
             {
@@ -91,7 +105,7 @@
                             linkUrl = galleryImage.Image.Url();
                         }
 
-                        <div class="item @imageSettings.CircleClass @carouselSettings.ItemsClass @animation.AnimationClass @itemMinSettings.CustomClasses" data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
+                        <div class="item @imageSettings.CircleClass @carouselSettings.ItemsClass @animation.AnimationClass @itemMinSettings.CustomClasses  " data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
                             <div class="image @imageSettings.CircleClass">
                                 @if (linkUrl != String.Empty)
                                 {

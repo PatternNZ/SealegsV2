@@ -26,6 +26,30 @@ UI.prototype = {
             self.moveWhiteCovers();
         }, 2200);
         this.setupFullWidthVideos();
+        this.moveSocialIcons();
+    },
+    moveSocialIcons: function () {
+
+        var socialLinks = $("#site-footer .item.footer-item.usn_pod_sociallinks");
+
+        if (socialLinks.length > 0) {
+            var ul = socialLinks.find(".inner .social ul:first-child");
+
+
+            if (ul.length > 0) {
+                var target = $("nav.footer-navigation").parent();
+
+
+                var navWrapper = $('<nav class="social-links"></nav>');
+                navWrapper.append(ul); 
+
+
+                target.append(navWrapper);
+
+                socialLinks.remove();
+            }
+        }
+
     },
     setupFullWidthVideos: function () {
         $(".full-width-image").each(function () {
