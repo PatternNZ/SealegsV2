@@ -27,6 +27,22 @@
     AnimationSettings animation = animateSettings != null ? _siteBuilderService.GetAnimationSettings(animateSettings.Animate, animateSettings.AnimationDelay, animateSettings.AnimationDuration, animateSettings.AnimationStyle) : null;
     string backgroundImageStyle = backgroundSettings != null ? _siteBuilderService.GetBackgroundImageStyle(backgroundSettings.BackgroundImageOptions, backgroundSettings.BackgroundImage) : String.Empty;
 
+
+    // fix for not removing webp
+
+    var nowebPbg = false;
+    if (backgroundSettings != null && backgroundSettings.BackgroundImage != null)
+    {
+        nowebPbg = backgroundSettings.BackgroundImage.Value<bool>("DisableWebPconversion");
+        if (nowebPbg)
+        {
+                backgroundImageStyle = backgroundImageStyle.Replace("?format=webp", "")
+                                               .Replace("[type:image/webp]", "")
+                                               .Replace("|", ""); // Optionally remove the '|' if needed
+
+        }
+    }
+    
     //Required for class label prefix
     string backgroundColorLabel = backgroundSettings != null && backgroundSettings.BackgroundColor.label != null ? backgroundSettings.BackgroundColor.label : "base";
 
