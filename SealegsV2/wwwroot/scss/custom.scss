@@ -9,62 +9,7 @@
     font-display: swap;
 }
 
-#site-footer {
-    .container {
-        .row {
-            .col {
-                font-size: 0;
 
-                @media(max-width:820px) {
-                    display:flex;
-                    flex-direction:column;
-                }
-
-                .footer-navigation {
-              
-                    display: inline-block;
-                    vertical-align: middle;
-                    width: 60%;
-                    padding-top: 0 !important;
-
-                    @media(max-width:820px) {
-                        width: 100%;
-                        order:2;
-                    }
-                }
-
-                .social-links {
-                    width: 40%;
-             
-                    display: inline-block;
-                    vertical-align: middle;
-                    text-align: right;
-
-                    @media(max-width:820px) {
-                        width: 100%;
-                        order:1;
-                        margin-bottom:20px;
-                    }
-
-                    ul {
-                        li {
-                            display: inline-block;
-
-                            span {
-                                a {
-
-                                    img {
-                                        max-width: 40px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 
 .full-width-right {
     .row.overview {
@@ -372,17 +317,7 @@
     }
 }
 
-a, a:active {
-    color: #000000;
-}
 
-a:hover, a:focus {
-    color: #2a2c30;
-}
-
-.info li {
-    margin-left: 20px;
-}
 
 /*HEADER*/
 
@@ -1751,23 +1686,6 @@ html.no-touch .spc.accordion .heading:not(.main) a.collapsed:hover {
     text-align: left;
     padding: 0 10px 0 0;
 }
-/* --- ACCORDION - TAB  --- */
-.spc.tabbed .tab-content {
-    background-color: transparent;
-    border: 0;
-    padding: 15px 0;
-}
-
-.tabbed nav.tabs {
-    border-bottom: 2px solid #000;
-}
-
-.tabbed nav.tabs .nav li a {
-    border: 0;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #000 !important;
-}
 
 .apc.c1-bg .tabbed nav.tabs .nav li a {
     background-color: transparent;
@@ -1864,28 +1782,9 @@ select.form-control:focus {
     color: #555;
 }
 
-.tab-buttons {
-    margin: 40px 0;
-}
 
-.tab-buttons a, .c1-bg .c3-text .tab-buttons a {
-    text-decoration: none;
-    color: #ffe600 !important;
-    text-transform: uppercase;
-    background-color: #000;
-    padding: 12px 15px;
-}
 
-.tab-buttons a:hover, .tab-buttons a:focus {
-    background-color: #323232;
-    color: white !important;
-    text-decoration: none;
-}
 
-.contact-details-box, .contactDetailsBox {
-    padding: 15px;
-    background-color: #f8da00;
-}
 
 .contact-details-box h3, .contact-details-box p {
     margin-top: 0;
@@ -1965,13 +1864,7 @@ footer .company-details .footer-address-middle {
     margin-left: 1%;
 }
 
-footer a {
-    color: #949597;
-}
 
-footer a:focus, footer a:hover {
-    color: #ffe600;
-}
 
 .resourceItem {
     width: 100%;

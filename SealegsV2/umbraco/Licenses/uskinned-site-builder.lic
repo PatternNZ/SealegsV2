@@ -1,14 +1,14 @@
 <License>
-  <Id>b385b7d2-a180-4f46-9819-102434b272c7</Id>
+  <Id>55c9bedb-f9d7-421c-b8f2-de553991f479</Id>
   <Type>Standard</Type>
   <ProductFeatures>
     <Feature name="Product">uSkinned Site Builder</Feature>
-    <Feature name="Creation Date">20230704</Feature>
-    <Feature name="Domains">bullerdc.govt.nz,builtbypattern.com,azurewebsites.net,bullerlibraries.nz,westportharbour.co.nz</Feature>
+    <Feature name="Creation Date">20240913</Feature>
+    <Feature name="Domains">sealegs.com,builtbypattern.com,azurewebsites.net</Feature>
   </ProductFeatures>
   <Customer>
     <Name>Rowan Schaaf</Name>
     <Email>rowan@pattern.co.nz</Email>
   </Customer>
-  <Signature>MEUCIB2zfM2OWKUS/Ze8S7emJGyq50DNc0zcTitUquvfmns/AiEAnzNyNPO3AuIYTl72xoI4BU7NON26UnNDLxIBEYKS3Vg=</Signature>
+  <Signature>MEYCIQC83QW8ucHwfrO2gshCWEJ2xFt8IXmvrPXM3bYmS2vjlgIhAK47h58LlJuj5/vu/x0bb6rqYeTO4flhRGr/qU1MQk53</Signature>
 </License>
