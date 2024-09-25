@@ -13,6 +13,53 @@
     overflow:hidden;
     border-radius:10px;
 }
+
+/* AB#14310 Feature Carousel [Large] styling*/
+
+.usn_cmp_pods {
+    .component-inner {
+        .container {
+            .component-main.listing-pods {
+                .slick-dots {
+                    text-align:left;
+                    left:15px;
+                }
+                .item.items-1.usn_pod_textimage.text-left {
+                    &.item_text-left {
+                    }
+
+                    .inner {
+                        .image {
+                        }
+
+                        .info {
+                            display: flex;
+        
+                            flex-direction: column;
+                            height: 100%;
+                            padding-bottom:40px;
+      
+                            &:last-child {
+                            }
+
+                            p.heading {
+                                margin-top: auto !important;
+                 
+                            }
+
+                            .text {
+                                margin-bottom: auto !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
 .accordion {
 
     .accordion-heading {
@@ -85,18 +132,14 @@
 
         a {
             background-image: none;
-
-           text-transform: none;
+            text-transform: none;
             z-index: 10;
-            position:relative;
+            position: relative;
+
             @media(max-width:1390px) {
-
-
-
             }
 
             @media(max-width:767px) {
-
             }
 
 
