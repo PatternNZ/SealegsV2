@@ -221,6 +221,7 @@ $(document).ready(function() {
 			$(".component.usn_cmp_anchornavigation .expand-anchor").removeClass('anchor-active');
 			$(".component.usn_cmp_anchornavigation .expand-anchor").attr('aria-expanded', 'false');
 			$(".component.usn_cmp_anchornavigation nav").removeClass('open-mobile');
+
 			$('html, body').animate({
 				scrollTop: $(href).offset().top
 			}, 600);
@@ -232,6 +233,7 @@ $(document).ready(function() {
 			$(".component.usn_cmp_anchornavigation .expand-anchor").removeClass('anchor-active');
 			$(".component.usn_cmp_anchornavigation .expand-anchor").attr('aria-expanded', 'false');
 			$(".component.usn_cmp_anchornavigation nav").removeClass('open-mobile');
+	
 			$('html, body').animate({
 				scrollTop: $(href).offset().top - anchor_nav_height - nav_height_half + 10
 			}, 600);
@@ -243,6 +245,7 @@ $(document).ready(function() {
 			$(".component.usn_cmp_anchornavigation .expand-anchor").removeClass('anchor-active');
 			$(".component.usn_cmp_anchornavigation .expand-anchor").attr('aria-expanded', 'false');
 			$(".component.usn_cmp_anchornavigation nav").removeClass('open-mobile');
+
 			$('html, body').animate({
 				scrollTop: $(href).offset().top - nav_height_half + 10
 			}, 600);
@@ -254,6 +257,7 @@ $(document).ready(function() {
 			$(".component.usn_cmp_anchornavigation .expand-anchor").removeClass('anchor-active');
 			$(".component.usn_cmp_anchornavigation .expand-anchor").attr('aria-expanded', 'false');
 			$(".component.usn_cmp_anchornavigation nav").removeClass('open-mobile');
+
 			$('html, body').animate({
 				scrollTop: $(href).offset().top - anchor_nav_height + 10
 			}, 600);
@@ -265,6 +269,7 @@ $(document).ready(function() {
 			$(".component.usn_cmp_anchornavigation .expand-anchor").removeClass('anchor-active');
 			$(".component.usn_cmp_anchornavigation .expand-anchor").attr('aria-expanded', 'false');
 			$(".component.usn_cmp_anchornavigation nav").removeClass('open-mobile');
+
 			$('html, body').animate({
 				scrollTop: $(href).offset().top - anchor_nav_height + 10
 			}, 600);
@@ -276,6 +281,7 @@ $(document).ready(function() {
 			$(".component.usn_cmp_anchornavigation .expand-anchor").removeClass('anchor-active');
 			$(".component.usn_cmp_anchornavigation .expand-anchor").attr('aria-expanded', 'false');
 			$(".component.usn_cmp_anchornavigation nav").removeClass('open-mobile');
+
 			$('html, body').animate({
 				scrollTop: $(href).offset().top - anchor_nav_height - nav_height + 10
 			}, 600);
@@ -293,6 +299,7 @@ $(document).ready(function() {
 					return false; // break
 				}
 			});
+
 			$("html, body").animate({
 				scrollTop: target
 			}, 600);
@@ -304,6 +311,7 @@ $(document).ready(function() {
 					return false; // break
 				}
 			});
+		
 			$("html, body").animate({
 				scrollTop: target
 			}, 600);
@@ -315,6 +323,7 @@ $(document).ready(function() {
 					return false; // break
 				}
 			});
+		
 			$("html, body").animate({
 				scrollTop: target
 			}, 600);
@@ -330,6 +339,7 @@ $(document).ready(function() {
 				if (target.length) {
 					$('html').removeClass('reveal-out');
 					$("header#site-header .expand-header").removeClass('active');
+		
 					$('html,body').animate({
 						scrollTop: target.offset().top
 					}, 600); // The number here represents the speed of the scroll in milliseconds
@@ -343,6 +353,7 @@ $(document).ready(function() {
 				if (target.length) {
 					$('html').removeClass('reveal-out');
 					$("header#site-header .expand-header").removeClass('active');
+		
 					$('html,body').animate({
 						scrollTop: target.offset().top - nav_height_half
 					}, 600); // The number here represents the speed of the scroll in milliseconds
@@ -351,16 +362,17 @@ $(document).ready(function() {
 			}
 		} else { 
 			if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-				var target = $(this.hash);
-				target = target.length ? target : (this.hash.length) ? $('[name=' + this.hash.slice(1) + ']') : "";
-				if (target.length) {
-					$('html').removeClass('reveal-out');
-					$("header#site-header .expand-header").removeClass('active');
-					$('html,body').animate({
-						scrollTop: target.offset().top - nav_height
-					}, 600); // The number here represents the speed of the scroll in milliseconds
-					return false;
-				}
+				//var target = $(this.hash);
+				//target = target.length ? target : (this.hash.length) ? $('[name=' + this.hash.slice(1) + ']') : "";
+				//if (target.length) {
+				//	$('html').removeClass('reveal-out');
+				//	$("header#site-header .expand-header").removeClass('active');
+					
+				//	$('html,body').animate({
+				//		scrollTop: target.offset().top - nav_height
+				//	}, 600); // The number here represents the speed of the scroll in milliseconds
+				//	return false;
+				//}
 			}
 		}
 	});

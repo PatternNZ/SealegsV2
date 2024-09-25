@@ -164,7 +164,6 @@
 
             .caption {
                 display: none;
-
             }
 
             img {
@@ -172,6 +171,7 @@
         }
     }
 }
+
 .usn_cmp_gallery {
     &.base-bg.base-bg-solid {
         .white-cover-left {
@@ -185,9 +185,10 @@
         }
     }
 }
+
 .white-cover-left {
     position: absolute;
-    z-index:100;
+    z-index: 100;
     width: 100vw;
     top: 0;
     bottom: 0;
@@ -1785,7 +1786,6 @@ select.form-control:focus {
 
 
 
-
 .contact-details-box h3, .contact-details-box p {
     margin-top: 0;
 }
@@ -2121,11 +2121,13 @@ h5.modal-title {
     &:not(.ajax-loading .loading) {
         pointer-events: none;
         font-style: italic;
-        background-color: #666 !important;
-        color: rgba(255,255,255,0.5) !important;
-        background-image: url(/images/icons/loading.svg);
         background-position: 10px center;
         background-repeat: no-repeat;
+        background-color: transparent;
+        line-height:100px;
+        background-size:50px 50px;
+        padding-left:80px;
+        background-image: url(/images/Sealegs/loading.svg);
     }
 }
 

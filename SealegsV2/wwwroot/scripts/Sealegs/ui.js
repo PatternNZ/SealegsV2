@@ -211,7 +211,7 @@ UI.prototype = {
             }
 
             if (attachedHtml + '' != '') {
-                var row = target.find('.row').first();
+                var row = target.find('.component-main').first();
                 row.html('<span class="loading">Loading...</span>');
                 setTimeout(function () {
 

@@ -28,7 +28,14 @@
     string backgroundImageStyle = backgroundSettings != null ? _siteBuilderService.GetBackgroundImageStyle(backgroundSettings.BackgroundImageOptions, backgroundSettings.BackgroundImage) : String.Empty;
 
 
-    // fix for not removing webp
+
+    // This is the new property 
+
+    string nestedHtml = commonBlockSettings.NestedHtml;
+    string anchorName = minSettings.AnchorName;
+
+
+
 
     var nowebPbg = false;
     if (backgroundSettings != null && backgroundSettings.BackgroundImage != null)
@@ -106,6 +113,18 @@
                 }
             }
         </div>
+        
+            @if (!string.IsNullOrEmpty(nestedHtml) && !string.IsNullOrEmpty(anchorName))
+            {
+               <script>
+                    if (!window.targetHtml) {
+                        window.targetHtml = [];
+                    }
+
+                    window.targetHtml['#@(anchorName)'] = '@Html.Raw(System.Web.HttpUtility.JavaScriptStringEncode(nestedHtml))';
+                </script>
+            }
+ 
     </section>
 
 }
