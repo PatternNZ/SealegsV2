@@ -142,6 +142,7 @@ UI.prototype = {
             var href = $(this).attr("href");
             if (href != 'undefined' && href != undefined && href != '' && href.indexOf("#") == 0 && $(this).data("toggle") != "tab") {
                 $(this).click(function (e) {
+
                     self.scrollToHash(href);
                     e.preventDefault();
                     e.stopPropagation();
@@ -203,13 +204,13 @@ UI.prototype = {
         }
 
         if (target.length > 0) {
-        
+
             var isAccordion = target.hasClass("is-accordion"); // if it's an accordion then we want to open it automatically
             if (isAccordion && target.hasClass("collapsed")) {
                 // open the accordion
                 target.click();
             }
-
+           
             if (attachedHtml + '' != '') {
                 var row = target.find('.component-main').first();
                 row.html('<span class="loading">Loading...</span>');
@@ -221,10 +222,16 @@ UI.prototype = {
 
                 }, 850);
             }
-
+            var targetTop = (target.offset().top - 150);
+            if (target.hasClass('repeatable-content')) {
+                if (target.is(":first-child")) {
+                    alert('yay')
+                }
+                targetTop -= 100;
+            }
 
             $('html, body').animate({
-                scrollTop: (target.offset().top - 80)
+                scrollTop: (targetTop)
             }, {
                     duration: 500,
                     complete: function () {

@@ -48,10 +48,21 @@
                         string ariaTag = openAccordion ? "aria-expanded=\"true\"" : "aria-expanded=\"false\"";
                         string openClass = openAccordion ? "show" : String.Empty;
                         string collapseClass = openAccordion ? String.Empty : "collapsed";
+                        <!--20909-->
                         <p class="tab @itemSettings.CustomClasses">
-                            <a class="nav-link nav-button-link @collapseClass" data-bs-toggle="collapse" href="#collapse_@(uniqueID)_@itemCount" aria-controls="collapse_@(uniqueID)_@itemCount" @Html.Raw(ariaTag) role="button">
-                                @Html.Raw(itemContent.ItemHeading)
-                            </a>
+                            <div class="accordion-heading">
+                                <a class="nav-link nav-button-link @collapseClass" data-bs-toggle="collapse" href="#collapse_@(uniqueID)_@itemCount" aria-controls="collapse_@(uniqueID)_@itemCount" @Html.Raw(ariaTag) role="button">
+                                    <span class="line-blocker">
+                                        @Html.Raw(itemContent.ItemHeading)
+                                    </span>
+                                </a>
+                                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="44" height="44" rx="22" fill="#2992E4" />
+                                    <path class="expand-cross" d="M20.6939 28.248V23.236H15.6819V20.59H20.6939V15.592H23.3399V20.59H28.3239V23.236H23.3399V28.248H20.6939Z" fill="white" />
+                                    <path class="expand-line" d="M15.6819 23.236H28.3239V20.59H15.6819V23.236Z" fill="white" />
+                                </svg>
+                                <div class="line"></div>
+                            </div>
                         </p>
                         <div id="collapse_@(uniqueID)_@itemCount" class="info repeatable-content collapse @itemSettings.CustomClasses @openClass">
                             <div class="text">@Html.Raw(itemContent.RepeaterText)</div>
@@ -74,7 +85,7 @@
                             {
                                 var itemContent = (Usn_Cbi_AccordionTabItem)item.Content;
                                 var itemSettings = (Usn_Cbis_AccordionTabItem)item.Settings;
-
+                                <!--202090-->
                                 <li class="tab @itemSettings.CustomClasses" role="presentation">
                                     <a class="nav-item nav-button-link nav-link @(itemCount == 1 ? "active" : "")" id="nav_tab_@(uniqueID)_@itemCount" data-bs-toggle="tab" href="#nav_@(uniqueID)_@itemCount" role="tab" aria-controls="nav_@(uniqueID)_@itemCount" aria-selected="@(itemCount == 1 ? "true" : "false")">
                                         @Html.Raw(itemContent.ItemHeading)
@@ -98,7 +109,7 @@
                             {
                                 var itemContent = (Usn_Cbi_AccordionTabItem)item.Content;
                                 var itemSettings = (Usn_Cbis_AccordionTabItem)item.Settings;
-
+                                <!--99399-->
                                 <div class="info tab-pane fade @itemSettings.CustomClasses @(itemCount == 1 ? "show active" : "")" id="nav_@(uniqueID)_@itemCount" role="tabpanel" aria-labelledby="nav_tab_@(uniqueID)_@itemCount">
                                     <div class="text">@Html.Raw(itemContent.RepeaterText)</div>
                                 </div>
