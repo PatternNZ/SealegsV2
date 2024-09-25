@@ -26,7 +26,7 @@ footer {
             display: inline-block;
             vertical-align: middle;
             width: 60%;
-            padding-top:0;
+            padding-top: 0;
         }
 
         .social-links {
@@ -41,8 +41,24 @@ footer {
 
                     span {
                         a {
+                            margin-left: 10px;
+                            display: inline-block;
+                            vertical-align: middle;
+                            transition: all .5s;
+                            width: 40px;
+                            text-align: center;
+                            font-size: 0;
+                            height:20px;
+                            &:hover {
+                                img {
+                                    opacity:0.5;
+                                }
+                            }
                             img {
-                                max-width: 40px;
+                                transition: all 0.4s;
+                                opacity:1;
+                                max-height:25px;
+                                width:auto;max-width:unset;min-width:unset;
                             }
                         }
                     }
