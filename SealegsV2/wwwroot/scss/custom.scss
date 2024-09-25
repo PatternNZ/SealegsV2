@@ -8,11 +8,50 @@
     unicode-range: U+0020-25CA;
     font-display: swap;
 }
-.image.video {
 
-    overflow:hidden;
-    border-radius:10px;
+.image.video {
+    overflow: hidden;
+    border-radius: 10px;
 }
+
+/* */
+
+footer {
+    .custom-footer-wrapper {
+        font-size: 0;
+        line-height: 0;
+        padding-top: calc(var(--base-spacing) * 2);
+
+        .footer-navigation {
+            display: inline-block;
+            vertical-align: middle;
+            width: 60%;
+            padding-top:0;
+        }
+
+        .social-links {
+            display: inline-block;
+            vertical-align: middle;
+            width: 40%;
+            text-align: right;
+
+            ul {
+                li {
+                    display: inline-block;
+
+                    span {
+                        a {
+                            img {
+                                max-width: 40px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 /* AB#14310 Feature Carousel [Large] styling*/
 
@@ -21,9 +60,10 @@
         .container {
             .component-main.listing-pods {
                 .slick-dots {
-                    text-align:left;
-                    left:15px;
+                    text-align: left;
+                    left: 15px;
                 }
+
                 .item.items-1.usn_pod_textimage.text-left {
                     &.item_text-left {
                     }
@@ -34,17 +74,15 @@
 
                         .info {
                             display: flex;
-        
                             flex-direction: column;
                             height: 100%;
-                            padding-bottom:40px;
-      
+                            padding-bottom: 40px;
+
                             &:last-child {
                             }
 
                             p.heading {
                                 margin-top: auto !important;
-                 
                             }
 
                             .text {
@@ -2370,9 +2408,9 @@ h5.modal-title {
         background-position: 10px center;
         background-repeat: no-repeat;
         background-color: transparent;
-        line-height:100px;
-        background-size:50px 50px;
-        padding-left:80px;
+        line-height: 100px;
+        background-size: 50px 50px;
+        padding-left: 80px;
         background-image: url(/images/Sealegs/loading.svg);
     }
 }
