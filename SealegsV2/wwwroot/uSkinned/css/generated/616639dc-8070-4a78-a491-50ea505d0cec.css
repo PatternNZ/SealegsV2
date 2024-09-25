@@ -403,6 +403,18 @@ Contents
 --c1-label-bg-stop-perc: 50%;
 --c1-label-bg-angle: 90deg;
 --c1-label-text: 255, 255, 255;
+--c2-label-bg-color1: 191, 21, 102;
+--c2-label-bg-color2:  0, 0, 0;
+--c2-label-bg-start-perc: 50%;
+--c2-label-bg-stop-perc: 50%;
+--c2-label-bg-angle: 90deg;
+--c2-label-text: 255, 255, 255;
+--c3-label-bg-color1: 41, 146, 228;
+--c3-label-bg-color2:  0, 0, 0;
+--c3-label-bg-start-perc: 50%;
+--c3-label-bg-stop-perc: 50%;
+--c3-label-bg-angle: 90deg;
+--c3-label-text: 255, 255, 255;
 
 
     /* Fonts tab */
@@ -3158,6 +3170,60 @@ Additional Colors - Labels
 /* Label text */
 .c1-label-text { 
     color: rgba(var(--c1-label-text), 1);
+}
+
+/*	
+--------------------------------------------------
+Additional Colors - Labels
+-------------------------------------------------- 
+*/
+
+/* Label backgrounds Solid */
+.c2-label-bg,
+.c2-label-bg.c2-label-bg-solid { 
+    background: rgba(var(--c2-label-bg-color1), 1); 
+}
+
+/* Label backgrounds Linear */
+.c2-label-bg.c2-label-bg-linear { 
+    background: linear-gradient(var(--c2-label-bg-angle), rgba(var(--c2-label-bg-color1), 1) 0%, rgba(var(--c2-label-bg-color2), 1) 100%); 
+}
+
+/* Label backgrounds Radial */
+.c2-label-bg.c2-label-bg-radial { 
+    background: radial-gradient(farthest-side at var(--c2-label-bg-start-perc) var(--c2-label-bg-stop-perc), rgba(var(--c2-label-bg-color1), 1) 0%, rgba(var(--c2-label-bg-color2), 1) 100%); 
+}
+
+/* Label text */
+.c2-label-text { 
+    color: rgba(var(--c2-label-text), 1);
+}
+
+/*	
+--------------------------------------------------
+Additional Colors - Labels
+-------------------------------------------------- 
+*/
+
+/* Label backgrounds Solid */
+.c3-label-bg,
+.c3-label-bg.c3-label-bg-solid { 
+    background: rgba(var(--c3-label-bg-color1), 1); 
+}
+
+/* Label backgrounds Linear */
+.c3-label-bg.c3-label-bg-linear { 
+    background: linear-gradient(var(--c3-label-bg-angle), rgba(var(--c3-label-bg-color1), 1) 0%, rgba(var(--c3-label-bg-color2), 1) 100%); 
+}
+
+/* Label backgrounds Radial */
+.c3-label-bg.c3-label-bg-radial { 
+    background: radial-gradient(farthest-side at var(--c3-label-bg-start-perc) var(--c3-label-bg-stop-perc), rgba(var(--c3-label-bg-color1), 1) 0%, rgba(var(--c3-label-bg-color2), 1) 100%); 
+}
+
+/* Label text */
+.c3-label-text { 
+    color: rgba(var(--c3-label-text), 1);
 }
 
 

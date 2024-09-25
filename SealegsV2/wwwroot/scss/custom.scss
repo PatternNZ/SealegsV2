@@ -48,17 +48,21 @@ footer {
                             width: 40px;
                             text-align: center;
                             font-size: 0;
-                            height:20px;
+                            height: 20px;
+
                             &:hover {
                                 img {
-                                    opacity:0.5;
+                                    opacity: 0.5;
                                 }
                             }
+
                             img {
                                 transition: all 0.4s;
-                                opacity:1;
-                                max-height:25px;
-                                width:auto;max-width:unset;min-width:unset;
+                                opacity: 1;
+                                max-height: 25px;
+                                width: auto;
+                                max-width: unset;
+                                min-width: unset;
                             }
                         }
                     }
@@ -113,7 +117,187 @@ footer {
 }
 
 
+/* Colour overrides */
+.usn_cmp_accordiontab.c2-bg {
+    .accordion-heading {
+        &:hover {
+            svg {
+                rect {
+                    fill: rgb(var(--c2-link-hover));
+                }
 
+                path {
+                    fill: rgb(var(--c2-highlight-text));
+                }
+            }
+        }
+
+        svg {
+            rect {
+                fill: rgb(var(--c2-link));
+            }
+
+            path {
+                fill: rgb(var(--c2-highlight-text));
+            }
+        }
+
+        .line {
+            background-color: rgb(var(--c2-borders));
+        }
+
+        a {
+
+
+            &:not(.collapsed) {
+                + svg {
+                    rect {
+                        fill: rgb(var(--c2-link-hover));
+                    }
+
+                    path {
+                        fill: rgb(var(--c2-highlight-text));
+                    }
+                }
+            }
+        }
+    }
+}
+.usn_cmp_accordiontab.c1-bg {
+    .accordion-heading {
+        &:hover {
+            svg {
+                rect {
+                    fill: rgb(var(--c1-link-hover));
+                }
+
+                path {
+                    fill: rgb(var(--c1-highlight-text));
+                }
+            }
+        }
+
+        svg {
+            rect {
+                fill: rgb(var(--c1-link));
+            }
+
+            path {
+                fill: rgb(var(--c1-highlight-text));
+            }
+        }
+
+        .line {
+            background-color: rgb(var(--c1-borders));
+        }
+
+        a {
+
+
+            &:not(.collapsed) {
+                + svg {
+                    rect {
+                        fill: rgb(var(--c1-link-hover));
+                    }
+
+                    path {
+                        fill: rgb(var(--c1-highlight-text));
+                    }
+                }
+            }
+        }
+    }
+}
+.usn_cmp_accordiontab.c3-bg {
+    .accordion-heading {
+        &:hover {
+            svg {
+                rect {
+                    fill: rgb(var(--c3-link-hover));
+                }
+
+                path {
+                    fill: rgb(var(--c3-highlight-text));
+                }
+            }
+        }
+
+        svg {
+            rect {
+                fill: rgb(var(--c3-link));
+            }
+
+            path {
+                fill: rgb(var(--c3-highlight-text));
+            }
+        }
+
+        .line {
+            background-color: rgb(var(--c3-borders));
+        }
+
+        a {
+
+
+            &:not(.collapsed) {
+                + svg {
+                    rect {
+                        fill: rgb(var(--c3-link-hover));
+                    }
+
+                    path {
+                        fill: rgb(var(--c3-highlight-text));
+                    }
+                }
+            }
+        }
+    }
+}
+.usn_cmp_accordiontab.base-bg {
+    .accordion-heading {
+        &:hover {
+            svg {
+                rect {
+                    fill: rgb(var(--base-link-hover));
+                }
+
+                path {
+                    fill: rgb(var(--base-highlight-text));
+                }
+            }
+        }
+
+        svg {
+            rect {
+                fill: rgb(var(--base-link));
+            }
+
+            path {
+                fill: rgb(var(--base-highlight-text));
+            }
+        }
+
+        .line {
+            background-color: rgb(var(--base-borders));
+        }
+
+        a {
+
+
+            &:not(.collapsed) {
+                + svg {
+                    rect {
+                        fill: rgb(var(--base-link-hover));
+                    }
+
+                    path {
+                        fill: rgb(var(--base-highlight-text));
+                    }
+                }
+            }
+        }
+    }
+}
 .accordion {
 
     .accordion-heading {
@@ -126,12 +310,12 @@ footer {
         &:hover {
             svg {
                 rect {
-                    fill: #fff;
+          
                 }
 
 
                 path {
-                    fill: #2992E4;
+    
                 }
             }
         }
@@ -141,7 +325,7 @@ footer {
             top: 50%;
             height: 1px;
             margin-top: -1px;
-            background-color: #EDF1F7;
+  
             opacity: 0.5;
             left: 0;
             right: 65px;
@@ -199,7 +383,7 @@ footer {
 
 
             .line-blocker {
-                background-color: #263444;
+                /*                background-color: #263444;*/
                 padding-right: 20px;
             }
 
@@ -236,11 +420,11 @@ footer {
             &:not(.collapsed) {
                 + svg {
                     rect {
-                        fill: #fff;
+               
                     }
 
                     path {
-                        fill: #2992E4;
+              
                     }
 
                     .expand-line {
@@ -617,9 +801,6 @@ footer {
         }
     }
 }
-
-
-
 /*HEADER*/
 
 header {
@@ -731,7 +912,6 @@ div#popup-message-error.message-error h3 {
 .c5-bg a.btn {
     text-decoration: none;
 }
-
 /* Changes for yellow background*/
 .apc.c1-bg:not(.icon-pods):not(.dark-pods):not(.text-with-form) a:not(.btn):not(.heading):not(.c1-text):not([data-toggle="tab"]):not([data-toggle="collapse"]):not(.selectBox) {
     color: #000;
@@ -1755,7 +1935,6 @@ nav.black-background .phones-navbar {
     .apc.banner .item.short .row {
         height: auto;
     }
-
     /*.navigation nav.main ul li.has-child ul li span a::before {
 		background-color: rgba(0, 0, 0, 1);
 	}*/
@@ -1926,7 +2105,6 @@ html.no-touch .spc.accordion .heading:not(.main) a.collapsed:hover {
 .accordion.accordionTimeline .panel-collapse {
     margin-top: -10px;
 }
-
 /* Hide icons when screen gets too small */
 @media screen and (max-width: 590px), screen and (min-width:769px) and (max-width:990px) {
     .spc.accordion .accordion-row .phone {
@@ -2245,7 +2423,6 @@ footer .company-details .footer-address-middle {
 	width: 50px;
 
 }*/
-
 /* Vehicle Rental Listing */
 
 .vehicle-items {
@@ -2371,7 +2548,6 @@ footer .company-details .footer-address-middle {
     background-position: center center;
     background-repeat: no-repeat;
 }
-
 /* Set the image to fill its parent and make transparent */
 .center-cropped img {
     min-height: 100%;
@@ -2383,7 +2559,6 @@ footer .company-details .footer-address-middle {
     /* modern browsers */
     opacity: 0;
 }
-
 /*fix safari showing cols on 2 rows*/
 .btn-group-vertical > .btn-group:after, .btn-group-vertical > .btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
     display: block;
@@ -2430,7 +2605,6 @@ h5.modal-title {
         background-image: url(/images/Sealegs/loading.svg);
     }
 }
-
 /* Semi Skel Right Of Newsletter */
 
 .component-newsletter.component-newsletter-inline.semiskel .pull-right {
