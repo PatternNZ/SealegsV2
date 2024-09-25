@@ -8,7 +8,11 @@
     unicode-range: U+0020-25CA;
     font-display: swap;
 }
+.image.video {
 
+    overflow:hidden;
+    border-radius:10px;
+}
 .accordion {
 
     .accordion-heading {

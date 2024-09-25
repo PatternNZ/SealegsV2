@@ -271,8 +271,9 @@
                         <div class="item @carouselSettings.ItemsClass @videoCircleClass @animation.AnimationClass @itemMinSettings.CustomClasses" data-os-animation="@animation.AnimationStyle" data-os-animation-delay="@animation.AnimationDelay" data-os-animation-duration="@animation.AnimationDuration">
                             @if (disableModalLinks || galleryVideo.DisableLightWindow)
                             {
+                                <!-- 234234-->
                                 <div class="image @videoCircleClass video ratio ratio-16x9">
-                                    <video class="embed-responsive-item" controls>
+                                    <video class="embed-responsive-item" controls muted="true" playsinline="true">
                                         <source src="@galleryVideo.VideoMp4.Url()" type="video/mp4">
                                     </video>
                                     @if (galleryVideo.VideoCaption.HasValue())

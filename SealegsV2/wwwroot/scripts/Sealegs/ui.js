@@ -52,54 +52,29 @@ UI.prototype = {
 
     },
     setupFullWidthVideos: function () {
-        $(".full-width-image").each(function () {
-            var videoUrl = $(this).data('videourl');
-            var playButton = $(this).parent().find(".play-button");
-            var $image = $(this);
+        $(".image.video video").each(function () {
+            var $video = $(this);
 
             function playVideo() {
-                var $video = $('<video>', {
-                    src: videoUrl,
-                    controls: true,
-                    autoplay: true,
-                    muted: true,
-                    playsinline: true, // For better compatibility on mobile
-                    loop: true,
-                    onloadedmetadata: function () {
-                        this.muted = true; // Ensure the video is muted
-                    }
-                });
-
-                $image.replaceWith($video);
-                playButton.remove();
-
-                // Ensure the video plays after being added to the DOM
                 $video[0].play().catch(function (error) {
-                    console.log("Autoplay prevented: ", error);
-                    // Handle the error, such as showing a play button
+                    console.error("Error playing video:", error);
                 });
 
                 $video.attr('loop', 'loop');
             }
 
-            if (videoUrl && videoUrl.trim() !== '') {
-                // Create an intersection observer
-                var observer = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            playVideo();
-                            observer.unobserve(entry.target); // Stop observing once video plays
-                        }
-                    });
+            // Create an intersection observer
+            var observer = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        playVideo();
+                        observer.unobserve(entry.target); // Stop observing once video plays
+                    }
                 });
+            });
 
-                // Observe the image
-                observer.observe(this);
-
-                // Retain click functionality
-                $image.off('click').on('click', playVideo);
-                playButton.off('click').on('click', playVideo);
-            }
+            // Observe the video element
+            observer.observe(this);
         });
     },
     moveWhiteCovers: function () {
