@@ -199,10 +199,17 @@ UI.prototype = {
             }
             var targetTop = (target.offset().top - 150);
             if (target.hasClass('repeatable-content')) {
+       
                 if (target.is(":first-child")) {
-                    alert('yay')
+
                 }
                 targetTop -= 100;
+            } else if (target.hasClass("tab-pane")) {
+           
+                targetTop -= 30;
+
+            } else {
+                //alert(target.attr("class"));
             }
 
             $('html, body').animate({
