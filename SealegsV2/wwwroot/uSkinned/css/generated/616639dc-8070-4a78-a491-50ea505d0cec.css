@@ -244,14 +244,14 @@ Contents
     --secondary-navigation-link-hover: 108, 108, 108;
     
     /* Navigation dropdown */
-    --navigation-dropdown-color1: 216, 216, 216;
-    --navigation-dropdown-color2:  255, 255, 255;
+    --navigation-dropdown-color1: 38, 52, 68;
+    --navigation-dropdown-color2:  65, 89, 116;
     --navigation-dropdown-start-perc: 50%;
     --navigation-dropdown-stop-perc: 50%;
     --navigation-dropdown-angle: 90deg;
-    --navigation-dropdown-link: 0, 0, 0;
-    --navigation-dropdown-link-hover: 108, 108, 108;
-    --navigation-dropdown-link-active: 108, 108, 108;
+    --navigation-dropdown-link: 237, 241, 247;
+    --navigation-dropdown-link-hover: 255, 255, 255;
+    --navigation-dropdown-link-active: 255, 255, 255;
     
     /* Content */
     --base-bg-color1: 237, 241, 247;
@@ -556,8 +556,8 @@ Contents
     --p-intro-typography_font-letter-spacing: 0px;
     --p-intro-typography_font-transform: None;
 
-    --p-intro-typography_font-size: 22px; 
-    --p-intro-typography_font-size_sm: 22px; 
+    --p-intro-typography_font-size: 16px; 
+    --p-intro-typography_font-size_sm: 16px; 
     --p-intro-typography_font-size_md: 22px; 
     --p-intro-typography_font-size_lg: 22px; 
     --p-intro-typography_font-size_xl: 22px; 
@@ -582,8 +582,8 @@ Contents
     --p-intro_large-typography_font-letter-spacing: -0.15px;
     --p-intro_large-typography_font-transform: None;
 
-    --p-intro_large-typography_font-size: 26px; 
-    --p-intro_large-typography_font-size_sm: 26px; 
+    --p-intro_large-typography_font-size: 22px; 
+    --p-intro_large-typography_font-size_sm: 22px; 
     --p-intro_large-typography_font-size_md: 26px; 
     --p-intro_large-typography_font-size_lg: 30px; 
     --p-intro_large-typography_font-size_xl: 30px;  
@@ -621,8 +621,8 @@ Contents
     --secondary-heading_large-typography_font-letter-spacing: 1.5px;
     --secondary-heading_large-typography_font-transform: Uppercase;
 
-    --secondary-heading_large-typography_font-size: 18px; 
-    --secondary-heading_large-typography_font-size_sm: 18px; 
+    --secondary-heading_large-typography_font-size: 14px; 
+    --secondary-heading_large-typography_font-size_sm: 14px; 
     --secondary-heading_large-typography_font-size_md: 18px; 
     --secondary-heading_large-typography_font-size_lg: 18px; 
     --secondary-heading_large-typography_font-size_xl: 18px;  
@@ -721,15 +721,15 @@ Contents
     --main-navigation_dropdowns-typography_font-name: 'Manrope',sans-serif;
     --main-navigation_dropdowns-typography_font-weight: 400;
     --main-navigation_dropdowns-typography_font-style: normal;
-    --main-navigation_dropdowns-typography_font-line-height: 150%;
+    --main-navigation_dropdowns-typography_font-line-height: 130%;
     --main-navigation_dropdowns-typography_font-letter-spacing: 0px;
     --main-navigation_dropdowns-typography_font-transform: None;
 
-    --main-navigation_dropdowns-typography_font-size: 16px; 
-    --main-navigation_dropdowns-typography_font-size_sm: 16px; 
-    --main-navigation_dropdowns-typography_font-size_md: 16px; 
-    --main-navigation_dropdowns-typography_font-size_lg: 16px; 
-    --main-navigation_dropdowns-typography_font-size_xl: 16px;  
+    --main-navigation_dropdowns-typography_font-size: 14px; 
+    --main-navigation_dropdowns-typography_font-size_sm: 14px; 
+    --main-navigation_dropdowns-typography_font-size_md: 14px; 
+    --main-navigation_dropdowns-typography_font-size_lg: 14px; 
+    --main-navigation_dropdowns-typography_font-size_xl: 14px;  
 
     --secondary-navigation-typography_font-name: 'Manrope',sans-serif;
     --secondary-navigation-typography_font-weight: 700;
@@ -803,11 +803,11 @@ Contents
     --acc-tab-typography_font-letter-spacing: 0px;
     --acc-tab-typography_font-transform: None;
 
-    --acc-tab-typography_font-size: 18px; 
-    --acc-tab-typography_font-size_sm: 18px; 
-    --acc-tab-typography_font-size_md: 18px; 
-    --acc-tab-typography_font-size_lg: 20px; 
-    --acc-tab-typography_font-size_xl: 20px;
+    --acc-tab-typography_font-size: 20px; 
+    --acc-tab-typography_font-size_sm: 20px; 
+    --acc-tab-typography_font-size_md: 20px; 
+    --acc-tab-typography_font-size_lg: 22px; 
+    --acc-tab-typography_font-size_xl: 22px;
     
     --logo-typography_font-name: 'Helvetica',Arial, sans-serif;
     --logo-typography_font-weight: 700;
@@ -3227,170 +3227,4 @@ Additional Colors - Labels
 }
 
 
-/* Chevron link styling */
-.chevron {
-  position: relative;
-  display: inline-block; /* Allows it to be centred like text */
-  height: 50px; /* Height should be double the border width for a balanced look */
-  width: 50px; /* Width to match the chevron's height */
-  margin: 0 auto; /* Centres the chevron */
-  text-decoration: none; /* Remove underline from link */
-}
 
-/* Chevron arrow pseudo-elements */
-.chevron::before,
-.chevron::after {
-  position: absolute;
-  display: block;
-  content: "";
-  border: 25px solid transparent; /* Adjust size of the chevron */
-}
-
-/* Chevron pointing upwards - change 'top' to 'left', 'right', or 'bottom' to rotate */
-.chevron::before {
-  top: 0;
-  border-top-color: #6c6c6c; /* Chevron colour */
-}
-
-.chevron:hover::before {
-  border-top-color: #d8d8d8; /* Chevron hover colour */
-}
-
-.chevron::after {
-  top: -10px; /* Adjust thickness or gap between layers */
-  border-top-color: #fff; /* Match background colour for cut-out effect */
-}
-
-/*custom table*/
- /* Remove any borders from the table itself */
-.no-vertical-borders {
-    border-collapse: collapse; /* Ensure borders collapse for a clean look */
-    border: none; /* Remove any border from the table */
-}
-
-/* Remove all vertical borders while keeping horizontal ones */
-.no-vertical-borders td,
-.no-vertical-borders th {
-    border-left: none; /* Remove left border */
-    border-right: none; /* Remove right border */
-    border-bottom: 1px solid #ddd; /* Keep bottom border for horizontal lines */
-    border-top: 1px solid #ddd; /* Keep top border for horizontal lines */
-}
-
-/* Thicker border for the bottom of the first row */
-.no-vertical-borders tr:first-child td,
-.no-vertical-borders tr:first-child th {
-    border-bottom: 2px solid #333; /* Thicker border for the first row's bottom */
-}
-
-/* Ensure no border on the left side of the first column */
-.no-vertical-borders td:first-child,
-.no-vertical-borders th:first-child {
-    border-left: none; /* Remove left border for the first column */
-}
-
-/* Remove any border from tbody */
-.no-vertical-borders tbody {
-    border-left: none; /* Ensure no left border on tbody */
-    border-right: none; /* Ensure no right border on tbody */
-}
-
-
-/*transparent button background*/
-.transparent-button .btn,
-.item .inner a:hover .link .c4-btn-bg span {
-    background-color: transparent !important;
-    border-width: 2px;
-}
-
-
-/*Hero Block Item in blog landing pages*/
-.hero-block .component-main .item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center; /* Centers items vertically within the row */
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.hero-block .component-main .item .image {
-    flex: 0 0 50%;
-    max-width: 50%;
-}
-
-.hero-block .component-main .item .info {
-    flex: 0 0 50%;
-    max-width: 50%;
-    display: flex;
-    flex-direction: column; /* Stack the text elements vertically */
-    justify-content: center; /* Vertically center the entire content */
-    padding: 20px; /* Add padding to the text content */
-}
-
-.hero-block .component-main .item .image img {
-    width: 100%;
-    height: auto;
-    border-radius: 0;
-}
-
-.hero-block .component-main .item .meta .date,
-.hero-block .component-main .item .meta .categories {
-    display: none; /* Hide the date and category elements */
-}
-
-/*Product Carousel*/
-.product-scroller .component-inner .container .text {
-    display: none !important;
-}
-.product-scroller .component-inner .container p.heading.sm {
-    font-size: 14px !important;
-}
-
-/*Product Pod Scroller*/
-.product-pod-scroller-large .component-main .item {
-    display: flex;
-    align-items: center; /* Ensure vertical alignment */
-}
-
-.product-pod-scroller-large .component-main .item .image {
-    flex: 0 0 60%;
-    max-width: 60%; /* Ensures the image container doesn't exceed 65% */
-}
-
-.product-pod-scroller-large .component-main .item .image img {
-    border-radius: 10px;
-    width: 100%; /* Make the image fill the container */
-    height: auto; /* Maintain the aspect ratio */
-}
-
-.product-pod-scroller-large .component-main .item .info {
-    flex: 0 0 40%;
-    padding-top: 30px !important;
-}
-
-.product-pod-scroller-large .slick-dots {
-    position: absolute;
-    bottom: 0px; /* Adjust the distance from the bottom as needed */
-    left: 0;
-    width: 35%; /* Ensure the dots align with the width of the text block */
-    text-align: left; /* Align the dots within the specified width */
-    padding-left: 0;
-}
-
-.product-pod-scroller-large {
-    position: relative; /* Ensure the section container is the reference point */
-}
-
-.product-pod-scroller-large .slick-dots li {
-    display: inline-block; /* Keep the dots in a row */
-}
-
-    
-/*Heading treatments*/
-
-.heading-shadow h1, 
-.heading-shadow h2,
-.heading-shadow h3,
-.heading-shadow p {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-}

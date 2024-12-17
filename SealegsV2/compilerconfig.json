@@ -3,5 +3,9 @@
     "outputFile": "wwwroot/scss/custom.css",
     "inputFile": "wwwroot/scss/custom.scss",
     "sourceMap": true
+  },
+  {
+    "outputFile": "wwwroot/scss/umbraco-styles.css",
+    "inputFile": "wwwroot/scss/umbraco-styles.scss","sourceMap": true
   }
 ]

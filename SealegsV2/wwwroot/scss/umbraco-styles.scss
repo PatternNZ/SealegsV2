@@ -1,0 +1,197 @@
+
+/*Hide filters on product landing pages*/
+.hide-filters .expand-filters {
+    display: none !important;
+}
+
+/* Chevron link styling */
+.chevron {
+    position: relative;
+    display: inline-block; /* Allows it to be centred like text */
+    height: 50px; /* Height should be double the border width for a balanced look */
+    width: 50px; /* Width to match the chevron's height */
+    margin: 0 auto; /* Centres the chevron */
+    text-decoration: none; /* Remove underline from link */
+}
+
+/* Chevron arrow pseudo-elements */
+.chevron::before,
+.chevron::after {
+    position: absolute;
+    display: block;
+    content: "";
+    border: 25px solid transparent; /* Adjust size of the chevron */
+}
+
+/* Chevron pointing upwards - change 'top' to 'left', 'right', or 'bottom' to rotate */
+.chevron::before {
+    top: 0;
+    border-top-color: #6c6c6c; /* Chevron colour */
+}
+
+.chevron:hover::before {
+    border-top-color: #d8d8d8; /* Chevron hover colour */
+}
+
+.chevron::after {
+    top: -10px; /* Adjust thickness or gap between layers */
+    border-top-color: #fff; /* Match background colour for cut-out effect */
+}
+
+/*custom table*/
+/* Remove any borders from the table itself */
+.no-vertical-borders {
+    border-collapse: collapse; /* Ensure borders collapse for a clean look */
+    border: none; /* Remove any border from the table */
+}
+
+/* Remove all vertical borders while keeping horizontal ones */
+.no-vertical-borders td,
+.no-vertical-borders th {
+    border-left: none; /* Remove left border */
+    border-right: none; /* Remove right border */
+    border-bottom: 1px solid #ddd; /* Keep bottom border for horizontal lines */
+    border-top: 1px solid #ddd; /* Keep top border for horizontal lines */
+}
+
+/* Thicker border for the bottom of the first row */
+.no-vertical-borders tr:first-child td,
+.no-vertical-borders tr:first-child th {
+    border-bottom: 2px solid #333; /* Thicker border for the first row's bottom */
+}
+
+/* Ensure no border on the left side of the first column */
+.no-vertical-borders td:first-child,
+.no-vertical-borders th:first-child {
+    border-left: none; /* Remove left border for the first column */
+}
+
+/* Remove any border from tbody */
+.no-vertical-borders tbody {
+    border-left: none; /* Ensure no left border on tbody */
+    border-right: none; /* Ensure no right border on tbody */
+}
+
+
+/*transparent button background*/
+.transparent-button .btn,
+.item .inner a:hover .link .c4-btn-bg span {
+    background-color: transparent !important;
+    border-width: 2px;
+}
+
+
+/*Hero Block Item in blog landing pages*/
+.hero-block .component-main .item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Centers items vertically within the row */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.hero-block .component-main .item .image {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.hero-block .component-main .item .info {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column; /* Stack the text elements vertically */
+    justify-content: center; /* Vertically center the entire content */
+    padding: 20px; /* Add padding to the text content */
+}
+
+.hero-block .component-main .item .image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+
+.hero-block .component-main .item .meta .date,
+.hero-block .component-main .item .meta .categories {
+    display: none; /* Hide the date and category elements */
+}
+
+/*Product Carousel*/
+.product-scroller .component-inner .container .text {
+    display: none !important;
+}
+
+.product-scroller .component-inner .container p.heading.sm {
+    font-size: 14px !important;
+}
+
+.product-scroller .tab a {
+    font-size: 1rem;
+    font-weight: 400 !important;
+    line-height: 1.2rem;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+/*Product Pod Scroller*/
+@media (min-width:768px) {
+    .product-pod-scroller-large .component-main .item {
+        display: flex;
+        align-items: center; /* Ensure vertical alignment */
+    }
+
+    .product-pod-scroller-large .component-main .item .image {
+        flex: 0 0 60%;
+        max-width: 60%; /* Ensures the image container doesn't exceed 65% */
+    }
+
+    .product-pod-scroller-large .component-main .item .image img {
+        border-radius: 10px;
+        width: 100%; /* Make the image fill the container */
+        height: auto; /* Maintain the aspect ratio */
+    }
+
+    .product-pod-scroller-large .component-main .item .info {
+        flex: 0 0 40%;
+        padding-top: 30px !important;
+    }
+
+    .product-pod-scroller-large .slick-dots {
+        position: absolute;
+        bottom: 0px; /* Adjust the distance from the bottom as needed */
+        left: 0;
+        width: 35%; /* Ensure the dots align with the width of the text block */
+        text-align: left; /* Align the dots within the specified width */
+        padding-left: 0;
+    }
+
+    .product-pod-scroller-large {
+        position: relative; /* Ensure the section container is the reference point */
+    }
+
+    .product-pod-scroller-large .slick-dots li {
+        display: inline-block; /* Keep the dots in a row */
+    }
+}
+
+/*Heading treatments*/
+
+.heading-shadow h1,
+.heading-shadow h2,
+.heading-shadow h3,
+.heading-shadow p {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/*Image treatments*/
+
+.add-radius img {
+    border-radius: 10px;
+}
+
+
+.image.video {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* */

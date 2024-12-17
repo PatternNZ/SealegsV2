@@ -9,12 +9,7 @@
     font-display: swap;
 }
 
-.image.video {
-    overflow: hidden;
-    border-radius: 10px;
-}
 
-/* */
 
 footer {
     .custom-footer-wrapper {
@@ -82,6 +77,15 @@ footer {
                 .slick-dots {
                     text-align: left;
                     left: 15px;
+
+                    @media(max-width:767px) {
+                        position: absolute;
+                        left: 15px;
+                        bottom: 5px;
+                        right: 15px;
+                        height: 36px;
+
+                    }
                 }
 
                 .item.items-1.usn_pod_textimage.text-left {
@@ -97,6 +101,10 @@ footer {
                             flex-direction: column;
                             height: 100%;
                             padding-bottom: 40px;
+
+                            @media(max-width:767px) {
+                                height: auto;
+                            }
 
                             &:last-child {
                             }
