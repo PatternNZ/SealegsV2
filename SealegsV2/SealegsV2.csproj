@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SeoToolkit.Umbraco" Version="3.6.1" />
+    <PackageReference Include="SeoToolkit.Umbraco.Common" Version="3.6.0" />
     <PackageReference Include="Umbraco.Cms" Version="13.3.2" />
     <PackageReference Include="uSkinnedSiteBuilder" Version="6.1.2" />
     <PackageReference Include="uSkinnedSiteBuilder.Theme.Cara" Version="4.0.0" />
