@@ -34,7 +34,7 @@
                     @if (pods != null && pods.Any())
                     {
                         <!-- Row -->
-                        <div class="row listing">
+                        <div class="row listing footer-items contains-@(pods.Where(p => p.Content.ContentType.Alias != Usn_Pb_SpacerColumn.ModelTypeAlias).Count() - 1)-items">
 
                             @for (int i = 0; i < pods.Count(); i++)
                             {
@@ -79,7 +79,7 @@
                         <!--// Row -->
                     }
                     <!-- Row -->
-                    <div class="row">
+                    <div class="row ts-and-cs">
 
                         <div class="col">
 

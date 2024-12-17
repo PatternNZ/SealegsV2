@@ -11,8 +11,104 @@
 
 
 
-footer {
-    .custom-footer-wrapper {
+footer#site-footer {
+
+    .container {
+        .row.listing.footer-items {
+            .quick-links {
+                ul {
+                    li {
+                        flex: 0 0 100%;
+                    }
+                }
+            }
+
+            &.contains-5-items {
+                .item.footer-item {
+
+                    @media(max-width:1199px) {
+                        margin-left: 0;
+                        margin-right: 0;
+                        width: 20%;
+                    }
+
+                    @media(max-width:991px) {
+                        flex-wrap: wrap;
+                    }
+
+                    &:nth-child(1) {
+         
+
+                        @media(max-width:991px) {
+                            order: 1;
+                            width: 100%;
+                            text-align: center;
+                        }
+
+                        img {
+                            max-width: 100%;
+                            width: auto;
+                        }
+                    }
+
+
+                    &:nth-child(2) {
+   
+
+                        @media(max-width:991px) {
+                            order: 3;
+                            width: 33.33333%;
+                        }
+
+                        @media(max-width:480px) {
+                            width: 100%;
+                        }
+                    }
+
+                    &:nth-child(3) {
+                    
+
+                        @media(max-width:991px) {
+                            order: 4;
+                            width: 33.33333%;
+                        }
+
+                        @media(max-width:480px) {
+                            width: 100%;
+                        }
+                    }
+
+                    &:nth-child(4) {
+             
+
+                        @media(max-width:991px) {
+                            order: 5;
+                            width: 33.33333%;
+                        }
+
+                        @media(max-width:480px) {
+                            width: 100%;
+                        }
+                    }
+
+                    &:nth-child(5) {
+             
+
+                        @media(max-width:991px) {
+                            order: 2;
+                            width: 100%;
+                        }
+
+                        .btn {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .custom-footer-wrapper { /* Ts & Cs*/
         font-size: 0;
         line-height: 0;
         padding-top: calc(var(--base-spacing) * 2);
@@ -22,6 +118,13 @@ footer {
             vertical-align: middle;
             width: 60%;
             padding-top: 0;
+            @media(max-width:767px) {
+                width: 100%;
+            }
+        }
+
+        @media(max-width:767px) {
+            flex-wrap: wrap;
         }
 
         .social-links {
@@ -29,6 +132,11 @@ footer {
             vertical-align: middle;
             width: 40%;
             text-align: right;
+
+            @media(max-width:767px) {
+                width: 100%;
+                margin-top: 20px;
+            }
 
             ul {
                 li {
@@ -84,7 +192,6 @@ footer {
                         bottom: 5px;
                         right: 15px;
                         height: 36px;
-
                     }
                 }
 
@@ -171,6 +278,7 @@ footer {
         }
     }
 }
+
 .usn_cmp_accordiontab.c1-bg {
     .accordion-heading {
         &:hover {
@@ -216,6 +324,7 @@ footer {
         }
     }
 }
+
 .usn_cmp_accordiontab.c3-bg {
     .accordion-heading {
         &:hover {
@@ -261,6 +370,7 @@ footer {
         }
     }
 }
+
 .usn_cmp_accordiontab.base-bg {
     .accordion-heading {
         &:hover {
@@ -306,6 +416,7 @@ footer {
         }
     }
 }
+
 .accordion {
 
     .accordion-heading {
@@ -318,12 +429,10 @@ footer {
         &:hover {
             svg {
                 rect {
-          
                 }
 
 
                 path {
-    
                 }
             }
         }
@@ -333,7 +442,6 @@ footer {
             top: 50%;
             height: 1px;
             margin-top: -1px;
-  
             opacity: 0.5;
             left: 0;
             right: 65px;
@@ -428,11 +536,9 @@ footer {
             &:not(.collapsed) {
                 + svg {
                     rect {
-               
                     }
 
                     path {
-              
                     }
 
                     .expand-line {
