@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Rewrite;
+
 namespace SealegsV2
 {
     public class Startup
@@ -48,6 +50,9 @@ namespace SealegsV2
             {
                 app.UseDeveloperExceptionPage();
             }
+            var rewriteOptions = new RewriteOptions();
+            rewriteOptions.AddRewrite("robots.txt", "robots-txt", skipRemainingRules: true);
+            app.UseRewriter(rewriteOptions);
 
             app.UseUmbraco()
                 .WithMiddleware(u =>
