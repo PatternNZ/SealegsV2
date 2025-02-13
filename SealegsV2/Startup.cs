@@ -37,6 +37,8 @@ namespace SealegsV2
                 .AddDeliveryApi()
                 .AddComposers()
                 .Build();
+
+            services.AddHostedService<ExamineRebuildHostedService>();
         }
 
         /// <summary>
