@@ -52,6 +52,17 @@ namespace SealegsV2
             {
                 app.UseDeveloperExceptionPage();
             }
+            // Strong cache headers for static assets
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    var headers = ctx.Context.Response.Headers;
+                    // Cache for 30 days by default for static files
+                    const int durationInSeconds = 60 * 60 * 24 * 30;
+                    headers["Cache-Control"] = "public,max-age=" + durationInSeconds + ",immutable";
+                }
+            });
             var rewriteOptions = new RewriteOptions();
             rewriteOptions.AddRewrite("robots.txt", "robots-txt", skipRemainingRules: true);
             app.UseRewriter(rewriteOptions);

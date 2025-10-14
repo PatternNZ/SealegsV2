@@ -316,5 +316,7 @@ else
     }
 }
 
-<link href="~/scss/custom.css" rel="stylesheet" />
-<link href="~/scss/umbraco-styles.css" rel="stylesheet" />
+<link href="~/scss/custom.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="~/scss/custom.css" rel="stylesheet" /></noscript>
+<link href="~/scss/umbraco-styles.css" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="~/scss/umbraco-styles.css" rel="stylesheet" /></noscript>

@@ -13,6 +13,22 @@
     @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/HeaderOpeningScripts", Model)
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=2">
+        <!-- Performance: preconnect/dns-prefetch for third-party origins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="dns-prefetch" href="//connect.facebook.net">
+        <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+        <link rel="dns-prefetch" href="//www.facebook.com">
+        <link rel="dns-prefetch" href="//downloads.mailchimp.com">
+        <link rel="preconnect" href="https://downloads.mailchimp.com" crossorigin>
+        <link rel="dns-prefetch" href="//chimpstatic.com">
+        <link rel="preconnect" href="https://chimpstatic.com" crossorigin>
+        <link rel="dns-prefetch" href="//js-ap1.hs-analytics.net">
+        <link rel="preconnect" href="https://js-ap1.hs-analytics.net" crossorigin>
+        <link rel="dns-prefetch" href="//js-ap1.hscollectedforms.net">
+        <link rel="preconnect" href="https://js-ap1.hscollectedforms.net" crossorigin>
+        <link rel="dns-prefetch" href="//js-ap1.hs-banner.com">
+        <link rel="preconnect" href="https://js-ap1.hs-banner.com" crossorigin>
     @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/SEOPageHead", Model)
     @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/StyleSheets", Model)
     @await Html.PartialAsync(Model.ThemeFolder + "/WebsiteHeadSection/Icons", Model)
