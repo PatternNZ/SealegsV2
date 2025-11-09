@@ -9,6 +9,17 @@
     font-display: swap;
 }
 
+.usn_cmp_subpagelisting {
+    .item.text-left {
+        .inner {
+            .info {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    }
+}
+
 .usn_cmp_splitcomponent.break-early {
     .component-inner {
         .container {
@@ -18,11 +29,12 @@
                         flex: 0 0 auto;
                         width: 100%;
                     }
+
                     .code-item {
                         iframe {
                             @media(max-width:767px) {
-                                width:100%!important;
-                                max-width:100%!important;
+                                width: 100% !important;
+                                max-width: 100% !important;
                             }
                         }
                     }
